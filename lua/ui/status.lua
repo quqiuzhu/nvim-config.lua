@@ -1,33 +1,11 @@
-local mapping = require("common.mapping")
-local config = require("common.config")
-local statusline = {}
-statusline.__index = statusline
-
-function statusline:new()
-    local o = {}
-    setmetatable(o, {__index = self})
-    return o
-end
-
-function statusline:plugins()
-    return {
-        {
-            'glepnir/galaxyline.nvim',
-            branch = 'main'
-            -- your statusline
-            -- config = function() require 'my_statusline' end,
-            -- some optional icons
-            -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
-        }
-    }
-end
-
---- config from internet
+--- config 
 -- https://github.com/glepnir/galaxyline.nvim/blob/main/example/eviline.lua
 -- https://github.com/glepnir/galaxyline.nvim/blob/main/example/spaceline.lua
 -- https://github.com/glepnir/galaxyline.nvim/issues/12
-function statusline:config()
-    local gl = require('galaxyline')
+local function setup_galaxyline()
+    local ok, gl = pcall(require, 'galaxyline')
+    if not ok then return end
+
     local colors = require('galaxyline.theme').default
     local condition = require('galaxyline.condition')
     local gls = gl.section
@@ -35,7 +13,7 @@ function statusline:config()
 
     gls.left[1] = {
         RainbowRed = {
-            provider = function() return '▊ ' end,
+            provider = function() return ' ' end,
             highlight = {colors.blue, colors.bg}
         }
     }
@@ -225,7 +203,7 @@ function statusline:config()
 
     gls.right[8] = {
         RainbowBlue = {
-            provider = function() return ' ▊' end,
+            provider = function() return ' ' end,
             highlight = {colors.blue, colors.bg}
         }
     }
@@ -254,6 +232,30 @@ function statusline:config()
         }
     }
 end
+
+local statusline = {}
+statusline.__index = statusline
+
+function statusline:new()
+    local o = {}
+    setmetatable(o, {__index = self})
+    return o
+end
+
+function statusline:plugins()
+    return {
+        {
+            'glepnir/galaxyline.nvim',
+            branch = 'main',
+            -- your statusline
+            config = setup_galaxyline
+            -- some optional icons
+            -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
+        }
+    }
+end
+
+function statusline:config() setup_galaxyline() end
 
 function statusline:mapping() end
 

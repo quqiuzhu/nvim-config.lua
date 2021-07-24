@@ -18,5 +18,6 @@ local module_names = {
 }
 
 local m = modules:new(module_names)
+m:init()
 m:load_plugins()
 m:set_configs()
