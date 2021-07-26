@@ -31,3 +31,14 @@ RUN apt-get install -y python3.8 python3.8-dev python3.8-distutils python3.8-ven
 
 # Build essentials
 RUN apt-get install -y build-essential autoconf libtool cmake pkg-config git
+
+ADD cargo_config /cargo_config
+
+# RipGrep
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh \
+    && chmod +x rustup.sh \
+    && ./rustup.sh -y \
+    && cp /cargo_config /root/.cargo/config \
+    && /root/.cargo/bin/cargo install ripgrep
+
+ENV PATH="/root/.cargo/bin:$PATH"

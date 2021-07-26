@@ -16,3 +16,12 @@
 [submodule "plugins/kyazdani42/nvim-tree.lua"]
 	path = plugins/kyazdani42/nvim-tree.lua
 	url = git@github.com:kyazdani42/nvim-tree.lua
+[submodule "plugins/nvim-lua/popup.nvim"]
+	path = plugins/nvim-lua/popup.nvim
+	url = git@github.com:nvim-lua/popup.nvim
+[submodule "plugins/nvim-lua/plenary.nvim"]
+	path = plugins/nvim-lua/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim
+[submodule "plugins/nvim-telescope/telescope.nvim"]
+	path = plugins/nvim-telescope/telescope.nvim
+	url = git@github.com:nvim-telescope/telescope.nvim

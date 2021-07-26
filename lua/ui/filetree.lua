@@ -91,8 +91,8 @@ local function setup()
         mapping:item():mode("n"):lhs("<C-r>"):noremap():rhs_cmdcr(
             "NvimTreeRefresh"):silent():nowait(),
         -- nnoremap <leader>n :NvimTreeFindFile<CR>
-        mapping:item():mode("n"):lhs("<C-f>"):noremap():rhs_cmdcr(
-            "NvimTreeFindFile"):silent():nowait(),
+        -- mapping:item():mode("n"):lhs("<C-f>"):noremap():rhs_cmdcr(
+        -- "NvimTreeFindFile"):silent():nowait(),
         -- NvimTreeOpen and NvimTreeClose are also available if you need them
         -- use tab switch window
         mapping:item():mode("n"):lhs("<tab>"):noremap():rhs("<C-w>w"):silent()
@@ -104,7 +104,7 @@ local function setup()
     -- default mappings
     local tree_cb = nc.nvim_tree_callback
     vim.g.nvim_tree_bindings = {
-        {key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit")},
+        {key = {"<CR>", "l", "o", "<2-LeftMouse>"}, cb = tree_cb("edit")},
         {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
         {key = "<C-v>", cb = tree_cb("vsplit")},
         {key = "<C-x>", cb = tree_cb("split")},
@@ -112,8 +112,7 @@ local function setup()
         {key = "<", cb = tree_cb("prev_sibling")},
         {key = ">", cb = tree_cb("next_sibling")},
         {key = "P", cb = tree_cb("parent_node")},
-        {key = "<BS>", cb = tree_cb("close_node")},
-        {key = "<S-CR>", cb = tree_cb("close_node")},
+        {key = {"<BS>", "<S-CR>", "h"}, cb = tree_cb("close_node")},
         {key = "K", cb = tree_cb("first_sibling")},
         {key = "J", cb = tree_cb("last_sibling")},
         {key = "I", cb = tree_cb("toggle_ignored")},
