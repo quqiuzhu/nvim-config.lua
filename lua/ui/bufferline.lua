@@ -1,24 +1,10 @@
-local tabline = {}
-tabline.__index = tabline
+local bufferline = {}
+bufferline.__index = bufferline
 
-function tabline:new()
-    local o = {}
-    setmetatable(o, {__index = self})
-    return o
-end
-
-function tabline:plugins()
-    return {
-        {
-            'akinsho/nvim-bufferline.lua'
-            -- requires = 'kyazdani42/nvim-web-devicons'
-        }
-    }
-end
-
-function tabline:config()
+local function setup()
     vim.opt.termguicolors = true
-    require("bufferline").setup({
+    vim.opt.number = true
+    require('bufferline').setup({
         options = {
             numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both",
             number_style = "superscript", -- "superscript" | "" | {"none", "subscript"}, -- buffer_id at index 1, ordinal at index 2
@@ -65,7 +51,7 @@ function tabline:config()
                     return true
                 end
                 -- filter out based on arbitrary rules
-                -- e.g. filter out vim wiki buffer from tabline in your work repo
+                -- e.g. filter out vim wiki buffer from bufferline in your work repo
                 if vim.fn.getcwd() == "<work-repo>" and
                     vim.bo[buf_number].filetype ~= "wiki" then
                     return true
@@ -85,7 +71,7 @@ function tabline:config()
             persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
             -- can also be a table containing 2 custom separators
             -- [focused and unfocused]. eg: { '|', '|' }
-            separator_style = "slant", -- "slant" | "thick" | "thin" | {'any', 'any'},
+            separator_style = "thin", -- "slant" | "thick" | "thin" | {'any', 'any'},
             enforce_regular_tabs = false, -- false | true,
             always_show_bufferline = true, -- true | false,
             sort_by = "id", -- 'id' | 'extension' | 'relative_directory' | 'directory' |
@@ -97,6 +83,24 @@ function tabline:config()
     })
 end
 
-function tabline:mapping() end
+function bufferline:new()
+    local o = {}
+    setmetatable(o, {__index = self})
+    return o
+end
 
-return tabline
+function bufferline:plugins()
+    return {
+        {
+            'akinsho/nvim-bufferline.lua',
+            config = setup,
+            requires = 'kyazdani42/nvim-web-devicons'
+        }
+    }
+end
+
+function bufferline:config() end
+
+function bufferline:mapping() end
+
+return bufferline

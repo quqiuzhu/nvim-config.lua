@@ -2,7 +2,7 @@
 -- https://github.com/glepnir/galaxyline.nvim/blob/main/example/eviline.lua
 -- https://github.com/glepnir/galaxyline.nvim/blob/main/example/spaceline.lua
 -- https://github.com/glepnir/galaxyline.nvim/issues/12
-local function setup_galaxyline()
+local function setup()
     local ok, gl = pcall(require, 'galaxyline')
     if not ok then return end
 
@@ -125,19 +125,6 @@ local function setup_galaxyline()
         }
     }
 
-    gls.mid[1] = {
-        ShowLspClient = {
-            provider = 'GetLspClient',
-            condition = function()
-                local tbl = {['dashboard'] = true, [''] = true}
-                if tbl[vim.bo.filetype] then return false end
-                return true
-            end,
-            icon = ' LSP:',
-            highlight = {colors.cyan, colors.bg, 'bold'}
-        }
-    }
-
     gls.right[1] = {
         FileEncode = {
             provider = 'FileEncode',
@@ -247,15 +234,13 @@ function statusline:plugins()
         {
             'glepnir/galaxyline.nvim',
             branch = 'main',
-            -- your statusline
-            config = setup_galaxyline
-            -- some optional icons
-            -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
+            config = setup,
+            requires = {'kyazdani42/nvim-web-devicons', opt = true}
         }
     }
 end
 
-function statusline:config() setup_galaxyline() end
+function statusline:config() end
 
 function statusline:mapping() end
 

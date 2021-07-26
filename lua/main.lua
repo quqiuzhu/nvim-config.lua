@@ -1,4 +1,4 @@
-local modules = require("common.modules")
+local manager = require("common.manager")
 
 local module_names = {
     "editor.edit", --
@@ -13,11 +13,11 @@ local module_names = {
     "ui.filetree", --
     "ui.popup", --
     "ui.statusline", --
-    "ui.tabline", --
+    "ui.bufferline", --
     "ui.theme" --
 }
 
-local m = modules:new(module_names)
+local m = manager:new(module_names)
 m:init()
 m:load_plugins()
 m:set_configs()

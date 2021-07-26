@@ -97,8 +97,11 @@ function filetree:new()
             "NvimTreeRefresh"):silent():nowait(),
         -- nnoremap <leader>n :NvimTreeFindFile<CR>
         mapping:item():mode("n"):lhs("<C-f>"):noremap():rhs_cmdcr(
-            "NvimTreeFindFile"):silent():nowait()
+            "NvimTreeFindFile"):silent():nowait(),
         -- NvimTreeOpen and NvimTreeClose are also available if you need them
+        -- use tab switch window
+        mapping:item():mode("n"):lhs("<tab>"):noremap():rhs("<C-w>w"):silent()
+            :nowait()
     }
     o.g_plugins = {
         'kyazdani42/nvim-web-devicons', --

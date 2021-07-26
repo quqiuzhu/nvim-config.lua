@@ -1,22 +1,22 @@
 local packer = require('packer')
 local util = require("packer.util")
 
-local modules = {}
-modules.__index = modules
+local manager = {}
+manager.__index = manager
 
-function modules:new(module_names)
+function manager:new(module_names)
     local o = {modules = {}, plugins = {}, module_names = module_names}
     setmetatable(o, {__index = self})
     return o
 end
 
-function modules:init()
+function manager:init()
     self:_set_packer_config()
     self:_get_modules()
     self:_get_plugins()
 end
 
-function modules:_set_packer_config()
+function manager:_set_packer_config()
     self.packer_config = {
         ensure_dependencies = true, -- Should packer install plugin dependencies?
         package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack'),
@@ -80,14 +80,14 @@ function modules:_set_packer_config()
     }
 end
 
-function modules:_get_modules()
+function manager:_get_modules()
     for _, module_name in pairs(self.module_names) do
         local m = require(module_name)
         if type(m) == "table" then self.modules[module_name] = m:new() end
     end
 end
 
-function modules:_get_plugins()
+function manager:_get_plugins()
     for module_name, m in pairs(self.modules) do
         for index, plugin in pairs(m:plugins()) do
             table.insert(self.plugins, plugin -- {
@@ -98,15 +98,17 @@ function modules:_get_plugins()
             )
         end
     end
+    --print(vim.inspect(self.plugins))
 end
 
-function modules:load_plugins()
+function manager:load_plugins()
     packer.init(self.packer_config)
     packer.reset()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end
     packer.install()
+    packer.compile()
 end
 
-function modules:set_configs() for _, m in pairs(self.modules) do m:config() end end
+function manager:set_configs() for _, m in pairs(self.modules) do m:config() end end
 
-return modules
+return manager
