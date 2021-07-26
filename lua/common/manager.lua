@@ -17,13 +17,14 @@ function manager:init()
 end
 
 function manager:_set_packer_config()
+    local plugin_path = util.join_paths(vim.fn.stdpath('config'), 'plugins')
     self.packer_config = {
         ensure_dependencies = true, -- Should packer install plugin dependencies?
         package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack'),
         compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin',
                                        'packer_compiled.lua'),
         plugin_package = 'packer', -- The default package for plugins
-        max_jobs = nil, -- Limit the number of simultaneous jobs. nil means no limit
+        max_jobs = 2, -- Limit the number of simultaneous jobs. nil means no limit
         auto_clean = true, -- During sync(), remove unused plugins
         compile_on_sync = true, -- During sync(), run packer.compile()
         disable_commands = false, -- Disable creating commands
@@ -48,7 +49,7 @@ function manager:_set_packer_config()
             },
             depth = 1, -- Git clone depth
             clone_timeout = 120, -- Timeout, in seconds, for git clones
-            default_url_format = 'https://github.com/%s' -- Lua format string used for "aaa/bbb" style plugins
+            default_url_format = 'file://' .. plugin_path .. '/%s' -- Lua format string used for "aaa/bbb" style plugins
         },
         display = {
             non_interactive = false, -- If true, disable display windows for all operations
@@ -98,10 +99,11 @@ function manager:_get_plugins()
             )
         end
     end
-    --print(vim.inspect(self.plugins))
+    -- print(vim.inspect(self.plugins))
 end
 
 function manager:load_plugins()
+    vim.cmd [[packadd packer.nvim]]
     packer.init(self.packer_config)
     packer.reset()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end

@@ -1,3 +1,18 @@
 [submodule "pack/packer/start/packer.nvim"]
 	path = pack/packer/start/packer.nvim
 	url = git@github.com:wbthomason/packer.nvim.git
+[submodule "plugins/glepnir/galaxyline.nvim"]
+	path = plugins/glepnir/galaxyline.nvim
+	url = git@github.com:glepnir/galaxyline.nvim
+[submodule "plugins/akinsho/nvim-bufferline.lua"]
+	path = plugins/akinsho/nvim-bufferline.lua
+	url = git@github.com:akinsho/nvim-bufferline.lua
+[submodule "plugins/kyazdani42/nvim-web-devicons"]
+	path = plugins/kyazdani42/nvim-web-devicons
+	url = git@github.com:kyazdani42/nvim-web-devicons.git
+[submodule "plugins/mhinz/vim-startify"]
+	path = plugins/mhinz/vim-startify
+	url = git@github.com:mhinz/vim-startify
+[submodule "plugins/kyazdani42/nvim-tree.lua"]
+	path = plugins/kyazdani42/nvim-tree.lua
+	url = git@github.com:kyazdani42/nvim-tree.lua

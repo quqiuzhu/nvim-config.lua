@@ -233,7 +233,6 @@ function statusline:plugins()
     return {
         {
             'glepnir/galaxyline.nvim',
-            branch = 'main',
             config = setup,
             requires = {'kyazdani42/nvim-web-devicons', opt = true}
         }
