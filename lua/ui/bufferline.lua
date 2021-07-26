@@ -4,10 +4,9 @@ bufferline.__index = bufferline
 local function setup()
     vim.opt.termguicolors = true
     vim.opt.number = true
-    if not packer_plugins["bufferline"] or
-        not packer_plugins["bufferline"].loaded then return end
-
-    require('bufferline').setup({
+    local ok, bl = pcall(require, 'bufferline')
+    if not ok then return end
+    bl.setup({
         options = {
             numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both",
             number_style = "superscript", -- "superscript" | "" | {"none", "subscript"}, -- buffer_id at index 1, ordinal at index 2
