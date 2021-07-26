@@ -42,3 +42,6 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh \
     && /root/.cargo/bin/cargo install ripgrep
 
 ENV PATH="/root/.cargo/bin:$PATH"
+
+# Compress: unzip zip tar
+RUN apt-get install -y unzip zip tar

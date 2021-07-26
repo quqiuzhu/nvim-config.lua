@@ -25,3 +25,9 @@
 [submodule "plugins/nvim-telescope/telescope.nvim"]
 	path = plugins/nvim-telescope/telescope.nvim
 	url = git@github.com:nvim-telescope/telescope.nvim
+[submodule "plugins/kabouzeid/nvim-lspinstall"]
+	path = plugins/kabouzeid/nvim-lspinstall
+	url = git@github.com:kabouzeid/nvim-lspinstall.git
+[submodule "plugins/neovim/nvim-lspconfig"]
+	path = plugins/neovim/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
