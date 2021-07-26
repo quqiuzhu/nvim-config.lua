@@ -12,8 +12,8 @@ local module_names = {
     "ide.terminal", --
     "ui.filetree", --
     "ui.popup", --
-    "ui.status", --
-    "ui.tab", --
+    "ui.statusline", --
+    "ui.tabline", --
     "ui.theme" --
 }
 
