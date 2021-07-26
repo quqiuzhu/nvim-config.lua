@@ -31,3 +31,6 @@
 [submodule "plugins/neovim/nvim-lspconfig"]
 	path = plugins/neovim/nvim-lspconfig
 	url = git@github.com:neovim/nvim-lspconfig.git
+[submodule "plugins/hrsh7th/nvim-compe"]
+	path = plugins/hrsh7th/nvim-compe
+	url = git@github.com:hrsh7th/nvim-compe.git

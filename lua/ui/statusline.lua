@@ -11,12 +11,7 @@ local function setup()
     local gls = gl.section
     gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer'}
 
-    gls.left[1] = {
-        RainbowRed = {
-            provider = function() return ' ' end,
-            highlight = {colors.blue, colors.bg}
-        }
-    }
+    gls.left[1] = {RainbowRed = {provider = function() return ' ' end, highlight = {colors.blue, colors.bg}}}
     gls.left[2] = {
         ViMode = {
             provider = function()
@@ -43,28 +38,20 @@ local function setup()
                     ['!'] = colors.red,
                     t = colors.red
                 }
-                vim.api.nvim_command('hi GalaxyViMode guifg=' ..
-                                         mode_color[vim.fn.mode()])
+                vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
                 return '  '
             end,
             highlight = {colors.red, colors.bg, 'bold'}
         }
     }
     gls.left[3] = {
-        FileSize = {
-            provider = 'FileSize',
-            condition = condition.buffer_not_empty,
-            highlight = {colors.fg, colors.bg}
-        }
+        FileSize = {provider = 'FileSize', condition = condition.buffer_not_empty, highlight = {colors.fg, colors.bg}}
     }
     gls.left[4] = {
         FileIcon = {
             provider = 'FileIcon',
             condition = condition.buffer_not_empty,
-            highlight = {
-                require('galaxyline.provider_fileinfo').get_file_icon_color,
-                colors.bg
-            }
+            highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg}
         }
     }
 
@@ -95,34 +82,18 @@ local function setup()
     }
 
     gls.left[8] = {
-        DiagnosticError = {
-            provider = 'DiagnosticError',
-            icon = '  ',
-            highlight = {colors.red, colors.bg}
-        }
+        DiagnosticError = {provider = 'DiagnosticError', icon = '  ', highlight = {colors.red, colors.bg}}
     }
     gls.left[9] = {
-        DiagnosticWarn = {
-            provider = 'DiagnosticWarn',
-            icon = '  ',
-            highlight = {colors.yellow, colors.bg}
-        }
+        DiagnosticWarn = {provider = 'DiagnosticWarn', icon = '  ', highlight = {colors.yellow, colors.bg}}
     }
 
     gls.left[10] = {
-        DiagnosticHint = {
-            provider = 'DiagnosticHint',
-            icon = '  ',
-            highlight = {colors.cyan, colors.bg}
-        }
+        DiagnosticHint = {provider = 'DiagnosticHint', icon = '  ', highlight = {colors.cyan, colors.bg}}
     }
 
     gls.left[11] = {
-        DiagnosticInfo = {
-            provider = 'DiagnosticInfo',
-            icon = '  ',
-            highlight = {colors.blue, colors.bg}
-        }
+        DiagnosticInfo = {provider = 'DiagnosticInfo', icon = '  ', highlight = {colors.blue, colors.bg}}
     }
 
     gls.mid[1] = {
@@ -201,12 +172,7 @@ local function setup()
         }
     }
 
-    gls.right[8] = {
-        RainbowBlue = {
-            provider = function() return ' ' end,
-            highlight = {colors.blue, colors.bg}
-        }
-    }
+    gls.right[8] = {RainbowBlue = {provider = function() return ' ' end, highlight = {colors.blue, colors.bg}}}
 
     gls.short_line_left[1] = {
         BufferType = {
@@ -225,12 +191,7 @@ local function setup()
         }
     }
 
-    gls.short_line_right[1] = {
-        BufferIcon = {
-            provider = 'BufferIcon',
-            highlight = {colors.fg, colors.bg}
-        }
-    }
+    gls.short_line_right[1] = {BufferIcon = {provider = 'BufferIcon', highlight = {colors.fg, colors.bg}}}
 end
 
 local statusline = {}
@@ -243,13 +204,7 @@ function statusline:new()
 end
 
 function statusline:plugins()
-    return {
-        {
-            'glepnir/galaxyline.nvim',
-            config = setup,
-            requires = {'kyazdani42/nvim-web-devicons', opt = true}
-        }
-    }
+    return {{'glepnir/galaxyline.nvim', config = setup, requires = {'kyazdani42/nvim-web-devicons', opt = true}}}
 end
 
 function statusline:config() end

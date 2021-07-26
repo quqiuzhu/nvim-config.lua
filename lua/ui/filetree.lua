@@ -1,5 +1,5 @@
 local function setup()
-    local config = require("common.config")
+    local config = require('common.config')
     config:set_vars({
         nvim_tree_disable_default_keybindings = 1,
         nvim_tree_side = 'left', -- left by default
@@ -27,24 +27,12 @@ local function setup()
         nvim_tree_hijack_cursor = 1, -- 1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
         nvim_tree_icon_padding = ' ', -- one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
         nvim_tree_update_cwd = 0, -- 0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
-        nvim_tree_window_picker_exclude = {
-            filetype = {'packer', 'qf'},
-            buftype = {'terminal'}
-        },
+        nvim_tree_window_picker_exclude = {filetype = {'packer', 'qf'}, buftype = {'terminal'}},
         -- Dictionary of buffer option names mapped to a list of option values that
         -- indicates to the window picker that the buffer's window should not be
         -- selectable.
-        nvim_tree_special_files = {
-            ['README.md'] = 1,
-            ['Makefile'] = 1,
-            ['MAKEFILE'] = 1
-        }, -- List of filenames that gets highlighted with NvimTreeSpecialFile
-        nvim_tree_show_icons = {
-            git = 1,
-            folders = 0,
-            files = 0,
-            folder_arrows = 0
-        },
+        nvim_tree_special_files = {['README.md'] = 1, ['Makefile'] = 1, ['MAKEFILE'] = 1}, -- List of filenames that gets highlighted with NvimTreeSpecialFile
+        nvim_tree_show_icons = {git = 1, folders = 0, files = 0, folder_arrows = 0},
         -- If 0, do not show the icons for one of 'git' 'folder' and 'files'
         -- 1 by default, notice that if 'files' is 1, it will only display
         -- if nvim-web-devicons is installed and on your runtimepath.
@@ -54,49 +42,42 @@ local function setup()
         -- default will show icon by default if no icon is provided
         -- default shows no icon by default
         nvim_tree_icons = {
-            default = "",
-            symlink = "",
+            default = '',
+            symlink = '',
             git = {
-                unstaged = "✗",
-                staged = "✓",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "★",
-                deleted = "",
-                ignored = "◌"
+                unstaged = '✗',
+                staged = '✓',
+                unmerged = '',
+                renamed = '➜',
+                untracked = '★',
+                deleted = '',
+                ignored = '◌'
             },
             folder = {
-                arrow_open = "",
-                arrow_closed = "",
-                default = "",
-                open = "",
-                empty = "",
-                empty_open = "",
-                symlink = "",
-                symlink_open = ""
+                arrow_open = '',
+                arrow_closed = '',
+                default = '',
+                open = '',
+                empty = '',
+                empty_open = '',
+                symlink = '',
+                symlink_open = ''
             },
-            lsp = {hint = "", info = "", warning = "", error = ""}
+            lsp = {hint = '', info = '', warning = '', error = ''}
         }
         -- set termguicolors -- this variable must be enabled for colors to be applied properly
         -- a list of groups can be found at `:help nvim_tree_highlight`
         -- highlight NvimTreeFolderIcon guibg=blue
     })
 
-    local mapping = require("common.mapping")
+    local mapping = require('common.mapping')
     mapping:set_keymaps({
         -- nnoremap <C-n> :NvimTreeToggle<CR>
-        mapping:item():mode("n"):lhs("<C-n>"):noremap():rhs_cmdcr(
-            "NvimTreeToggle"):silent():nowait(),
+        mapping:item():mode('n'):lhs('<C-n>'):noremap():rhs_cmdcr('NvimTreeToggle'):silent():nowait(),
         -- nnoremap <leader>r :NvimTreeRefresh<CR>
-        mapping:item():mode("n"):lhs("<C-r>"):noremap():rhs_cmdcr(
-            "NvimTreeRefresh"):silent():nowait(),
-        -- nnoremap <leader>n :NvimTreeFindFile<CR>
-        -- mapping:item():mode("n"):lhs("<C-f>"):noremap():rhs_cmdcr(
-        -- "NvimTreeFindFile"):silent():nowait(),
-        -- NvimTreeOpen and NvimTreeClose are also available if you need them
+        mapping:item():mode('n'):lhs('<C-r>'):noremap():rhs_cmdcr('NvimTreeRefresh'):silent():nowait(),
         -- use tab switch window
-        mapping:item():mode("n"):lhs("<tab>"):noremap():rhs("<C-w>w"):silent()
-            :nowait()
+        mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
 
     local ok, nc = pcall(require, 'nvim-tree.config')
@@ -104,33 +85,20 @@ local function setup()
     -- default mappings
     local tree_cb = nc.nvim_tree_callback
     vim.g.nvim_tree_bindings = {
-        {key = {"<CR>", "l", "o", "<2-LeftMouse>"}, cb = tree_cb("edit")},
-        {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
-        {key = "<C-v>", cb = tree_cb("vsplit")},
-        {key = "<C-x>", cb = tree_cb("split")},
-        {key = "<C-t>", cb = tree_cb("tabnew")},
-        {key = "<", cb = tree_cb("prev_sibling")},
-        {key = ">", cb = tree_cb("next_sibling")},
-        {key = "P", cb = tree_cb("parent_node")},
-        {key = {"<BS>", "<S-CR>", "h"}, cb = tree_cb("close_node")},
-        {key = "K", cb = tree_cb("first_sibling")},
-        {key = "J", cb = tree_cb("last_sibling")},
-        {key = "I", cb = tree_cb("toggle_ignored")},
-        {key = "H", cb = tree_cb("toggle_dotfiles")},
-        {key = "R", cb = tree_cb("refresh")},
-        {key = "a", cb = tree_cb("create")},
-        {key = "d", cb = tree_cb("remove")},
-        {key = "r", cb = tree_cb("rename")},
-        {key = "<C-r>", cb = tree_cb("full_rename")},
-        {key = "x", cb = tree_cb("cut")}, {key = "c", cb = tree_cb("copy")},
-        {key = "p", cb = tree_cb("paste")},
-        {key = "y", cb = tree_cb("copy_name")},
-        {key = "Y", cb = tree_cb("copy_path")},
-        {key = "gy", cb = tree_cb("copy_absolute_path")},
-        {key = "[c", cb = tree_cb("prev_git_item")},
-        {key = "]c", cb = tree_cb("next_git_item")},
-        {key = "-", cb = tree_cb("dir_up")}, {key = "q", cb = tree_cb("close")},
-        {key = "g?", cb = tree_cb("toggle_help")}
+        {key = {'<CR>', 'l', 'o', '<2-LeftMouse>'}, cb = tree_cb('edit')},
+        {key = {'<2-RightMouse>', '<C-]>'}, cb = tree_cb('cd')}, {key = '<C-v>', cb = tree_cb('vsplit')},
+        {key = '<C-x>', cb = tree_cb('split')}, {key = '<C-t>', cb = tree_cb('tabnew')},
+        {key = '<', cb = tree_cb('prev_sibling')}, {key = '>', cb = tree_cb('next_sibling')},
+        {key = 'P', cb = tree_cb('parent_node')}, {key = {'<BS>', '<S-CR>', 'h'}, cb = tree_cb('close_node')},
+        {key = 'K', cb = tree_cb('first_sibling')}, {key = 'J', cb = tree_cb('last_sibling')},
+        {key = 'I', cb = tree_cb('toggle_ignored')}, {key = 'H', cb = tree_cb('toggle_dotfiles')},
+        {key = 'R', cb = tree_cb('refresh')}, {key = 'a', cb = tree_cb('create')}, {key = 'd', cb = tree_cb('remove')},
+        {key = 'r', cb = tree_cb('rename')}, {key = '<C-r>', cb = tree_cb('full_rename')},
+        {key = 'x', cb = tree_cb('cut')}, {key = 'c', cb = tree_cb('copy')}, {key = 'p', cb = tree_cb('paste')},
+        {key = 'y', cb = tree_cb('copy_name')}, {key = 'Y', cb = tree_cb('copy_path')},
+        {key = 'gy', cb = tree_cb('copy_absolute_path')}, {key = '[c', cb = tree_cb('prev_git_item')},
+        {key = ']c', cb = tree_cb('next_git_item')}, {key = '-', cb = tree_cb('dir_up')},
+        {key = 'q', cb = tree_cb('close')}, {key = 'g?', cb = tree_cb('toggle_help')}
     }
 end
 
@@ -145,11 +113,8 @@ end
 
 function filetree:plugins()
     return {
-        {
-            'kyazdani42/nvim-tree.lua',
-            config = setup,
-            requires = {'kyazdani42/nvim-web-devicons', opt = true}
-        }, 'mhinz/vim-startify'
+        {'kyazdani42/nvim-tree.lua', config = setup, requires = {'kyazdani42/nvim-web-devicons', opt = true}},
+        'mhinz/vim-startify'
     }
 end
 
