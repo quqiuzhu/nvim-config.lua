@@ -1,21 +1,21 @@
-local manager = require("common.manager")
+local manager = require('common.manager')
 
 local module_names = {
-    "editor.edit", --
-    "editor.jump", --
-    "ide.format", --
-    "ide.lint", --
-    "ide.comment", --
-    "ide.lsp", --
-    "ide.git", --
-    "ide.debug", --
-    "ide.note", --
-    "ide.terminal", --
-    "ui.filetree", --
-    "ui.popup", --
-    "ui.statusline", --
-    "ui.bufferline", --
-    "ui.theme" --
+    'editor.edit', --
+    'editor.jump', --
+    'editor.note', --
+    'ide.format', --
+    'ide.lint', --
+    'ide.comment', --
+    'ide.lsp', --
+    'ide.git', --
+    'ide.debug', --
+    'ui.terminal', --
+    'ui.filetree', --
+    'ui.popup', --
+    'ui.statusline', --
+    'ui.bufferline', --
+    'ui.theme' --
 }
 
 local m = manager:new(module_names)

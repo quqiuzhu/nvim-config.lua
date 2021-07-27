@@ -34,3 +34,6 @@
 [submodule "plugins/hrsh7th/nvim-compe"]
 	path = plugins/hrsh7th/nvim-compe
 	url = git@github.com:hrsh7th/nvim-compe.git
+[submodule "plugins/mhartington/formatter.nvim"]
+	path = plugins/mhartington/formatter.nvim
+	url = git@github.com:mhartington/formatter.nvim.git

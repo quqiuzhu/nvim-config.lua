@@ -50,7 +50,7 @@ LSP
 | Normal | `gi`         | Goto implemention    |
 | Normal | `gr`         | Goto references      |
 
-## LSP
+## Languages
 
 Run `:LspInstall cpp` to install cpp language server, and other supported [language servers][lsp-servers].
 
