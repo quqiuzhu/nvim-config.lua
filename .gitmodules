@@ -37,3 +37,9 @@
 [submodule "plugins/mhartington/formatter.nvim"]
 	path = plugins/mhartington/formatter.nvim
 	url = git@github.com:mhartington/formatter.nvim.git
+[submodule "plugins/nvim-treesitter/nvim-treesitter"]
+	path = plugins/nvim-treesitter/nvim-treesitter
+	url = git@github.com:nvim-treesitter/nvim-treesitter.git
+[submodule "plugins/glepnir/zephyr-nvim"]
+	path = plugins/glepnir/zephyr-nvim
+	url = git@github.com:glepnir/zephyr-nvim.git
