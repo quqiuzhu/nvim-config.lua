@@ -45,3 +45,9 @@ ENV PATH="/root/.cargo/bin:$PATH"
 
 # Compress: unzip zip tar
 RUN apt-get install -y unzip zip tar
+
+# Golang
+RUN wget https://mirrors.ustc.edu.cn/golang/go1.12.17.linux-amd64.tar.gz \
+    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.12.17.linux-amd64.tar.gz
+
+ENV PATH="/usr/local/go/bin:$PATH"

@@ -7,7 +7,6 @@ local module_names = {
     "ide.lint", --
     "ide.comment", --
     "ide.lsp", --
-    "ide.complete", --
     "ide.git", --
     "ide.debug", --
     "ide.note", --
