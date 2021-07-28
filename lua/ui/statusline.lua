@@ -98,13 +98,13 @@ local function setup()
 
     gls.mid[1] = {
         ShowLspClient = {
-            provider = 'GetLspClient',
+            provider = function() return _G.galaxyline_providers.GetLspClient('off') end,
             condition = function()
-                local tbl = {['dashboard'] = true, [''] = true}
+                local tbl = {['dashboard'] = true, [''] = true, ['startify'] = true}
                 if tbl[vim.bo.filetype] then return false end
                 return true
             end,
-            icon = ' LSP:',
+            icon = '✿ ',
             highlight = {colors.cyan, colors.bg, 'bold'}
         }
     }

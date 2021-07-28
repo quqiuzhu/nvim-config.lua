@@ -1,8 +1,10 @@
 -- Formatter
 -- https://github.com/mhartington/formatter.nvim
--- full formatter config:
 -- https://github.com/sbdchd/neoformat
--- Each format tool config is a function that returns a table. Since each entry is a function, the tables for each file type act as an ordered list (or array). This mean things will run in the order you list them, keep this in mind.
+-- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
+-- Each format tool config is a function that returns a table. Since each entry is a function, 
+-- the tables for each file type act as an ordered list (or array). This mean things will run
+-- in the order you list them, keep this in mind.
 -- Each formatter should return a table that consist of:
 -- exe: the program you wish to run
 -- args: a table of args to pass
@@ -15,11 +17,20 @@ local function setup()
     local function new_formater_function(name)
         if name == 'prettier' then
             return function()
-                return {
-                    exe = 'prettier',
-                    args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'},
-                    stdin = true
-                }
+                local get_prettier_extend_parser = function()
+                    local ft = vim.bo.filetype
+                    if ft == 'css' or ft == 'less' or ft == 'scss' then
+                        return 'css'
+                    elseif ft == 'typescript' or ft == 'json' or ft == 'yaml' or ft == 'vue' then
+                        return ft
+                    end
+                end
+                local args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'}
+                local parser = get_prettier_extend_parser()
+                if parser ~= nil then
+                    args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--parser', parser, '--single-quote'}
+                end
+                return {exe = 'prettier', args = args, stdin = true}
             end
         elseif name == 'clang-format' then
             return function()
@@ -38,11 +49,26 @@ local function setup()
     f.setup({
         logging = false,
         filetype = {
-            javascript = {new_formater_function('prettier')},
             rust = {function() return {exe = 'rustfmt', args = {'--emit=stdout'}, stdin = true} end},
             lua = {function() return {exe = 'lua-format', args = {}, stdin = true} end},
             go = {function() return {exe = 'gofmt', args = {}, stdin = true} end},
-            cpp = {new_formater_function('clang-format')}
+            python = {function() return {exe = 'yapf', args = {}, stdin = true} end},
+            javascript = {new_formater_function('prettier')},
+            html = {new_formater_function('prettier')},
+            markdown = {new_formater_function('prettier')},
+            css = {new_formater_function('prettier')},
+            less = {new_formater_function('prettier')},
+            scss = {new_formater_function('prettier')},
+            typescript = {new_formater_function('prettier')},
+            json = {new_formater_function('prettier')},
+            vue = {new_formater_function('prettier')},
+            yaml = {new_formater_function('prettier')},
+            cpp = {new_formater_function('clang-format')},
+            c = {new_formater_function('clang-format')},
+            objc = {new_formater_function('clang-format')},
+            proto = {new_formater_function('clang-format')},
+            glsl = {new_formater_function('clang-format')},
+            java = {new_formater_function('clang-format')}
         }
     })
     vim.api.nvim_exec([[

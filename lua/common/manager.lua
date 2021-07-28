@@ -1,5 +1,5 @@
 local packer = require('packer')
-local util = require("packer.util")
+local util = require('packer.util')
 
 local manager = {}
 manager.__index = manager
@@ -21,8 +21,7 @@ function manager:_set_packer_config()
     self.packer_config = {
         ensure_dependencies = true, -- Should packer install plugin dependencies?
         package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack'),
-        compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin',
-                                       'packer_compiled.lua'),
+        compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin', 'packer_compiled.lua'),
         plugin_package = 'packer', -- The default package for plugins
         max_jobs = 2, -- Limit the number of simultaneous jobs. nil means no limit
         auto_clean = true, -- During sync(), remove unused plugins
@@ -84,7 +83,7 @@ end
 function manager:_get_modules()
     for _, module_name in pairs(self.module_names) do
         local m = require(module_name)
-        if type(m) == "table" then self.modules[module_name] = m:new() end
+        if type(m) == 'table' then self.modules[module_name] = m:new() end
     end
 end
 

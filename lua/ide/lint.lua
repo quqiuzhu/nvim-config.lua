@@ -1,0 +1,4 @@
+-- https://github.com/neomake/neomake/tree/master/autoload/neomake/makers/ft
+-- https://github.com/iamcco/diagnostic-languageserver
+-- https://github.com/mfussenegger/nvim-lint
+-- https://github.com/lewis6991/spellsitter.nvim
