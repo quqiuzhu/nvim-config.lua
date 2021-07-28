@@ -51,3 +51,15 @@ RUN wget https://mirrors.ustc.edu.cn/golang/go1.12.17.linux-amd64.tar.gz \
     && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.12.17.linux-amd64.tar.gz
 
 ENV PATH="/usr/local/go/bin:$PATH"
+
+# Formatter
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x |  bash - \
+    && apt-get install -y nodejs clang-format lua5.3 liblua5.3-dev \
+    && npm install prettier -g \
+    && pip3 install yapf \ 
+    && wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz \
+    && tar zxpf luarocks-3.3.1.tar.gz \
+    && cd luarocks-3.3.1 \
+    && ./configure \
+    && make . && make install \
+    && luarocks install --server=https://luarocks.org/dev luaformatter
