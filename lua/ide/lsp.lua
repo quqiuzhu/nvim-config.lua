@@ -79,6 +79,7 @@ end
 
 -- https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically
 -- https://github.com/neoclide/coc.nvim/wiki/Language-servers#go
+-- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization
 local function setup_lsp()
     local ok, li = pcall(require, 'lspinstall')
     if not ok then return end
@@ -144,6 +145,6 @@ end
 
 function lsp:config() end
 
-function lsp:mapping() return self.g_mapping end
+function lsp:mapping() end
 
 return lsp

@@ -43,3 +43,6 @@
 [submodule "plugins/glepnir/zephyr-nvim"]
 	path = plugins/glepnir/zephyr-nvim
 	url = git@github.com:glepnir/zephyr-nvim.git
+[submodule "plugins/terrortylor/nvim-comment"]
+	path = plugins/terrortylor/nvim-comment
+	url = git@github.com:terrortylor/nvim-comment.git

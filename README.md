@@ -61,6 +61,9 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | Complete      | Normal | `gd`         | Goto definition                           |
 | Complete      | Normal | `gi`         | Goto implemention                         |
 | Complete      | Normal | `gr`         | Goto references                           |
+| Format        | Normal | `<Leader>f`  | Format buffer code                        |
+| Comment       | Normal | `gcc`        | Comment line code                         |
+| Comment       | Visual | `gc`         | Comment visual line code operator         |
 
 ## Language
 

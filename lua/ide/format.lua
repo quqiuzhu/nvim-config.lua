@@ -78,6 +78,11 @@ local function setup()
         augroup END
     ]], true)
     -- nnoremap <silent> <leader>f :Format<CR>
+    local mapping = require('common.mapping')
+    mapping:set_keymaps({
+        -- nnoremap <leader>f <cmd>Format<cr>
+        mapping:item():mode('n'):lhs('<leader>f'):noremap():rhs_cmdcr('Format'):silent():nowait()
+    })
 end
 
 local format = {}
