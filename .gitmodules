@@ -46,3 +46,6 @@
 [submodule "plugins/terrortylor/nvim-comment"]
 	path = plugins/terrortylor/nvim-comment
 	url = git@github.com:terrortylor/nvim-comment.git
+[submodule "plugins/f-person/git-blame.nvim"]
+	path = plugins/f-person/git-blame.nvim
+	url = git@github.com:f-person/git-blame.nvim.git
