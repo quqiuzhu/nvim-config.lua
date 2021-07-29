@@ -1,9 +1,10 @@
 project=vim
-target=mynvim
-github_dir=/Users/quqiuzhu/Documents/github/
+target=quqiuzhu/nvim
+default_dir=/Users/quqiuzhu/Documents/
 ifeq ($(shell uname), Linux)
-		github_dir=/data/github/
+		default_dir=/data/
 endif
+dir ?= ${default_dir}
 
 build:
 	docker build -f Dockerfile -t ${target}:latest .
@@ -12,8 +13,8 @@ dev:
 	@docker run -it --rm --name=nvim \
 	--network=host  \
 	-v ${PWD}:/root/.config/nvim \
-	-v ${github_dir}:/root/github/ \
-	-w /root/github/ \
+	-v ${dir}:/data/ \
+	-w /data/ \
 	${target}:latest bash
 
 .PHONY: build dev

@@ -1,6 +1,20 @@
 # nvim-config.lua
 
-Before this project, I am using [SpaceVim][spacevim], So I inherit habits and borrow ideas from it.
+Before this project, I was using [SpaceVim][spacevim], So I inherit habits and borrow ideas from it.
+
+Requires neovim 0.5.0+.
+
+## Try
+
+The project is working in progress, you can try it by the docker image
+
+```
+> cd path/to/nvim-config.lua
+> make dev dir=/your/code/explore/dir
+```
+
+Then you'll in a docker instance, run `nvim` to install packages, when install is done, quit nvim by
+type `:q` and run `nvim` again to experience.
 
 ## Installl
 
