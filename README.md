@@ -2,14 +2,13 @@
 
 Before this project, I was using [SpaceVim][spacevim], So I inherit habits and borrow ideas from it.
 
-Requires neovim 0.5.0+.
-
 ## Try
 
 The project is working in progress, you can try it by the docker image
 
 ```
-> cd path/to/nvim-config.lua
+> git clone --recurse-submodules project/path/nvim-config.lua /your/path
+> cd /your/path
 > make dev dir=/your/code/explore/dir
 ```
 
@@ -17,6 +16,8 @@ Then you'll in a docker instance, run `nvim` to install packages, when install i
 type `:q` and run `nvim` again to experience.
 
 ## Installl
+
+Requires neovim 0.5.0+.
 
 First, clone this project and submodules to you computer, and link to your nvim config path(~/.config/nvim)
 
