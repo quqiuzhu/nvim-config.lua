@@ -15,7 +15,9 @@ local module_names = {
     'ui.popup',
     'ui.statusline',
     'ui.bufferline',
-    'ui.theme'
+    'ui.theme',
+    'ui.outline',
+    'ui.quickfix'
 }
 
 local m = manager:new(module_names)

@@ -1,5 +1,6 @@
 --- mapping
 -- https://github.com/folke/which-key.nvim
+-- https://github.com/AckslD/nvim-whichkey-setup.lua
 -- <BS>           Backspace
 -- <Tab>          Tab
 -- <CR>           Enter

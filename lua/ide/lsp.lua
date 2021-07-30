@@ -1,4 +1,9 @@
 -- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+-- https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically
+-- https://github.com/neoclide/coc.nvim/wiki/Language-servers
+-- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization
+-- https://langserver.org/
+-- https://github.com/jose-elias-alvarez/null-ls.nvim
 local function setup_complete()
     local ok, compe = pcall(require, 'compe')
     if not ok then return end
@@ -77,9 +82,6 @@ local function setup_complete()
     vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', {expr = true})
 end
 
--- https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically
--- https://github.com/neoclide/coc.nvim/wiki/Language-servers#go
--- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization
 local function setup_lsp()
     local ok, li = pcall(require, 'lspinstall')
     if not ok then return end

@@ -1,4 +1,5 @@
 -- lint: seem not needed, lsp diagnostic is enough
+-- https://github.com/folke/trouble.nvim
 -- https://github.com/vim-syntastic/syntastic
 -- https://github.com/neomake/neomake/tree/master/autoload/neomake/makers/ft
 -- https://github.com/iamcco/diagnostic-languageserver

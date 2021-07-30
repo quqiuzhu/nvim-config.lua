@@ -1,1 +1,4 @@
---- https://github.com/kevinhwang91/nvim-hlslens
+-- / search: https://github.com/kevinhwang91/nvim-hlslens
+-- ft motion: https://github.com/ggandor/lightspeed.nvim
+-- scroll: https://github.com/karb94/neoscroll.nvim
+-- auto pairs: https://github.com/windwp/nvim-autopairs
