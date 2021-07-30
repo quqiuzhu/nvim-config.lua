@@ -49,3 +49,6 @@
 [submodule "plugins/f-person/git-blame.nvim"]
 	path = plugins/f-person/git-blame.nvim
 	url = git@github.com:f-person/git-blame.nvim.git
+[submodule "plugins/famiu/bufdelete.nvim"]
+	path = plugins/famiu/bufdelete.nvim
+	url = git@github.com:famiu/bufdelete.nvim.git
