@@ -52,7 +52,7 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | File Explorer | Normal | `h`          | Close node (valid in tree)                |
 | File Explorer | Normal | `l`          | Open node (valid in tree)                 |
 | File Explorer | Normal | `-`          | Change dir to parent (valid in tree)      |
-| Search        | Normal | `<ff>`       | Find files by name                        |
+| Search        | Normal | `ff`         | Find files by name                        |
 | Search        | Normal | `<C-p>`      | Fly grep                                  |
 | Search        | Normal | `<C-h>`      | Find help tags                            |
 | Complete      | Insert | `<C-Space>`  | Complete                                  |
