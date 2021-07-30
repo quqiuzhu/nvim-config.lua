@@ -44,7 +44,7 @@ local function setup()
     local mapping = require('common.mapping')
     mapping:set_keymaps({
         -- nnoremap <leader>ff <cmd>Telescope find_files<cr>
-        mapping:item():mode('n'):lhs('<C-s-f>'):noremap():rhs_cmdcr('Telescope find_files'):silent():nowait(),
+        mapping:item():mode('n'):lhs('ff'):noremap():rhs_cmdcr('Telescope find_files'):silent():nowait(),
         -- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
         mapping:item():mode('n'):lhs('<C-p>'):noremap():rhs_cmdcr('Telescope live_grep'):silent():nowait(),
         -- nnoremap <leader>fb <cmd>Telescope buffers<cr>
