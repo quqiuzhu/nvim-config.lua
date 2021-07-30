@@ -23,7 +23,7 @@ function manager:_set_packer_config()
         package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack'),
         compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin', 'packer_compiled.lua'),
         plugin_package = 'packer', -- The default package for plugins
-        max_jobs = 2, -- Limit the number of simultaneous jobs. nil means no limit
+        max_jobs = 4, -- Limit the number of simultaneous jobs. nil means no limit
         auto_clean = true, -- During sync(), remove unused plugins
         compile_on_sync = true, -- During sync(), run packer.compile()
         disable_commands = false, -- Disable creating commands
@@ -103,6 +103,7 @@ end
 
 function manager:load_plugins()
     vim.cmd [[packadd packer.nvim]]
+    vim.opt.termguicolors = true
     packer.init(self.packer_config)
     packer.reset()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end
