@@ -1,11 +1,11 @@
 -- https://github.com/glepnir/zephyr-nvim
+-- https://github.com/norcalli/nvim-colorizer.lua
+-- https://github.com/yamatsum/nvim-cursorline
 -- https://github.com/nvim-treesitter/nvim-treesitter
+-- https://github.com/RRethy/nvim-treesitter-textsubjects
 local function setup_treesitter()
     local ok, c = pcall(require, 'nvim-treesitter.configs')
-    if not ok then
-        print('treesitter not load')
-        return
-    end
+    if not ok then return end
 
     c.setup {
         ensure_installed = 'maintained', -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -18,8 +18,24 @@ local function setup_treesitter()
             -- Using this option may slow down your editor, and you may see some duplicate highlights.
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false
-        }
+        },
+        textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart', [';'] = 'textsubjects-container-outer'}}
     }
+end
+
+local function setup_colorzier()
+    local ok, c = pcall(require, 'colorizer')
+    if not ok then return end
+    c.setup {
+        '*', -- Highlight all files, but customize some others.
+        css = {rgb_fn = true}, -- Enable parsing rgb(...) functions in css.
+        html = {names = false} -- Disable parsing "names" like Blue or Gray
+    }
+end
+
+local function cursorline()
+    -- You can override cursor highlighting by defining CursorWord group and disabling built-in highlighting
+    -- by specifying vim.g.cursorword_highlight (lua) or g:cursorword_highlight (vimscript).
 end
 
 local theme = {}
@@ -34,7 +50,10 @@ end
 function theme:plugins()
     return {
         {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = setup_treesitter},
-        {'glepnir/zephyr-nvim', config = function() pcall(require, 'zephyr') end}
+        {'RRethy/nvim-treesitter-textsubjects', requires = {'nvim-treesitter/nvim-treesitter'}},
+        {'glepnir/zephyr-nvim', config = function() pcall(require, 'zephyr') end},
+        {'norcalli/nvim-colorizer.lua', config = setup_colorzier},
+        {'yamatsum/nvim-cursorline', config = setup_cursorline}
     }
 end
 

@@ -52,3 +52,12 @@
 [submodule "plugins/famiu/bufdelete.nvim"]
 	path = plugins/famiu/bufdelete.nvim
 	url = git@github.com:famiu/bufdelete.nvim.git
+[submodule "plugins/RRethy/nvim-treesitter-textsubjects"]
+	path = plugins/RRethy/nvim-treesitter-textsubjects
+	url = git@github.com:RRethy/nvim-treesitter-textsubjects.git
+[submodule "plugins/norcalli/nvim-colorizer.lua"]
+	path = plugins/norcalli/nvim-colorizer.lua
+	url = git@github.com:norcalli/nvim-colorizer.lua.git
+[submodule "plugins/yamatsum/nvim-cursorline"]
+	path = plugins/yamatsum/nvim-cursorline
+	url = git@github.com:yamatsum/nvim-cursorline.git

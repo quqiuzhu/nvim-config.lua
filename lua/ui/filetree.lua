@@ -135,6 +135,6 @@ end
 
 function filetree:config() end
 
-function filetree:mapping() return self.g_mapping end
+function filetree:mapping() end
 
 return filetree
