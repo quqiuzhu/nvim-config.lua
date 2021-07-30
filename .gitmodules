@@ -61,3 +61,15 @@
 [submodule "plugins/yamatsum/nvim-cursorline"]
 	path = plugins/yamatsum/nvim-cursorline
 	url = git@github.com:yamatsum/nvim-cursorline.git
+[submodule "plugins/kevinhwang91/nvim-hlslens"]
+	path = plugins/kevinhwang91/nvim-hlslens
+	url = git@github.com:kevinhwang91/nvim-hlslens.git
+[submodule "plugins/karb94/neoscroll.nvim"]
+	path = plugins/karb94/neoscroll.nvim
+	url = git@github.com:karb94/neoscroll.nvim.git
+[submodule "plugins/ggandor/lightspeed.nvim"]
+	path = plugins/ggandor/lightspeed.nvim
+	url = git@github.com:ggandor/lightspeed.nvim.git
+[submodule "plugins/windwp/nvim-autopairs"]
+	path = plugins/windwp/nvim-autopairs
+	url = git@github.com:windwp/nvim-autopairs.git
