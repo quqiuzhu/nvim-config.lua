@@ -1,0 +1,2 @@
+-- move panel with tmux: https://github.com/numToStr/Navigator.nvim
+-- https://github.com/jabirali/tmux-tilish

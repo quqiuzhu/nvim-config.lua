@@ -2,6 +2,7 @@
 -- ft motion: https://github.com/ggandor/lightspeed.nvim
 -- scroll: https://github.com/karb94/neoscroll.nvim
 -- auto pairs: https://github.com/windwp/nvim-autopairs
+-- move: https://github.com/matze/vim-move
 local function setup_search()
     local ok, h = pcall(require, 'hlslens')
     if not ok then return end

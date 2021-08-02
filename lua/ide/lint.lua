@@ -2,6 +2,7 @@
 -- https://github.com/folke/trouble.nvim
 -- https://github.com/vim-syntastic/syntastic
 -- https://github.com/neomake/neomake/tree/master/autoload/neomake/makers/ft
+-- https://github.com/neomake/neomake/wiki/Makers
 -- https://github.com/iamcco/diagnostic-languageserver
 -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
 -- https://github.com/iamcco/coc-diagnostic
