@@ -79,3 +79,6 @@
 [submodule "plugins/voldikss/vim-translator"]
 	path = plugins/voldikss/vim-translator
 	url = git@github.com:voldikss/vim-translator.git
+[submodule "plugins/vhyrro/neorg"]
+	path = plugins/vhyrro/neorg
+	url = git@github.com:vhyrro/neorg.git

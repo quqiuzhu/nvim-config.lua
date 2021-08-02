@@ -1,4 +1,4 @@
--- https://translatehub.com/voldikss/vim-translator
+-- https://github.com/voldikss/vim-translator
 local function setup()
     -- local g = {
     -- translator_target_lang = 'zh',

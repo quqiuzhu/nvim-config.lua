@@ -38,7 +38,8 @@ local function setup_complete()
             nvim_lua = true,
             vsnip = true,
             ultisnips = true,
-            luasnip = true
+            luasnip = true,
+            neorg = true
         }
     })
 

@@ -38,7 +38,8 @@ local function setup()
                     ['!'] = colors.red,
                     t = colors.red
                 }
-                vim.api.nvim_command('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
+                local fg = mode_color[vim.fn.mode()] or colors.blue
+                vim.api.nvim_command('hi GalaxyViMode guifg=' .. fg)
                 return '  '
             end,
             highlight = {colors.red, colors.bg, 'bold'}

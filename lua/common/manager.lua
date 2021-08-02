@@ -102,7 +102,6 @@ function manager:_get_plugins()
 end
 
 function manager:load_plugins()
-    vim.cmd [[packadd packer.nvim]]
     vim.opt.termguicolors = true
     packer.init(self.packer_config)
     packer.reset()
