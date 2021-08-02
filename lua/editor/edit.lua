@@ -93,6 +93,8 @@ local function setup_autopairs()
     })
 end
 
+local function setup_move() vim.api.nvim_set_var('move_key_modifier', 'C') end
+
 local edit = {}
 edit.__index = edit
 
@@ -107,7 +109,8 @@ function edit:plugins()
         {'kevinhwang91/nvim-hlslens', config = setup_search},
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
-        {'windwp/nvim-autopairs', config = setup_autopairs}
+        {'windwp/nvim-autopairs', config = setup_autopairs},
+        {'matze/vim-move', config = setup_move}
     }
 end
 

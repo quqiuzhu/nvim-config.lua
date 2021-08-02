@@ -54,7 +54,8 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | File Explorer | Normal | `-`          | Change dir to parent (valid in tree)      |
 | Search        | Normal | `ff`         | Find files by name                        |
 | Search        | Normal | `<C-p>`      | Fly grep                                  |
-| Search        | Normal | `<C-h>`      | Find help tags                            |
+| Search        | Normal | `fp`         | Fly grep                                  |
+| Search        | Normal | `fh`         | Find help tags                            |
 | Complete      | Insert | `<C-Space>`  | Complete                                  |
 | Complete      | Insert | `<Tab>`      | Complete Select item                      |
 | Complete      | Insert | `<Cr>`       | Complete confirm                          |
@@ -66,6 +67,10 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | Comment       | Visual | `gc`         | Comment visual line code operator         |
 | Text Object   | Visual | `.`          | Smart select text object                  |
 | Text Object   | Visual | `;`          | Smart select outer text object            |
+| Text Object   | Visual | `<C-h>`      | Move block left                           |
+| Text Object   | Visual | `<C-l>`      | Move block right                          |
+| Text Object   | Visual | `<C-k>`      | Move block up                             |
+| Text Object   | Visual | `<C-j>`      | Move block down                           |
 
 Note: default leader is `\`.
 

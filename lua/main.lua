@@ -2,7 +2,8 @@ local manager = require('common.manager')
 
 local module_names = {
     'editor.edit',
-    'editor.jump',
+    'editor.tmux',
+    'editor.translate',
     'editor.note',
     'ide.lsp',
     'ide.format',
@@ -17,7 +18,8 @@ local module_names = {
     'ui.bufferline',
     'ui.theme',
     'ui.outline',
-    'ui.quickfix'
+    'ui.quickfix',
+    'lang.markdown'
 }
 
 local m = manager:new(module_names)

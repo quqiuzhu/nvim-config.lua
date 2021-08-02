@@ -73,3 +73,6 @@
 [submodule "plugins/windwp/nvim-autopairs"]
 	path = plugins/windwp/nvim-autopairs
 	url = git@github.com:windwp/nvim-autopairs.git
+[submodule "plugins/matze/vim-move"]
+	path = plugins/matze/vim-move
+	url = git@github.com:matze/vim-move.git

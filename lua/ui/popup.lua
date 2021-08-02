@@ -50,7 +50,7 @@ local function setup()
         -- nnoremap <leader>fb <cmd>Telescope buffers<cr>
         -- mapping:item():mode("n"):lhs("<leader>fb"):noremap():rhs_cmdcr("Telescope buffers"):silent():nowait(),
         -- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-        mapping:item():mode('n'):lhs('<C-h>'):noremap():rhs_cmdcr('Telescope help_tags'):silent():nowait()
+        mapping:item():mode('n'):lhs('fh'):noremap():rhs_cmdcr('Telescope help_tags'):silent():nowait()
     })
 end
 
