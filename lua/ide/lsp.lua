@@ -1,7 +1,8 @@
 -- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
 -- https://github.com/neovim/nvim-lspconfig/wiki/Installing-language-servers-automatically
--- https://github.com/neoclide/coc.nvim/wiki/Language-servers
+-- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips
 -- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization
+-- https://github.com/neoclide/coc.nvim/wiki/Language-servers
 -- https://langserver.org/
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
 local function setup_complete()

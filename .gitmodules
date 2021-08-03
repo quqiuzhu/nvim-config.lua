@@ -85,3 +85,6 @@
 [submodule "plugins/simrat39/symbols-outline.nvim"]
 	path = plugins/simrat39/symbols-outline.nvim
 	url = git@github.com:simrat39/symbols-outline.nvim.git
+[submodule "plugins/npxbr/glow.nvim"]
+	path = plugins/npxbr/glow.nvim
+	url = git@github.com:npxbr/glow.nvim.git
