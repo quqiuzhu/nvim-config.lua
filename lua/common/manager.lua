@@ -107,7 +107,8 @@ function manager:load_plugins()
     packer.reset()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end
     packer.install()
-    packer.compile()
+    --packer.compile()
+    vim.cmd [[autocmd User PackerComplete PackerCompile]]
 end
 
 function manager:set_configs() for _, m in pairs(self.modules) do m:config() end end

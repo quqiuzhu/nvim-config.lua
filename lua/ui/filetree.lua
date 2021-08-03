@@ -128,7 +128,7 @@ end
 
 function filetree:plugins()
     return {
-        {'kyazdani42/nvim-tree.lua', config = setup, requires = {'kyazdani42/nvim-web-devicons', opt = true}},
+        {'kyazdani42/nvim-tree.lua', config = setup, requires = {'kyazdani42/nvim-web-devicons'}, setup = setup},
         'mhinz/vim-startify'
     }
 end
