@@ -88,3 +88,6 @@
 [submodule "plugins/npxbr/glow.nvim"]
 	path = plugins/npxbr/glow.nvim
 	url = git@github.com:npxbr/glow.nvim.git
+[submodule "plugins/folke/trouble.nvim"]
+	path = plugins/folke/trouble.nvim
+	url = git@github.com:folke/trouble.nvim.git
