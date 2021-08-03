@@ -75,6 +75,10 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | Text Object   | Visual | `<C-l>`      | Move block right                          |
 | Text Object   | Visual | `<C-k>`      | Move block up                             |
 | Text Object   | Visual | `<C-j>`      | Move block down                           |
+| Translate     | Normal | `<Leader>t`  | Translate selected word in command line   |
+| Translate     | Visual | `<Leader>t`  | Translate selected word in command line   |
+| Translate     | Normal | `<Leader>w`  | Translate selected word in window         |
+| Translate     | Visual | `<Leader>w`  | Translate selected word in window         |
 
 Note: default leader is `\`.
 
