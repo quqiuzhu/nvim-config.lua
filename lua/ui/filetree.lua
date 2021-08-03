@@ -79,7 +79,9 @@ local function setup()
         -- use tab switch window
         mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
+end
 
+local function config()
     local ok, nc = pcall(require, 'nvim-tree.config')
     if not ok then return end
     -- default mappings
@@ -132,7 +134,7 @@ function filetree:plugins()
     return {
         {
             'kyazdani42/nvim-tree.lua',
-            config = setup,
+            config = config,
             requires = {'kyazdani42/nvim-web-devicons'},
             setup = setup,
             after = 'nvim-bufferline.lua'

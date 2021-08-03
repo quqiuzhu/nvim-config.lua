@@ -9,7 +9,13 @@ function markdown:new()
 end
 
 function markdown:plugins()
-    return {{'npxbr/glow.nvim', run = 'GlowInstall', setup = function() vim.cmd [[noremap <leader>p :Glow<CR>]] end}}
+    return {
+        {
+            'npxbr/glow.nvim',
+            ft = {'markdown'},
+            setup = function() vim.cmd [[autocmd FileType markdown noremap <leader>p :Glow<CR>]] end
+        }
+    }
 end
 
 function markdown:config() end
