@@ -116,7 +116,7 @@ local function setup()
         {key = 'g?', cb = tree_cb('toggle_help')}
     }
 
-    require'nvim-tree'.toggle()
+    require('nvim-tree')
 end
 
 local filetree = {}
