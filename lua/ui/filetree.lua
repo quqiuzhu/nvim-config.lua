@@ -8,7 +8,7 @@ local function setup()
         nvim_tree_gitignore = 1, -- 0 by default
         nvim_tree_auto_open = 1, -- 0 by default, opens the tree when typing `vim $DIR` or `vim`
         nvim_tree_auto_close = 1, -- 0 by default, closes the tree when it's the last window
-        nvim_tree_auto_ignore_ft = {'dashboard'}, -- empty by default, don't auto open tree on specific filetypes.
+        nvim_tree_auto_ignore_ft = {'dashboard', 'Outline'}, -- empty by default, don't auto open tree on specific filetypes.
         nvim_tree_quit_on_open = 0, -- 0 by default, closes the tree when you open a file
         nvim_tree_follow = 1, -- 0 by default, this option allows the cursor to be updated when entering a buffer
         nvim_tree_indent_markers = 1, -- 0 by default, this option shows indent markers when folders are open

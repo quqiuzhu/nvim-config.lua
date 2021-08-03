@@ -29,7 +29,7 @@ function note:new()
     return o
 end
 
-function note:plugins() return {'vhyrro/neorg', requires = 'nvim-lua/plenary.nvim'} end
+function note:plugins() return {{'vhyrro/neorg', config = setup, requires = 'nvim-lua/plenary.nvim'}} end
 
 function note:config() end
 

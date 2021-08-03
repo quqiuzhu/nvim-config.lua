@@ -82,3 +82,6 @@
 [submodule "plugins/vhyrro/neorg"]
 	path = plugins/vhyrro/neorg
 	url = git@github.com:vhyrro/neorg.git
+[submodule "plugins/simrat39/symbols-outline.nvim"]
+	path = plugins/simrat39/symbols-outline.nvim
+	url = git@github.com:simrat39/symbols-outline.nvim.git
