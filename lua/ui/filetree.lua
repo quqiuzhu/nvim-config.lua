@@ -115,6 +115,8 @@ local function setup()
         {key = 'q', cb = tree_cb('close')},
         {key = 'g?', cb = tree_cb('toggle_help')}
     }
+
+    require'nvim-tree'.toggle()
 end
 
 local filetree = {}
@@ -128,7 +130,13 @@ end
 
 function filetree:plugins()
     return {
-        {'kyazdani42/nvim-tree.lua', config = setup, requires = {'kyazdani42/nvim-web-devicons'}, setup = setup},
+        {
+            'kyazdani42/nvim-tree.lua',
+            config = setup,
+            requires = {'kyazdani42/nvim-web-devicons'},
+            setup = setup,
+            after = 'nvim-bufferline.lua'
+        },
         'mhinz/vim-startify'
     }
 end

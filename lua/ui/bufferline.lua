@@ -80,7 +80,6 @@ local function setup()
         -- nnoremap <leader>d <cmd>BufferLinePickClose<cr>
         mapping:item():mode('n'):lhs('<leader>d'):noremap():rhs_cmdcr('BufferLinePickClose'):silent():nowait()
     })
-
 end
 
 function bufferline:new()
