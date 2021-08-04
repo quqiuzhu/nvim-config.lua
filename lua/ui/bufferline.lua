@@ -56,6 +56,11 @@ local function setup()
                     filetype = 'NvimTree',
                     text = 'File Explorer',
                     text_align = 'left' -- "left" | "center" | "right"
+                },
+                {
+                    filetype = 'Outline',
+                    text = 'Outline',
+                    text_align = 'left' -- "left" | "center" | "right"
                 }
             },
             show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers

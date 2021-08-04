@@ -91,3 +91,15 @@
 [submodule "plugins/folke/trouble.nvim"]
 	path = plugins/folke/trouble.nvim
 	url = git@github.com:folke/trouble.nvim.git
+[submodule "plugins/mfussenegger/nvim-dap"]
+	path = plugins/mfussenegger/nvim-dap
+	url = git@github.com:mfussenegger/nvim-dap.git
+[submodule "plugins/rcarriga/nvim-dap-ui"]
+	path = plugins/rcarriga/nvim-dap-ui
+	url = git@github.com:rcarriga/nvim-dap-ui.git
+[submodule "plugins/Pocco81/DAPInstall.nvim"]
+	path = plugins/Pocco81/DAPInstall.nvim
+	url = git@github.com:Pocco81/DAPInstall.nvim.git
+[submodule "plugins/jbyuki/one-small-step-for-vimkind"]
+	path = plugins/jbyuki/one-small-step-for-vimkind
+	url = git@github.com:jbyuki/one-small-step-for-vimkind.git
