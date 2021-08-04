@@ -1,6 +1,7 @@
 --- mapping
 -- https://github.com/folke/which-key.nvim
 -- https://github.com/AckslD/nvim-whichkey-setup.lua
+-- :h key-notation
 -- <BS>           Backspace
 -- <Tab>          Tab
 -- <CR>           Enter
@@ -21,6 +22,24 @@
 -- <PageUp>       Page-Up
 -- <PageDown>     Page-Down
 -- <bar>          the '|' character, which otherwise needs to be escaped '\|'
+-- Meta key mapping test:  https://github.com/neovim/neovim/issues/2379#issuecomment-94496365
+-- nnoremap <Tab> :echom "Tab"<cr>
+-- nnoremap <C-Tab> :echom "C-Tab"<cr>
+-- nnoremap <S-Tab> :echom "S-Tab"<cr>
+-- nnoremap <C-S-Tab> :echom "C-S-Tab"<cr>
+-- nnoremap <M-Tab> :echom "M-Tab"<cr>
+-- nnoremap <M-S-Tab> :echom "M-S-Tab"<cr>
+-- nnoremap <C-M-Tab> :echom "C-M-Tab"<cr>
+-- nnoremap <C-M-S-Tab> :echom "C-M-S-Tab"<cr>
+-- " For comparison
+-- nnoremap p :echom "p"<cr>
+-- nnoremap <S-p> :echom "S-p"<cr>
+-- nnoremap <C-p> :echom "C-p"<cr>
+-- nnoremap <C-S-p> :echom "C-S-p"<cr>
+-- nnoremap <M-p> :echom "M-p"<cr>
+-- nnoremap <M-S-p> :echom "M-S-p"<cr>
+-- nnoremap <C-M-p> :echom "C-M-p"<cr>
+-- nnoremap <C-M-S-p> :echom "C-M-S-p"<cr>
 local option = {}
 option.__index = option
 

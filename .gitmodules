@@ -103,3 +103,6 @@
 [submodule "plugins/jbyuki/one-small-step-for-vimkind"]
 	path = plugins/jbyuki/one-small-step-for-vimkind
 	url = git@github.com:jbyuki/one-small-step-for-vimkind.git
+[submodule "plugins/numToStr/Navigator.nvim"]
+	path = plugins/numToStr/Navigator.nvim
+	url = git@github.com:numToStr/Navigator.nvim.git
