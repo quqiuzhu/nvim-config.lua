@@ -108,7 +108,10 @@ function manager:load_plugins()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end
     packer.install()
     --packer.compile()
-    vim.cmd [[autocmd User PackerComplete PackerCompile]]
+    vim.cmd [[
+      autocmd User PackerComplete PackerCompile
+      tnoremap <Esc> <C-\><C-n>
+    ]]
 end
 
 function manager:set_configs() for _, m in pairs(self.modules) do m:config() end end

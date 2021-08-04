@@ -56,6 +56,31 @@ local function setup_install()
     for debugger, _ in pairs(dbg_list) do install.config(debugger, {}) end
 end
 
+local function setup_lua_debug()
+    local dap = require 'dap'
+    dap.configurations.lua = {
+        {
+            type = 'nlua',
+            request = 'attach',
+            name = 'Attach to running Neovim instance',
+            host = function()
+                local value = vim.fn.input('Host [127.0.0.1]: ')
+                if value ~= '' then return value end
+                return '127.0.0.1'
+            end,
+            port = function()
+                local val = tonumber(vim.fn.input('Port: '))
+                assert(val, 'Please provide a port number')
+                return val
+            end
+        }
+    }
+
+    dap.adapters.nlua = function(callback, config)
+        callback({type = 'server', host = config.host, port = config.port})
+    end
+end
+
 local dap = {}
 dap.__index = dap
 
@@ -69,7 +94,7 @@ function dap:plugins()
     return {
         {'rcarriga/nvim-dap-ui', config = setup_ui, requires = {'mfussenegger/nvim-dap'}},
         {'Pocco81/DAPInstall.nvim', config = setup_install, requires = {'mfussenegger/nvim-dap'}},
-        {'jbyuki/one-small-step-for-vimkind'} -- neovim internal luajit debug
+        {'jbyuki/one-small-step-for-vimkind', config = setup_lua_debug, requires = {'mfussenegger/nvim-dap'}} -- neovim internal luajit debug
     }
 end
 
