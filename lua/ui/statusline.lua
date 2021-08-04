@@ -9,7 +9,7 @@ local function setup()
     local colors = require('galaxyline.theme').default
     local condition = require('galaxyline.condition')
     local gls = gl.section
-    gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer', 'Outline', 'startify'}
+    gl.short_line_list = {'NvimTree', 'vista', 'dbui', 'packer', 'Outline', 'startify', 'Trouble'}
 
     gls.left[1] = {RainbowRed = {provider = function() return ' ' end, highlight = {colors.blue, colors.bg}}}
     gls.left[2] = {

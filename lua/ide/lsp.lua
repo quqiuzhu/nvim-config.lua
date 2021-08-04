@@ -9,6 +9,8 @@ local function setup_complete()
     local ok, compe = pcall(require, 'compe')
     if not ok then return end
 
+    vim.cmd [[set completeopt=menuone,noselect]]
+
     compe.setup({
         enabled = true,
         autocomplete = true,
@@ -124,11 +126,28 @@ local function setup_lsp()
             buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
             buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
             buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-            buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+            -- buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
         end
+        function copy(obj, seen)
+            if type(obj) ~= 'table' then return obj end
+            if seen and seen[obj] then return seen[obj] end
+            local s = seen or {}
+            local res = setmetatable({}, getmetatable(obj))
+            s[obj] = res
+            for k, v in pairs(obj) do res[copy(k, s)] = copy(v, s) end
+            return res
+        end
+        local configs = vim.g.lsp_server_configs or {}
         local servers = li.installed_servers()
         for _, server in pairs(servers) do
-            lc[server].setup {on_attach = on_attach, flags = {debounce_text_changes = 150}}
+            if type(configs[server]) == 'table' then
+                local config = copy(configs[server])
+                config.on_attach = on_attach
+                config.flags = {debounce_text_changes = 150}
+                lc[server].setup(config)
+            else
+                lc[server].setup {on_attach = on_attach, flags = {debounce_text_changes = 150}}
+            end
         end
     end
     setup_servers()

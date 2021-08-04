@@ -71,12 +71,12 @@ local function setup()
             java = {new_formater_function('clang-format')}
         }
     })
-    vim.api.nvim_exec([[
-        augroup FormatAutogroup
-          autocmd!
-          autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
-        augroup END
-    ]], true)
+    -- vim.api.nvim_exec([[
+    -- augroup FormatAutogroup
+    -- autocmd!
+    -- autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
+    -- augroup END
+    -- ]], true)
     local mapping = require('common.mapping')
     mapping:set_keymaps({
         -- nnoremap <slient> <leader>f <cmd>Format<cr>

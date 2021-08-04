@@ -1,102 +1,325 @@
--- lint: seem not needed, lsp diagnostic is enough
--- https://github.com/folke/trouble.nvim
+-- lint: lsp diagnostic integrated 
+-- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 -- https://github.com/vim-syntastic/syntastic
 -- https://github.com/neomake/neomake/tree/master/autoload/neomake/makers/ft
 -- https://github.com/neomake/neomake/wiki/Makers
 -- https://github.com/iamcco/diagnostic-languageserver
 -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
--- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 -- https://github.com/mfussenegger/nvim-lint
-local function setup()
-    local lspconfig = require('lspconfig')
-    local diagnosticls = require('common.diagnostic')
-    lspconfig.diagnosticls.setup({
-        filetypes = {'haskell', unpack(diagnosticls.filetypes)},
-        init_options = {
-            linters = diagnosticls.linters,
-            formatters = diagnosticls.formatters,
-            filetypes = {
-                haskell = 'hlint',
-                lua = {'luacheck', 'selene'},
-                markdown = {'markdownlint'},
-                python = {'flake8', 'mypy'},
-                scss = 'stylelint',
-                sh = 'shellcheck',
-                vim = 'vint',
-                yaml = 'yamllint'
-            },
-            formatFiletypes = {
-                fish = 'fish_indent',
-                javascript = 'prettier',
-                javascriptreact = 'prettier',
-                json = 'prettier',
-                lua = {'lua-format', 'stylua'},
-                python = {'isort', 'black'},
-                sh = 'shfmt',
-                sql = 'pg_format',
-                typescript = 'prettier',
-                typescriptreact = 'prettier'
-            }
-        }
-    })
-end
+local linters = {
+    ['ansible-lint'] = {
+        command = 'ansible-lint',
+        args = {'--parseable-severity', '--nocolor', '-'},
+        sourceName = 'ansible-lint',
+        rootPatterns = {'.ansible-lint'},
+        formatPattern = {'^[^:]+:(\\d+):\\s\\[\\w+\\]\\s\\[(\\w+)\\]\\s(.*)$', {line = 1, security = 2, message = 3}},
+        securities = {VERY_LOW = 'hint', LOW = 'info', HIGH = 'warning', VERY_HIGH = 'error'}
+    },
 
-local function config()
-    local ok, t = pcall(require, 'trouble')
-    if not ok then return end
-    t.setup({
-        position = 'bottom', -- position of the list can be: bottom, top, left, right
-        height = 16, -- height of the trouble list when position is top or bottom
-        width = 50, -- width of the list when position is left or right
-        icons = true, -- use devicons for filenames
-        mode = 'lsp_workspace_diagnostics', -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
-        fold_open = '', -- icon used for open folds
-        fold_closed = '', -- icon used for closed folds
-        action_keys = { -- key mappings for actions in the trouble list
-            -- map to {} to remove a mapping, for example:
-            -- close = {},
-            close = 'q', -- close the list
-            cancel = '<esc>', -- cancel the preview and get back to your last window / buffer / cursor
-            refresh = 'r', -- manually refresh
-            jump = {'<cr>', '<tab>'}, -- jump to the diagnostic or open / close folds
-            open_split = {'<c-x>'}, -- open buffer in new split
-            open_vsplit = {'<c-v>'}, -- open buffer in new vsplit
-            open_tab = {'<c-t>'}, -- open buffer in new tab
-            jump_close = {'o'}, -- jump to the diagnostic and close the list
-            toggle_mode = 'm', -- toggle between "workspace" and "document" diagnostics mode
-            toggle_preview = 'P', -- toggle auto_preview
-            hover = 'K', -- opens a small popup with the full multiline message
-            preview = 'p', -- preview the diagnostic location
-            close_folds = {'zM', 'zm'}, -- close all folds
-            open_folds = {'zR', 'zr'}, -- open all folds
-            toggle_fold = {'zA', 'za'}, -- toggle fold of current file
-            previous = 'k', -- preview item
-            next = 'j' -- next item
+    cpplint = {
+        command = 'cpplint',
+        args = {'%file'},
+        debounce = 100,
+        isStderr = true,
+        isStdout = false,
+        sourceName = 'cpplint',
+        offsetLine = 0,
+        offsetColumn = 0,
+        formatPattern = {
+            '^[^:]+:(\\d+):(\\d+)?\\s+([^:]+?)\\s\\[(\\d)\\]$',
+            {line = 1, column = 2, message = 3, security = 4}
         },
-        indent_lines = true, -- add an indent guide below the fold icons
-        auto_open = false, -- automatically open the list when you have diagnostics
-        auto_close = false, -- automatically close the list when you have no diagnostics
-        auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-        auto_fold = false, -- automatically fold a file trouble list at creation
-        signs = {
-            -- icons / text used for a diagnostic
-            error = '',
-            warning = '',
-            hint = '',
-            information = '',
-            other = '﫠'
+        securities = {['1'] = 'info', ['2'] = 'warning', ['3'] = 'warning', ['4'] = 'error', ['5'] = 'error'}
+    },
+
+    dmypy = {
+        sourceName = 'dmypy',
+        command = 'dmypy',
+        args = {
+            'run',
+            '--timeout',
+            '300',
+            '--',
+            '--hide-error-codes',
+            '--hide-error-context',
+            '--no-color-output',
+            '--no-error-summary',
+            '--no-pretty',
+            '--show-column-numbers',
+            '%file'
         },
-        use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
-    })
-    vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>Trouble<cr>', {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>xw', '<cmd>Trouble lsp_workspace_diagnostics<cr>',
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>xd', '<cmd>Trouble lsp_document_diagnostics<cr>',
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>xl', '<cmd>Trouble loclist<cr>', {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', 'gR', '<cmd>Trouble lsp_references<cr>', {silent = true, noremap = true})
-end
+        rootPatterns = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
+        requiredFiles = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
+        formatPattern = {'^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$', {line = 1, column = 2, security = 3, message = 4}},
+        securities = {error = 'error'}
+    },
+
+    eslint = {
+        command = './node_modules/.bin/eslint',
+        args = {'--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
+        rootPatterns = {
+            '.eslintrc.js',
+            '.eslintrc.cjs',
+            '.eslintrc.yaml',
+            '.eslintrc.yml',
+            '.eslintrc.json',
+            'package.json'
+        },
+        debounce = 100,
+        sourceName = 'eslint',
+        parseJson = {
+            errorsRoot = '[0].messages',
+            line = 'line',
+            column = 'column',
+            endLine = 'endLine',
+            endColumn = 'endColumn',
+            message = '${message} [${ruleId}]',
+            security = 'severity'
+        },
+        securities = {['2'] = 'error', ['1'] = 'warning'}
+    },
+
+    fish = {
+        command = 'fish',
+        args = {'-n', '%file'},
+        isStdout = false,
+        isStderr = true,
+        sourceName = 'fish',
+        formatLines = 1,
+        formatPattern = {'^.*\\(line (\\d+)\\): (.*)$', {line = 1, message = 2}}
+    },
+
+    flake8 = {
+        command = 'flake8',
+        args = {'--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-'},
+        debounce = 100,
+        rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'flake8',
+        formatLines = 1,
+        formatPattern = {'(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$', {line = 1, column = 2, security = 3, message = 4}},
+        securities = {W = 'warning', E = 'error', F = 'error', C = 'error', N = 'error'}
+    },
+
+    ['golangci-lint'] = {
+        command = 'golangci-lint',
+        rootPatterns = {'go.mod', '.git'},
+        debounce = 100,
+        args = {'run', '--out-format', 'json'},
+        sourceName = 'golangci-lint',
+        parseJson = {
+            sourceName = 'Pos.Filename',
+            sourceNameFilter = true,
+            errorsRoot = 'Issues',
+            line = 'Pos.Line',
+            column = 'Pos.Column',
+            message = '${Text} [${FromLinter}]'
+        }
+    },
+
+    hadolint = {
+        command = 'hadolint',
+        sourceName = 'hadolint',
+        args = {'-f', 'json', '-'},
+        parseJson = {line = 'line', column = 'column', security = 'level', message = '${message} [${code}]'},
+        securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
+    },
+
+    luacheck = {
+        command = 'luacheck',
+        args = {'--formatter', 'plain', '--codes', '--ranges', '--filename', '%filepath', '-'},
+        sourceName = 'luacheck',
+        formatPattern = {
+            '^[^:]+:(\\d+):(\\d+)-(\\d+):\\s+\\((\\w)\\d+\\)\\s+(.*)$',
+            {line = 1, column = 2, endLine = 1, endColumn = 3, security = 4, message = 5}
+        },
+        rootPatterns = {'.luacheckrc'},
+        requiredFiles = {'.luacheckrc'},
+        debounce = 100,
+        securities = {W = 'warning', E = 'error'}
+    },
+
+    markdownlint = {
+        command = 'markdownlint',
+        args = {'--stdin'},
+        isStderr = true,
+        debounce = 100,
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'markdownlint',
+        formatLines = 1,
+        formatPattern = {
+            '^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$',
+            {line = 1, column = 3, message = {4}}
+        },
+        rootPatterns = {'.markdownlint.json'}
+    },
+
+    mypy = {
+        sourceName = 'mypy',
+        command = 'mypy',
+        args = {
+            '--follow-imports=silent',
+            '--hide-error-codes',
+            '--hide-error-context',
+            '--no-color-output',
+            '--no-error-summary',
+            '--no-pretty',
+            '--show-column-numbers',
+            '%file'
+        },
+        rootPatterns = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
+        formatPattern = {'^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$', {line = 1, column = 2, security = 3, message = 4}},
+        securities = {error = 'error'}
+    },
+
+    pylint = {
+        sourceName = 'pylint',
+        command = 'pylint',
+        debounce = 500,
+        args = {
+            '--output-format',
+            'text',
+            '--score',
+            'no',
+            '--msg-template',
+            '\'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})\'',
+            '%file'
+        },
+        formatPattern = {'^(\\d+?):(\\d+?):([a-z]+?):(.*)$', {line = 1, column = 2, security = 3, message = 4}},
+        rootPatterns = {'pyproject.toml', 'setup.py', '.git'},
+        securities = {
+            informational = 'hint',
+            refactor = 'info',
+            convention = 'info',
+            warning = 'warning',
+            error = 'error',
+            fatal = 'error'
+        },
+        offsetColumn = 1,
+        formatLines = 1
+    },
+
+    revive = {
+        command = 'revive',
+        rootPatterns = {'go.mod', '.git'},
+        debounce = 100,
+        args = {'%file'},
+        sourceName = 'revive',
+        formatPattern = {'^[^:]+:(\\d+):(\\d+):\\s+(.*)$', {line = 1, column = 2, message = {3}}}
+    },
+
+    selene = {
+        command = 'selene',
+        args = {'--display-style', 'quiet', '-'},
+        sourceName = 'selene',
+        formatPattern = {
+            '^[^:]+:(\\d+):(\\d+):\\s(\\w+)\\[\\w+\\]:\\s(.*)$',
+            {line = 1, column = 2, endLine = 1, endColumn = 2, security = 3, message = 4}
+        },
+        rootPatterns = {'selene.toml'},
+        requiredFiles = {'selene.toml'},
+        debounce = 100,
+        securities = {error = 'error', warning = 'warning'}
+    },
+
+    shellcheck = {
+        command = 'shellcheck',
+        debounce = 100,
+        args = {'--format', 'json', '--external-sources', '-'},
+        sourceName = 'shellcheck',
+        parseJson = {
+            line = 'line',
+            column = 'column',
+            endLine = 'endLine',
+            endColumn = 'endColumn',
+            message = '${message} [${code}]',
+            security = 'level'
+        },
+        securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
+    },
+
+    stylelint = {
+        command = './node_modules/.bin/stylelint',
+        args = {'--formatter', 'json', '--stdin-filename', '%filepath'},
+        rootPatterns = {
+            '.stylelintrc',
+            '.stylelintrc.js',
+            '.stylelintrc.json',
+            '.stylelintrc.yaml',
+            '.stylelintrc.yml',
+            'stylelint.config.js',
+            'stylelint.config.cjs',
+            'package.json'
+        },
+        requiredFiles = {
+            '.stylelintrc',
+            '.stylelintrc.js',
+            '.stylelintrc.json',
+            '.stylelintrc.yaml',
+            '.stylelintrc.yml',
+            'stylelint.config.js',
+            'stylelint.config.cjs',
+            'package.json'
+        },
+        debounce = 100,
+        sourceName = 'stylelint',
+        parseJson = {
+            errorsRoot = '[0].warnings',
+            line = 'line',
+            column = 'column',
+            message = '${text}',
+            security = 'severity'
+        },
+        securities = {error = 'error', warning = 'warning'}
+    },
+
+    vint = {
+        command = 'vint',
+        debounce = 100,
+        args = {'--enable-neovim', '--stdin-display-name', '%filepath', '-'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'vint',
+        formatLines = 1,
+        formatPattern = {'[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
+    },
+
+    yamllint = {
+        args = {'-f', 'parsable', '-'},
+        command = 'yamllint',
+        debounce = 100,
+        formatLines = 1,
+        formatPattern = {
+            '^.*?:(\\d+):(\\d+): \\[(.*?)] (.*) \\((.*)\\)',
+            {line = 1, endline = 1, column = 2, endColumn = 2, message = 4, code = 5, security = 3}
+        },
+        securities = {error = 'error', warning = 'warning'},
+        sourceName = 'yamllint'
+    }
+}
+
+local filetypes = {
+    'css',
+    'dockerfile',
+    'fish',
+    'go',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'lua',
+    'markdown',
+    'python',
+    'scss',
+    'sh',
+    'sql',
+    'typescript',
+    'typescriptreact',
+    'vim',
+    'yaml',
+    'yaml.ansible'
+}
 
 local lint = {}
 lint.__index = lint
@@ -107,9 +330,29 @@ function lint:new()
     return o
 end
 
-function lint:plugins() return {{'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = config}} end
+function lint:plugins() return {} end
 
-function lint:config() end
+function lint:config()
+    if vim.g.lsp_server_configs == nil then vim.g.lsp_server_configs = {} end
+    local c = vim.g.lsp_server_configs
+    c['diagnosticls'] = {
+        filetypes = {'haskell', unpack(filetypes)},
+        init_options = {
+            linters = linters,
+            filetypes = {
+                haskell = 'hlint',
+                lua = {'luacheck', 'selene'},
+                markdown = {'markdownlint'},
+                python = {'flake8', 'mypy'},
+                scss = 'stylelint',
+                sh = 'shellcheck',
+                vim = 'vint',
+                yaml = 'yamllint'
+            }
+        }
+    }
+    vim.g.lsp_server_configs = c
+end
 
 function lint:mapping() end
 

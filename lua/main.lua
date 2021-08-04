@@ -24,5 +24,5 @@ local module_names = {
 
 local m = manager:new(module_names)
 m:init()
-m:load_plugins()
 m:set_configs()
+m:load_plugins()
