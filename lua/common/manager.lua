@@ -110,7 +110,6 @@ function manager:load_plugins()
     --packer.compile()
     vim.cmd [[
       autocmd User PackerComplete PackerCompile
-      tnoremap <Esc> <C-\><C-n>
     ]]
 end
 
