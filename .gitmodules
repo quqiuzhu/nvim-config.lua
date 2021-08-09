@@ -103,3 +103,6 @@
 [submodule "plugins/numToStr/Navigator.nvim"]
 	path = plugins/numToStr/Navigator.nvim
 	url = git@github.com:numToStr/Navigator.nvim.git
+[submodule "plugins/ethanholz/nvim-lastplace"]
+	path = plugins/ethanholz/nvim-lastplace
+	url = git@github.com:ethanholz/nvim-lastplace.git

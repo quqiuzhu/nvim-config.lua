@@ -143,13 +143,16 @@ function filetree:plugins()
 end
 
 function filetree:config()
-    vim.g['startify_lists'] = {
-        {header = {('   MRU in: ' .. vim.fn.getcwd())}, type = 'dir'},
+    vim.g.startify_lists = {
+        {header = {'   MRU in current directory'}, type = 'dir'},
         {header = {'   MRU '}, type = 'files'},
         {header = {'   Sessions'}, type = 'sessions'},
         {header = {'   Bookmarks'}, type = 'bookmarks'},
         {header = {'   Commands'}, type = 'commands'}
     }
+    vim.g.startify_session_persistence = 1
+    vim.g.startify_session_autoload = 1
+    vim.g.startify_update_oldfiles = 1
 end
 
 function filetree:mapping() end

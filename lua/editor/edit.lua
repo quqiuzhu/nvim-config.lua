@@ -95,6 +95,14 @@ end
 
 local function setup_move() vim.api.nvim_set_var('move_key_modifier', 'C') end
 
+local function setup_lastplace()
+    require'nvim-lastplace'.setup {
+        lastplace_ignore_buftype = {'NvimTree', 'vista', 'dbui', 'packer', 'Outline', 'startify', 'Trouble', 'help'},
+        lastplace_ignore_filetype = {'gitcommit', 'gitrebase', 'svn', 'hgcommit'},
+        lastplace_open_folds = true
+    }
+end
+
 local edit = {}
 edit.__index = edit
 
@@ -110,7 +118,8 @@ function edit:plugins()
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
         {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'matze/vim-move', config = setup_move}
+        {'matze/vim-move', config = setup_move},
+        {'ethanholz/nvim-lastplace', config = setup_lastplace}
     }
 end
 
