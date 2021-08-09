@@ -75,8 +75,7 @@ local function setup()
         -- nnoremap <C-n> :NvimTreeToggle<CR>
         mapping:item():mode('n'):lhs('<C-n>'):noremap():rhs_cmdcr('NvimTreeToggle'):silent():nowait(),
         -- nnoremap <leader>r :NvimTreeRefresh<CR>
-        mapping:item():mode('n'):lhs('<C-r>'):noremap():rhs_cmdcr('NvimTreeRefresh'):silent():nowait(),
-        -- use tab switch window
+        mapping:item():mode('n'):lhs('<C-r>'):noremap():rhs_cmdcr('NvimTreeRefresh'):silent():nowait(), -- use tab switch window
         mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
 end
@@ -143,7 +142,15 @@ function filetree:plugins()
     }
 end
 
-function filetree:config() end
+function filetree:config()
+    vim.g['startify_lists'] = {
+        {header = {('   MRU in: ' .. vim.fn.getcwd())}, type = 'dir'},
+        {header = {'   MRU '}, type = 'files'},
+        {header = {'   Sessions'}, type = 'sessions'},
+        {header = {'   Bookmarks'}, type = 'bookmarks'},
+        {header = {'   Commands'}, type = 'commands'}
+    }
+end
 
 function filetree:mapping() end
 

@@ -50,7 +50,9 @@ local function setup()
         logging = false,
         filetype = {
             rust = {function() return {exe = 'rustfmt', args = {'--emit=stdout'}, stdin = true} end},
-            lua = {function() return {exe = 'lua-format', args = {}, stdin = true} end},
+            lua = {function()
+                return {exe = 'lua-format', args = {}, stdin = true, cwd = vim.fn.expand('%:p:h')}
+            end},
             go = {function() return {exe = 'gofmt', args = {}, stdin = true} end},
             python = {function() return {exe = 'yapf', args = {}, stdin = true} end},
             javascript = {new_formater_function('prettier')},
