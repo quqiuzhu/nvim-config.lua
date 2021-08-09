@@ -43,7 +43,9 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | ------------- | ------ | ------------ | -------------------------------------------- |
 | Window        | Normal | `<Tab>`      | Switch window                                |
 | Buffer        | Normal | `<Leader>N`  | Switch to buffer N, N in range [1, 9]        |
-| Buffer        | Normal | `<Leader>d`  | Select and delete buffer                     |
+| Buffer        | Normal | `bdp`        | Pick and delete selected buffer              |
+| Buffer        | Normal | `bdl`        | Delete left buffer                           |
+| Buffer        | Normal | `bdr`        | Delete right buffers                         |
 | File Explorer | Normal | `<C-n>`      | Toggle file tree (valid in buffer & tree)    |
 | File Explorer | Normal | `<C-r>`      | Refresh file tree (valid in buffer)          |
 | File Explorer | Normal | `<Cr>`       | Edit file (valid in tree)                    |
