@@ -2,7 +2,7 @@
 -- https://github.com/mhartington/formatter.nvim
 -- https://github.com/sbdchd/neoformat
 -- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
--- Each format tool config is a function that returns a table. Since each entry is a function, 
+-- Each format tool config is a function that returns a table. Since each entry is a function,
 -- the tables for each file type act as an ordered list (or array). This mean things will run
 -- in the order you list them, keep this in mind.
 -- Each formatter should return a table that consist of:

@@ -7,6 +7,23 @@
 -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
 -- https://github.com/mfussenegger/nvim-lint
 local linters = {
+    tidy = {
+        command = 'tidy',
+        args = {'-e', '-q'},
+        rootPatterns = {'.git/'},
+        isStderr = true,
+        debounce = 100,
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'tidy',
+        formatLines = 1,
+        formatPattern = {
+            '^.*?(\\d+).*?(\\d+)\\s+-\\s+([^:]+):\\s+(.*)(\\r|\\n)*$',
+            {line = 1, column = 2, endLine = 1, endColumn = 2, message = {4}, security = 3}
+        },
+        securities = {Error = 'error', Warning = 'warning'}
+    },
+
     ['ansible-lint'] = {
         command = 'ansible-lint',
         args = {'--parseable-severity', '--nocolor', '-'},
@@ -302,6 +319,7 @@ local linters = {
 
 local filetypes = {
     'css',
+    'html',
     'dockerfile',
     'fish',
     'go',
@@ -312,13 +330,18 @@ local filetypes = {
     'markdown',
     'python',
     'scss',
+    'less',
     'sh',
     'sql',
     'typescript',
     'typescriptreact',
     'vim',
     'yaml',
-    'yaml.ansible'
+    'yaml.ansible',
+    'haskell',
+    'c',
+    'cpp',
+    'rust'
 }
 
 local lint = {}
@@ -336,7 +359,7 @@ function lint:config()
     if vim.g.lsp_server_configs == nil then vim.g.lsp_server_configs = {} end
     local c = vim.g.lsp_server_configs
     c['diagnosticls'] = {
-        filetypes = {'haskell', unpack(filetypes)},
+        filetypes = filetypes,
         init_options = {
             linters = linters,
             filetypes = {
@@ -345,12 +368,22 @@ function lint:config()
                 markdown = {'markdownlint'},
                 python = {'flake8', 'mypy'},
                 scss = 'stylelint',
+                less = 'stylelint',
+                css = 'stylelint',
                 sh = 'shellcheck',
+                fish = 'fish',
                 vim = 'vint',
-                yaml = 'yamllint'
+                yaml = 'yamllint',
+                cpp = 'cpplint',
+                c = 'cpplint',
+                objc = 'cpplint',
+                javascript = 'eslint',
+                html = 'tidy',
+                go = 'golangci-lint',
+                ['yaml.ansible'] = 'ansible-lint'
             }
         },
-	handlers = {}
+        handlers = {}
     }
     vim.g.lsp_server_configs = c
 end
