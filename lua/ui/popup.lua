@@ -20,9 +20,14 @@ local function setup()
             entry_prefix = '  ',
             initial_mode = 'insert',
             selection_strategy = 'reset',
-            sorting_strategy = 'descending',
+            sorting_strategy = 'ascending',
             layout_strategy = 'horizontal',
-            layout_config = {horizontal = {mirror = false}, vertical = {mirror = false}},
+            layout_config = {
+                height = 0.8,
+                width = 0.7,
+                horizontal = {mirror = false, prompt_position = 'top'},
+                vertical = {mirror = false}
+            },
             file_sorter = require'telescope.sorters'.get_fuzzy_file,
             file_ignore_patterns = {},
             generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -47,8 +52,12 @@ local function setup()
         mapping:item():mode('n'):lhs('ff'):noremap():rhs_cmdcr('Telescope find_files'):silent():nowait(),
         -- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
         mapping:item():mode('n'):lhs('<C-p>'):noremap():rhs_cmdcr('Telescope live_grep'):silent():nowait(),
+        mapping:item():mode('n'):lhs('fg'):noremap():rhs_cmdcr('Telescope live_grep'):silent():nowait(),
+        mapping:item():mode('n'):lhs('fk'):noremap():rhs_cmdcr('Telescope keymaps'):silent():nowait(),
+        mapping:item():mode('n'):lhs('fc'):noremap():rhs_cmdcr('Telescope commands'):silent():nowait(),
+        mapping:item():mode('n'):lhs('fm'):noremap():rhs_cmdcr('Telescope man_pages'):silent():nowait(),
+        mapping:item():mode('n'):lhs('fa'):noremap():rhs_cmdcr('Telescope autocommands'):silent():nowait(),
         -- nnoremap <leader>fb <cmd>Telescope buffers<cr>
-        -- mapping:item():mode("n"):lhs("<leader>fb"):noremap():rhs_cmdcr("Telescope buffers"):silent():nowait(),
         -- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
         mapping:item():mode('n'):lhs('fh'):noremap():rhs_cmdcr('Telescope help_tags'):silent():nowait()
     })

@@ -39,55 +39,71 @@ TODO
 
 Keymaps should be short, and you don't need too many of them, the core keymaps may be shared across editors.
 
-| Module        | Mode   | Key Bindings | Descriptions                                 |
-| ------------- | ------ | ------------ | -------------------------------------------- |
-| Window        | Normal | `<Tab>`      | Switch window                                |
-| Buffer        | Normal | `<Leader>N`  | Switch to buffer N, N in range [1, 9]        |
-| Buffer        | Normal | `bdp`        | Pick and delete selected buffer              |
-| Buffer        | Normal | `bdl`        | Delete left buffer                           |
-| Buffer        | Normal | `bdr`        | Delete right buffers                         |
-| File Explorer | Normal | `<C-n>`      | Toggle file tree (valid in buffer & tree)    |
-| File Explorer | Normal | `<C-r>`      | Refresh file tree (valid in buffer)          |
-| File Explorer | Normal | `<Cr>`       | Edit file (valid in tree)                    |
-| File Explorer | Normal | `r`          | Rename file (valid in tree)                  |
-| File Explorer | Normal | `c`          | Copy file name (valid in tree)               |
-| File Explorer | Normal | `y`          | Copy file (valid in tree)                    |
-| File Explorer | Normal | `x`          | Cut file (valid in tree)                     |
-| File Explorer | Normal | `d`          | Remove file (valid in tree)                  |
-| File Explorer | Normal | `N`          | New file or directory (valid in tree)        |
-| File Explorer | Normal | `h`          | Close node (valid in tree)                   |
-| File Explorer | Normal | `l`          | Open node (valid in tree)                    |
-| File Explorer | Normal | `-`          | Change dir to parent (valid in tree)         |
-| Search        | Normal | `ff`         | Find files by name                           |
-| Search        | Normal | `<C-p>`      | Fly grep                                     |
-| Search        | Normal | `fp`         | Fly grep                                     |
-| Search        | Normal | `fh`         | Find help tags                               |
-| Complete      | Insert | `<C-Space>`  | Complete                                     |
-| Complete      | Insert | `<Tab>`      | Complete Select item                         |
-| Complete      | Insert | `<Cr>`       | Complete confirm                             |
-| Complete      | Normal | `gd`         | Goto definition                              |
-| Complete      | Normal | `gi`         | Goto implemention                            |
-| Complete      | Normal | `gr`         | Goto references                              |
-| Format        | Normal | `<Leader>f`  | Format buffer code                           |
-| Comment       | Normal | `gcc`        | Comment line code                            |
-| Comment       | Visual | `gc`         | Comment visual line code operator            |
-| Text Object   | Visual | `.`          | Smart select text object                     |
-| Text Object   | Visual | `;`          | Smart select outer text object               |
-| Text Object   | Visual | `<C-h>`      | Move block left                              |
-| Text Object   | Visual | `<C-l>`      | Move block right                             |
-| Text Object   | Visual | `<C-k>`      | Move block up                                |
-| Text Object   | Visual | `<C-j>`      | Move block down                              |
-| Translate     | Normal | `<Leader>t`  | Translate selected word in command line      |
-| Translate     | Visual | `<Leader>t`  | Translate selected word in command line      |
-| Translate     | Normal | `<Leader>w`  | Translate selected word in window            |
-| Translate     | Visual | `<Leader>w`  | Translate selected word in window            |
-| Quckfix       | Normal | `<Leader>xx` | Open document quickfix window                |
-| Quckfix       | Normal | `<Leader>xw` | Open workspace quickfix window               |
-| Quckfix       | Normal | `<Esc>`      | Back to window / buffer                      |
-| Quckfix       | Normal | `q`          | Close quickfix window                        |
-| Quckfix       | Normal | `o`          | Jump to the diagnostic and close             |
-| Quckfix       | Normal | `r`          | Refresh quickfix window                      |
-| Quckfix       | Normal | `m`          | Mode change between "workspace" & "document" |
+| Module        | Mode   | Key Bindings   | Descriptions                                 |
+| ------------- | ------ | -------------- | -------------------------------------------- |
+| Window        | Normal | `<Tab>`        | Switch window                                |
+| Buffer        | Normal | `<Leader>N`    | Switch to buffer N, N in range [1, 9]        |
+| Buffer        | Normal | `bdp`          | Pick and delete selected buffer              |
+| Buffer        | Normal | `bdl`          | Delete left buffer                           |
+| Buffer        | Normal | `bdr`          | Delete right buffers                         |
+| File Explorer | Normal | `<C-n>`        | Toggle file tree (valid in buffer & tree)    |
+| File Explorer | Normal | `<C-r>`        | Refresh file tree (valid in buffer)          |
+| File Explorer | Normal | `<Cr>`         | Edit file (valid in tree)                    |
+| File Explorer | Normal | `r`            | Rename file (valid in tree)                  |
+| File Explorer | Normal | `c`            | Copy file name (valid in tree)               |
+| File Explorer | Normal | `y`            | Copy file (valid in tree)                    |
+| File Explorer | Normal | `x`            | Cut file (valid in tree)                     |
+| File Explorer | Normal | `d`            | Remove file (valid in tree)                  |
+| File Explorer | Normal | `N`            | New file or directory (valid in tree)        |
+| File Explorer | Normal | `h`            | Close node (valid in tree)                   |
+| File Explorer | Normal | `l`            | Open node (valid in tree)                    |
+| File Explorer | Normal | `-`            | Change dir to parent (valid in tree)         |
+| Search        | Normal | `ff`           | Find files by name                           |
+| Search        | Normal | `<C-p>`        | Fly grep                                     |
+| Search        | Normal | `fg`           | Fly grep                                     |
+| Search        | Normal | `fb`           | Find bufers                                  |
+| Search        | Normal | `fh`           | Find help tags                               |
+| Search        | Normal | `fk`           | Find keymaps                                 |
+| Search        | Normal | `fc`           | Find commands                                |
+| Search        | Normal | `fa`           | Find auto commands                           |
+| Search        | Normal | `fm`           | Find man pages                               |
+| Search        | Normal | `<C-n>/<Down>` | Next item                                    |
+| Search        | Normal | `<C-p>/<Up>`   | Previous item                                |
+| Search        | Normal | `j/k`          | Next/previous (in normal mode)               |
+| Search        | Normal | `<Cr>`         | Confirm selection                            |
+| Search        | Normal | `<C-x>`        | go to file selection as a split              |
+| Search        | Normal | `<C-v>`        | go to file selection as a vsplit             |
+| Search        | Normal | `<C-t>`        | go to a file in a new tab                    |
+| Search        | Normal | `<C-u>`        | scroll up in preview window                  |
+| Search        | Normal | `<C-d>`        | scroll down in preview window                |
+| Search        | Normal | `<C-c>`        | close telescope                              |
+| Search        | Normal | `<Esc>`        | close telescope (in normal mode)             |
+| Complete      | Insert | `<C-Space>`    | Complete                                     |
+| Complete      | Insert | `<Tab>`        | Complete Select item                         |
+| Complete      | Insert | `<Cr>`         | Complete confirm                             |
+| Complete      | Normal | `gd`           | Goto definition                              |
+| Complete      | Normal | `gi`           | Goto implemention                            |
+| Complete      | Normal | `gr`           | Goto references                              |
+| Format        | Normal | `<Leader>f`    | Format buffer code                           |
+| Comment       | Normal | `gcc`          | Comment line code                            |
+| Comment       | Visual | `gc`           | Comment visual line code operator            |
+| Text Object   | Visual | `.`            | Smart select text object                     |
+| Text Object   | Visual | `;`            | Smart select outer text object               |
+| Text Object   | Visual | `<C-h>`        | Move block left                              |
+| Text Object   | Visual | `<C-l>`        | Move block right                             |
+| Text Object   | Visual | `<C-k>`        | Move block up                                |
+| Text Object   | Visual | `<C-j>`        | Move block down                              |
+| Translate     | Normal | `<Leader>t`    | Translate selected word in command line      |
+| Translate     | Visual | `<Leader>t`    | Translate selected word in command line      |
+| Translate     | Normal | `<Leader>w`    | Translate selected word in window            |
+| Translate     | Visual | `<Leader>w`    | Translate selected word in window            |
+| Quckfix       | Normal | `<Leader>xx`   | Open document quickfix window                |
+| Quckfix       | Normal | `<Leader>xw`   | Open workspace quickfix window               |
+| Quckfix       | Normal | `<Esc>`        | Back to window / buffer                      |
+| Quckfix       | Normal | `q`            | Close quickfix window                        |
+| Quckfix       | Normal | `o`            | Jump to the diagnostic and close             |
+| Quckfix       | Normal | `r`            | Refresh quickfix window                      |
+| Quckfix       | Normal | `m`            | Mode change between "workspace" & "document" |
 
 Note: default leader is `\`.
 
