@@ -88,11 +88,8 @@ end
 
 local function setup_lsp()
     local function setup_servers()
-        local ok, li = pcall(require, 'lspinstall')
-        if not ok then return end
-
-        local ok, lc = pcall(require, 'lspconfig')
-        if not ok then return end
+        local li = require('lspinstall')
+        local lc = require('lspconfig')
 
         -- Setup server install config
         li.setup()
@@ -128,7 +125,7 @@ local function setup_lsp()
             buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
             -- buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
         end
-        function copy(obj, seen)
+        local function copy(obj, seen)
             if type(obj) ~= 'table' then return obj end
             if seen and seen[obj] then return seen[obj] end
             local s = seen or {}
@@ -144,9 +141,16 @@ local function setup_lsp()
                 local config = copy(configs[server])
                 config.on_attach = on_attach
                 config.flags = {debounce_text_changes = 150}
+                if config.handlers == nil then
+                    config.handlers = {['textDocument/publishDiagnostics'] = function() end}
+                end
                 lc[server].setup(config)
             else
-                lc[server].setup {on_attach = on_attach, flags = {debounce_text_changes = 150}}
+                lc[server].setup {
+                    on_attach = on_attach,
+                    flags = {debounce_text_changes = 150},
+                    handlers = {['textDocument/publishDiagnostics'] = function() end}
+                }
             end
         end
     end

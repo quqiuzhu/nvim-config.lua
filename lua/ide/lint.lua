@@ -1,4 +1,4 @@
--- lint: lsp diagnostic integrated 
+-- lint: lsp diagnostic integrated
 -- https://github.com/iamcco/coc-diagnostic/blob/master/src/config.ts
 -- https://github.com/vim-syntastic/syntastic
 -- https://github.com/neomake/neomake/tree/master/autoload/neomake/makers/ft
@@ -349,7 +349,8 @@ function lint:config()
                 vim = 'vint',
                 yaml = 'yamllint'
             }
-        }
+        },
+	handlers = {}
     }
     vim.g.lsp_server_configs = c
 end
