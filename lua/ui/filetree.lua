@@ -8,7 +8,7 @@ local function setup()
         nvim_tree_gitignore = 1, -- 0 by default
         nvim_tree_auto_open = 1, -- 0 by default, opens the tree when typing `vim $DIR` or `vim`
         nvim_tree_auto_close = 1, -- 0 by default, closes the tree when it's the last window
-        nvim_tree_auto_ignore_ft = {'dashboard', 'Outline'}, -- empty by default, don't auto open tree on specific filetypes.
+        nvim_tree_auto_ignore_ft = {'dashboard', 'Outline', 'Trouble', 'Startify'}, -- empty by default, don't auto open tree on specific filetypes.
         nvim_tree_quit_on_open = 0, -- 0 by default, closes the tree when you open a file
         nvim_tree_follow = 1, -- 0 by default, this option allows the cursor to be updated when entering a buffer
         nvim_tree_indent_markers = 1, -- 0 by default, this option shows indent markers when folders are open
@@ -27,11 +27,14 @@ local function setup()
         nvim_tree_hijack_cursor = 1, -- 1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
         nvim_tree_icon_padding = ' ', -- one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
         nvim_tree_update_cwd = 0, -- 0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
-        nvim_tree_window_picker_exclude = {filetype = {'packer', 'qf'}, buftype = {'terminal'}},
+        nvim_tree_window_picker_exclude = {
+            filetype = {'packer', 'qf', 'Outline', 'Trouble', 'Startify', 'help'},
+            buftype = {'terminal'}
+        },
         -- Dictionary of buffer option names mapped to a list of option values that
         -- indicates to the window picker that the buffer's window should not be
         -- selectable.
-        nvim_tree_special_files = {['README.md'] = 1, ['Makefile'] = 1, ['MAKEFILE'] = 1}, -- List of filenames that gets highlighted with NvimTreeSpecialFile
+        nvim_tree_special_files = {['README.md'] = 1, ['Makefile'] = 1, ['MAKEFILE'] = 1, ['CMakeLists.txt'] = 1}, -- List of filenames that gets highlighted with NvimTreeSpecialFile
         nvim_tree_show_icons = {git = 1, folders = 0, files = 0, folder_arrows = 0},
         -- If 0, do not show the icons for one of 'git' 'folder' and 'files'
         -- 1 by default, notice that if 'files' is 1, it will only display
