@@ -7,6 +7,62 @@
 -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
 -- https://github.com/mfussenegger/nvim-lint
 local linters = {
+    cmakelint = {
+        command = 'cmakelint',
+        debounce = 100,
+        args = {'%filepath'},
+        offsetLine = 0,
+        offsetColumn = 1,
+        sourceName = 'cmakelint',
+        formatLines = 1,
+        formatPattern = {'^[^:]+:(\\d+): (.*)$', {line = 1, message = 2}}
+    },
+
+    ['cmake-lint'] = {
+        command = 'cmake-lint',
+        debounce = 100,
+        args = {'%filepath'},
+        offsetLine = 0,
+        offsetColumn = 1,
+        sourceName = 'cmakelint',
+        formatLines = 1,
+        formatPattern = {'^[^:]+:(\\d+)(,(\\d+))?: (\\[(.).*)$', {line = 1, column = 3, message = 4, security = 5}},
+        securities = {['C'] = 'info', ['R'] = 'info', ['W'] = 'warning', ['E'] = 'error'}
+    },
+
+    reek = {
+        command = 'bundle',
+        sourceName = 'reek',
+        debounce = 100,
+        args = {'exec', 'reek', '--format', 'json', '--force-exclusion', '--stdin-filename', '%filepath'},
+        parseJson = {line = 'lines[0]', endLine = 'lines[1]', message = '[${smell_type}] ${message}'},
+        securities = {undefined = 'info'}
+    },
+
+    rubocop = {
+        command = 'bundle',
+        sourceName = 'rubocop',
+        debounce = 100,
+        args = {'exec', 'rubocop', '--format', 'json', '--force-exclusion', '--stdin', '%filepath'},
+        parseJson = {
+            errorsRoot = 'files[0].offenses',
+            line = 'location.start_line',
+            endLine = 'location.last_line',
+            column = 'location.start_column',
+            endColumn = 'location.end_column',
+            message = '[${cop_name}] ${message}',
+            security = 'severity'
+        },
+        securities = {
+            fatal = 'error',
+            error = 'error',
+            warning = 'warning',
+            convention = 'info',
+            refactor = 'info',
+            info = 'info'
+        }
+    },
+
     tidy = {
         command = 'tidy',
         args = {'-e', '-q'},
@@ -22,6 +78,95 @@ local linters = {
             {line = 1, column = 2, endLine = 1, endColumn = 2, message = {4}, security = 3}
         },
         securities = {Error = 'error', Warning = 'warning'}
+    },
+
+    proselint = {
+        command = 'proselint',
+        debounce = 300,
+        args = {'-j'},
+        sourceName = 'proselint',
+        parseJson = {
+            errorsRoot = 'data.errors',
+            line = 'line',
+            column = 'column',
+            message = '${message}',
+            security = 'severity'
+        },
+        securities = {error = 'error', warning = 'warning', info = 'suggestion'}
+    },
+
+    hlint = {
+        command = 'hlint',
+        debounce = 100,
+        args = {'--json', '-'},
+        sourceName = 'hlint',
+        parseJson = {
+            line = 'startLine',
+            column = 'startColumn',
+            endLine = 'endLine',
+            endColumn = 'endColumn',
+            message = '${hint}',
+            security = 'severity'
+        },
+        securities = {Error = 'error', Warning = 'warning', Suggestion = 'info'}
+    },
+
+    phpcs = {
+        command = './vendor/bin/phpcs',
+        debounce = 100,
+        rootPatterns = {'composer.json', 'composer.lock', 'vendor', '.git'},
+        args = {'--standard=PSR2', '--report=emacs', '-s', '-'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'phpcs',
+        formatLines = 1,
+        formatPattern = {
+            '^.*:(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$',
+            {line = 1, column = 2, message = 4, security = 3}
+        },
+        securities = {error = 'error', warning = 'warning'}
+    },
+
+    phpstan = {
+        command = './vendor/bin/phpstan',
+        debounce = 100,
+        rootPatterns = {'composer.json', 'composer.lock', 'vendor', '.git'},
+        args = {'analyze', '--error-format', 'raw', '--no-progress', '%file'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'phpstan',
+        formatLines = 1,
+        formatPattern = {'^[^:]+:(\\d+):(.*)(\\r|\\n)*$', {line = 1, message = 2}}
+    },
+
+    ['nix-linter'] = {
+        command = 'nix-linter',
+        sourceName = 'nix-linter',
+        debounce = 100,
+        parseJson = {
+            line = 'pos.spanBegin.sourceLine',
+            column = 'pos.spanBegin.sourceColumn',
+            endLine = 'pos.spanEnd.sourceLine',
+            endColumn = 'pos.spanEnd.sourceColumn',
+            message = '${description}'
+        },
+        securities = {undefined = 'warning'}
+    },
+
+    mix_credo = {
+        command = 'mix',
+        debounce = 100,
+        rootPatterns = {'mix.exs'},
+        args = {'credo', 'suggest', '--format', 'flycheck', '--read-from-stdin'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'mix_credo',
+        formatLines = 1,
+        formatPattern = {
+            '^[^ ]+?:([0-9]+)(:([0-9]+))?:\\s+([^ ]+):\\s+(.*)(\\r|\\n)*$',
+            {line = 1, column = 3, message = 5, security = 4}
+        },
+        securities = {['F'] = 'warning', ['C'] = 'warning', ['D'] = 'info', ['R'] = 'info'}
     },
 
     ['ansible-lint'] = {
@@ -47,6 +192,24 @@ local linters = {
             {line = 1, column = 2, message = 3, security = 4}
         },
         securities = {['1'] = 'info', ['2'] = 'warning', ['3'] = 'warning', ['4'] = 'error', ['5'] = 'error'}
+    },
+
+    xo = {
+        command = './node_modules/.bin/xo',
+        rootPatterns = {'package.json', '.git'},
+        debounce = 100,
+        args = {'--reporter', 'json', '--stdin', '--stdin-filename', '%filepath'},
+        sourceName = 'xo',
+        parseJson = {
+            errorsRoot = '[0].messages',
+            line = 'line',
+            column = 'column',
+            endLine = 'endLine',
+            endColumn = 'endColumn',
+            message = '[xo] ${message} [${ruleId}]',
+            security = 'severity'
+        },
+        securities = {['2'] = 'error', ['1'] = 'warning'}
     },
 
     dmypy = {
@@ -257,6 +420,20 @@ local linters = {
         securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
     },
 
+    standard = {
+        command = './node_modules/.bin/standard',
+        isStderr = false,
+        isStdout = true,
+        args = {'--stdin', '--verbose'},
+        rootPatterns = {'.git'},
+        debounce = 100,
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'standard',
+        formatLines = 1,
+        formatPattern = {'^\\s*<\\w+>:(\\d+):(\\d+):\\s+(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
+    },
+
     stylelint = {
         command = './node_modules/.bin/stylelint',
         args = {'--formatter', 'json', '--stdin-filename', '%filepath'},
@@ -303,6 +480,20 @@ local linters = {
         formatPattern = {'[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
     },
 
+    textidote = {
+        command = 'textidote',
+        debounce = 500,
+        args = {'--type', 'tex', '--check', 'en', '--output', 'singleline', '--no-color'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'textidote',
+        formatLines = 1,
+        formatPattern = {
+            '\\(L(\\d+)C(\\d+)-L(\\d+)C(\\d+)\\):(.+)".+"$',
+            {line = 1, column = 2, endLine = 3, endColumn = 4, message = 5}
+        }
+    },
+
     yamllint = {
         args = {'-f', 'parsable', '-'},
         command = 'yamllint',
@@ -319,6 +510,7 @@ local linters = {
 
 local filetypes = {
     'css',
+    'cmake',
     'html',
     'dockerfile',
     'fish',
@@ -333,6 +525,7 @@ local filetypes = {
     'less',
     'sh',
     'sql',
+    'ruby',
     'typescript',
     'typescriptreact',
     'vim',
@@ -341,7 +534,8 @@ local filetypes = {
     'haskell',
     'c',
     'cpp',
-    'rust'
+    'rust',
+    'prose'
 }
 
 local lint = {}
@@ -363,10 +557,11 @@ function lint:config()
         init_options = {
             linters = linters,
             filetypes = {
+                cmake = {'cmakelint', 'cmake-lint'},
                 haskell = 'hlint',
                 lua = {'luacheck', 'selene'},
                 markdown = {'markdownlint'},
-                python = {'flake8', 'mypy'},
+                python = {'flake8', 'mypy', 'pylint'},
                 scss = 'stylelint',
                 less = 'stylelint',
                 css = 'stylelint',
@@ -377,10 +572,13 @@ function lint:config()
                 cpp = 'cpplint',
                 c = 'cpplint',
                 objc = 'cpplint',
-                javascript = 'eslint',
+                javascript = {'xo', 'standard', 'eslint'},
+                typescript = {'xo', 'eslint'},
                 html = 'tidy',
-                go = 'golangci-lint',
-                ['yaml.ansible'] = 'ansible-lint'
+                go = {'golangci-lint', 'revive'},
+                ['yaml.ansible'] = 'ansible-lint',
+                prose = 'proselint',
+                ruby = {'reek', 'rubocop'}
             }
         },
         handlers = {}
