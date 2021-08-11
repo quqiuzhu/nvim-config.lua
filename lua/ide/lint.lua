@@ -7,6 +7,7 @@
 -- https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
 -- https://github.com/mfussenegger/nvim-lint
 local linters = {
+    -- cmake
     cmakelint = {
         command = 'cmakelint',
         debounce = 100,
@@ -18,6 +19,7 @@ local linters = {
         formatPattern = {'^[^:]+:(\\d+): (.*)$', {line = 1, message = 2}}
     },
 
+    -- cmake
     ['cmake-lint'] = {
         command = 'cmake-lint',
         debounce = 100,
@@ -30,6 +32,7 @@ local linters = {
         securities = {['C'] = 'info', ['R'] = 'info', ['W'] = 'warning', ['E'] = 'error'}
     },
 
+    -- ruby
     reek = {
         command = 'bundle',
         sourceName = 'reek',
@@ -39,6 +42,7 @@ local linters = {
         securities = {undefined = 'info'}
     },
 
+    -- ruby
     rubocop = {
         command = 'bundle',
         sourceName = 'rubocop',
@@ -63,6 +67,7 @@ local linters = {
         }
     },
 
+    -- html
     tidy = {
         command = 'tidy',
         args = {'-e', '-q'},
@@ -80,6 +85,7 @@ local linters = {
         securities = {Error = 'error', Warning = 'warning'}
     },
 
+    -- prose
     proselint = {
         command = 'proselint',
         debounce = 300,
@@ -95,6 +101,7 @@ local linters = {
         securities = {error = 'error', warning = 'warning', info = 'suggestion'}
     },
 
+    -- haskell
     hlint = {
         command = 'hlint',
         debounce = 100,
@@ -111,6 +118,7 @@ local linters = {
         securities = {Error = 'error', Warning = 'warning', Suggestion = 'info'}
     },
 
+    -- php
     phpcs = {
         command = './vendor/bin/phpcs',
         debounce = 100,
@@ -127,6 +135,7 @@ local linters = {
         securities = {error = 'error', warning = 'warning'}
     },
 
+    -- php
     phpstan = {
         command = './vendor/bin/phpstan',
         debounce = 100,
@@ -139,6 +148,25 @@ local linters = {
         formatPattern = {'^[^:]+:(\\d+):(.*)(\\r|\\n)*$', {line = 1, message = 2}}
     },
 
+    -- php
+    psalm = {
+        command = './vendor/bin/psalm',
+        debounce = 100,
+        rootPatterns = {'composer.json', 'composer.lock', 'vendor', '.git'},
+        args = {'--output-format=emacs', '--no-progress', '%file'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'psalm',
+        formatLines = 1,
+        formatPattern = {
+            '^[^:]+:(\\d+):(\\d+):(.*)\\s-\\s(.*)(\\r|\\n)*$',
+            {line = 1, column = 2, message = 4, security = 3}
+        },
+        securities = {error = 'error', warning = 'warning'},
+        requiredFiles = {'psalm.xml'}
+    },
+
+    -- nix
     ['nix-linter'] = {
         command = 'nix-linter',
         sourceName = 'nix-linter',
@@ -153,6 +181,7 @@ local linters = {
         securities = {undefined = 'warning'}
     },
 
+    -- elixir
     mix_credo = {
         command = 'mix',
         debounce = 100,
@@ -169,6 +198,7 @@ local linters = {
         securities = {['F'] = 'warning', ['C'] = 'warning', ['D'] = 'info', ['R'] = 'info'}
     },
 
+    -- yaml.ansible
     ['ansible-lint'] = {
         command = 'ansible-lint',
         args = {'--parseable-severity', '--nocolor', '-'},
@@ -178,6 +208,7 @@ local linters = {
         securities = {VERY_LOW = 'hint', LOW = 'info', HIGH = 'warning', VERY_HIGH = 'error'}
     },
 
+    -- cpp
     cpplint = {
         command = 'cpplint',
         args = {'%file'},
@@ -194,6 +225,7 @@ local linters = {
         securities = {['1'] = 'info', ['2'] = 'warning', ['3'] = 'warning', ['4'] = 'error', ['5'] = 'error'}
     },
 
+    -- javascript typescript
     xo = {
         command = './node_modules/.bin/xo',
         rootPatterns = {'package.json', '.git'},
@@ -212,28 +244,7 @@ local linters = {
         securities = {['2'] = 'error', ['1'] = 'warning'}
     },
 
-    dmypy = {
-        sourceName = 'dmypy',
-        command = 'dmypy',
-        args = {
-            'run',
-            '--timeout',
-            '300',
-            '--',
-            '--hide-error-codes',
-            '--hide-error-context',
-            '--no-color-output',
-            '--no-error-summary',
-            '--no-pretty',
-            '--show-column-numbers',
-            '%file'
-        },
-        rootPatterns = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
-        requiredFiles = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
-        formatPattern = {'^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$', {line = 1, column = 2, security = 3, message = 4}},
-        securities = {error = 'error'}
-    },
-
+    -- javascript
     eslint = {
         command = './node_modules/.bin/eslint',
         args = {'--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
@@ -259,83 +270,45 @@ local linters = {
         securities = {['2'] = 'error', ['1'] = 'warning'}
     },
 
-    fish = {
-        command = 'fish',
-        args = {'-n', '%file'},
-        isStdout = false,
-        isStderr = true,
-        sourceName = 'fish',
-        formatLines = 1,
-        formatPattern = {'^.*\\(line (\\d+)\\): (.*)$', {line = 1, message = 2}}
-    },
-
-    flake8 = {
-        command = 'flake8',
-        args = {'--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-'},
-        debounce = 100,
-        rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
-        offsetLine = 0,
-        offsetColumn = 0,
-        sourceName = 'flake8',
-        formatLines = 1,
-        formatPattern = {'(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$', {line = 1, column = 2, security = 3, message = 4}},
-        securities = {W = 'warning', E = 'error', F = 'error', C = 'error', N = 'error'}
-    },
-
-    ['golangci-lint'] = {
-        command = 'golangci-lint',
-        rootPatterns = {'go.mod', '.git'},
-        debounce = 100,
-        args = {'run', '--out-format', 'json'},
-        sourceName = 'golangci-lint',
-        parseJson = {
-            sourceName = 'Pos.Filename',
-            sourceNameFilter = true,
-            errorsRoot = 'Issues',
-            line = 'Pos.Line',
-            column = 'Pos.Column',
-            message = '${Text} [${FromLinter}]'
-        }
-    },
-
-    hadolint = {
-        command = 'hadolint',
-        sourceName = 'hadolint',
-        args = {'-f', 'json', '-'},
-        parseJson = {line = 'line', column = 'column', security = 'level', message = '${message} [${code}]'},
-        securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
-    },
-
-    luacheck = {
-        command = 'luacheck',
-        args = {'--formatter', 'plain', '--codes', '--ranges', '--filename', '%filepath', '-'},
-        sourceName = 'luacheck',
-        formatPattern = {
-            '^[^:]+:(\\d+):(\\d+)-(\\d+):\\s+\\((\\w)\\d+\\)\\s+(.*)$',
-            {line = 1, column = 2, endLine = 1, endColumn = 3, security = 4, message = 5}
-        },
-        rootPatterns = {'.luacheckrc'},
-        requiredFiles = {'.luacheckrc'},
-        debounce = 100,
-        securities = {W = 'warning', E = 'error'}
-    },
-
-    markdownlint = {
-        command = 'markdownlint',
-        args = {'--stdin'},
-        isStderr = true,
+    -- javascript
+    standard = {
+        command = './node_modules/.bin/standard',
+        isStderr = false,
+        isStdout = true,
+        args = {'--stdin', '--verbose'},
+        rootPatterns = {'.git'},
         debounce = 100,
         offsetLine = 0,
         offsetColumn = 0,
-        sourceName = 'markdownlint',
+        sourceName = 'standard',
         formatLines = 1,
-        formatPattern = {
-            '^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$',
-            {line = 1, column = 3, message = {4}}
-        },
-        rootPatterns = {'.markdownlint.json'}
+        formatPattern = {'^\\s*<\\w+>:(\\d+):(\\d+):\\s+(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
     },
 
+    -- python
+    dmypy = {
+        sourceName = 'dmypy',
+        command = 'dmypy',
+        args = {
+            'run',
+            '--timeout',
+            '300',
+            '--',
+            '--hide-error-codes',
+            '--hide-error-context',
+            '--no-color-output',
+            '--no-error-summary',
+            '--no-pretty',
+            '--show-column-numbers',
+            '%file'
+        },
+        rootPatterns = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
+        requiredFiles = {'mypy.ini', '.mypy.ini', 'pyproject.toml', 'setup.cfg'},
+        formatPattern = {'^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$', {line = 1, column = 2, security = 3, message = 4}},
+        securities = {error = 'error'}
+    },
+
+    -- python
     mypy = {
         sourceName = 'mypy',
         command = 'mypy',
@@ -354,6 +327,21 @@ local linters = {
         securities = {error = 'error'}
     },
 
+    -- python
+    flake8 = {
+        command = 'flake8',
+        args = {'--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s', '-'},
+        debounce = 100,
+        rootPatterns = {'.flake8', 'setup.cfg', 'tox.ini'},
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'flake8',
+        formatLines = 1,
+        formatPattern = {'(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$', {line = 1, column = 2, security = 3, message = 4}},
+        securities = {W = 'warning', E = 'error', F = 'error', C = 'error', N = 'error'}
+    },
+
+    -- python
     pylint = {
         sourceName = 'pylint',
         command = 'pylint',
@@ -381,6 +369,35 @@ local linters = {
         formatLines = 1
     },
 
+    -- fish
+    fish = {
+        command = 'fish',
+        args = {'-n', '%file'},
+        isStdout = false,
+        isStderr = true,
+        sourceName = 'fish',
+        formatLines = 1,
+        formatPattern = {'^.*\\(line (\\d+)\\): (.*)$', {line = 1, message = 2}}
+    },
+
+    -- go
+    ['golangci-lint'] = {
+        command = 'golangci-lint',
+        rootPatterns = {'go.mod', '.git'},
+        debounce = 100,
+        args = {'run', '--out-format', 'json'},
+        sourceName = 'golangci-lint',
+        parseJson = {
+            sourceName = 'Pos.Filename',
+            sourceNameFilter = true,
+            errorsRoot = 'Issues',
+            line = 'Pos.Line',
+            column = 'Pos.Column',
+            message = '${Text} [${FromLinter}]'
+        }
+    },
+
+    -- go
     revive = {
         command = 'revive',
         rootPatterns = {'go.mod', '.git'},
@@ -390,6 +407,31 @@ local linters = {
         formatPattern = {'^[^:]+:(\\d+):(\\d+):\\s+(.*)$', {line = 1, column = 2, message = {3}}}
     },
 
+    -- dockerfile
+    hadolint = {
+        command = 'hadolint',
+        sourceName = 'hadolint',
+        args = {'-f', 'json', '-'},
+        parseJson = {line = 'line', column = 'column', security = 'level', message = '${message} [${code}]'},
+        securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
+    },
+
+    -- lua
+    luacheck = {
+        command = 'luacheck',
+        args = {'--formatter', 'plain', '--codes', '--ranges', '--filename', '%filepath', '-'},
+        sourceName = 'luacheck',
+        formatPattern = {
+            '^[^:]+:(\\d+):(\\d+)-(\\d+):\\s+\\((\\w)\\d+\\)\\s+(.*)$',
+            {line = 1, column = 2, endLine = 1, endColumn = 3, security = 4, message = 5}
+        },
+        rootPatterns = {'.luacheckrc'},
+        requiredFiles = {'.luacheckrc'},
+        debounce = 100,
+        securities = {W = 'warning', E = 'error'}
+    },
+
+    -- lua
     selene = {
         command = 'selene',
         args = {'--display-style', 'quiet', '-'},
@@ -404,6 +446,24 @@ local linters = {
         securities = {error = 'error', warning = 'warning'}
     },
 
+    -- markdown
+    markdownlint = {
+        command = 'markdownlint',
+        args = {'--stdin'},
+        isStderr = true,
+        debounce = 100,
+        offsetLine = 0,
+        offsetColumn = 0,
+        sourceName = 'markdownlint',
+        formatLines = 1,
+        formatPattern = {
+            '^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$',
+            {line = 1, column = 3, message = {4}}
+        },
+        rootPatterns = {'.markdownlint.json'}
+    },
+
+    -- sh
     shellcheck = {
         command = 'shellcheck',
         debounce = 100,
@@ -420,20 +480,7 @@ local linters = {
         securities = {error = 'error', warning = 'warning', info = 'info', style = 'hint'}
     },
 
-    standard = {
-        command = './node_modules/.bin/standard',
-        isStderr = false,
-        isStdout = true,
-        args = {'--stdin', '--verbose'},
-        rootPatterns = {'.git'},
-        debounce = 100,
-        offsetLine = 0,
-        offsetColumn = 0,
-        sourceName = 'standard',
-        formatLines = 1,
-        formatPattern = {'^\\s*<\\w+>:(\\d+):(\\d+):\\s+(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
-    },
-
+    -- css scss sass less sugarss
     stylelint = {
         command = './node_modules/.bin/stylelint',
         args = {'--formatter', 'json', '--stdin-filename', '%filepath'},
@@ -469,6 +516,7 @@ local linters = {
         securities = {error = 'error', warning = 'warning'}
     },
 
+    -- vim
     vint = {
         command = 'vint',
         debounce = 100,
@@ -480,6 +528,7 @@ local linters = {
         formatPattern = {'[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$', {line = 1, column = 2, message = 3}}
     },
 
+    -- latex
     textidote = {
         command = 'textidote',
         debounce = 500,
@@ -494,6 +543,7 @@ local linters = {
         }
     },
 
+    -- yaml
     yamllint = {
         args = {'-f', 'parsable', '-'},
         command = 'yamllint',
@@ -508,34 +558,38 @@ local linters = {
     }
 }
 
-local filetypes = {
-    'css',
-    'cmake',
-    'html',
-    'dockerfile',
-    'fish',
-    'go',
-    'javascript',
-    'javascriptreact',
-    'json',
-    'lua',
-    'markdown',
-    'python',
-    'scss',
-    'less',
-    'sh',
-    'sql',
-    'ruby',
-    'typescript',
-    'typescriptreact',
-    'vim',
-    'yaml',
-    'yaml.ansible',
-    'haskell',
-    'c',
-    'cpp',
-    'rust',
-    'prose'
+local linters_by_filetype = {
+    cmake = {'cmakelint', 'cmake-lint'},
+    haskell = 'hlint',
+    lua = {'luacheck', 'selene'},
+    markdown = {'markdownlint'},
+    python = {'flake8', 'mypy', 'pylint'},
+    scss = 'stylelint',
+    sass = 'stylelint',
+    less = 'stylelint',
+    css = 'stylelint',
+    sh = 'shellcheck',
+    fish = 'fish',
+    vim = 'vint',
+    yaml = 'yamllint',
+    cpp = {'cpplint'},
+    c = {'cpplint'},
+    objc = 'cpplint',
+    dockerfile = 'hadolint',
+    javascript = {'xo', 'standard', 'eslint'},
+    typescript = {'xo'},
+    html = 'tidy',
+    go = {'golangci-lint', 'revive'},
+    ['yaml.ansible'] = 'ansible-lint',
+    prose = 'proselint',
+    php = {'phpcs', 'phpstan', 'psalm'},
+    ruby = {'reek', 'rubocop'},
+    latex = {'textidote'},
+    json = {},
+    sql = {},
+    rust = {},
+    elixir = 'mix_credo',
+    nix = 'nix-linter'
 }
 
 local lint = {}
@@ -550,37 +604,13 @@ end
 function lint:plugins() return {} end
 
 function lint:config()
+    local filetypes = {}
+    for t, _ in pairs(linters_by_filetype) do table.insert(filetypes, t) end
     if vim.g.lsp_server_configs == nil then vim.g.lsp_server_configs = {} end
     local c = vim.g.lsp_server_configs
     c['diagnosticls'] = {
         filetypes = filetypes,
-        init_options = {
-            linters = linters,
-            filetypes = {
-                cmake = {'cmakelint', 'cmake-lint'},
-                haskell = 'hlint',
-                lua = {'luacheck', 'selene'},
-                markdown = {'markdownlint'},
-                python = {'flake8', 'mypy', 'pylint'},
-                scss = 'stylelint',
-                less = 'stylelint',
-                css = 'stylelint',
-                sh = 'shellcheck',
-                fish = 'fish',
-                vim = 'vint',
-                yaml = 'yamllint',
-                cpp = 'cpplint',
-                c = 'cpplint',
-                objc = 'cpplint',
-                javascript = {'xo', 'standard', 'eslint'},
-                typescript = {'xo', 'eslint'},
-                html = 'tidy',
-                go = {'golangci-lint', 'revive'},
-                ['yaml.ansible'] = 'ansible-lint',
-                prose = 'proselint',
-                ruby = {'reek', 'rubocop'}
-            }
-        },
+        init_options = {linters = linters, filetypes = linters_by_filetype},
         handlers = {}
     }
     vim.g.lsp_server_configs = c
