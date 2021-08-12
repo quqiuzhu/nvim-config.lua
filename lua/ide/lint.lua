@@ -225,6 +225,23 @@ local linters = {
         securities = {['1'] = 'info', ['2'] = 'warning', ['3'] = 'warning', ['4'] = 'error', ['5'] = 'error'}
     },
 
+    -- -- cpp
+    --     ['clang-tidy'] = {
+    --         command = 'clang-tidy',
+    --         debounce = 100,
+    --         rootPatterns = {'.git'},
+    --         args = {'--quiet', [[-header-filter=".*.{h,hh,hpp}"]], '-p', '`pwd`', '%file'},
+    --         offsetLine = 1,
+    --         offsetColumn = 0,
+    --         sourceName = 'clang-tidy',
+    --         formatLines = 3,
+    --         formatPattern = {
+    --             '^.*:(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$',
+    --             {sourceName = 0, sourceNameFilter = true, line = 1, column = 2, message = {4}, security = 3}
+    --         },
+    --         securities = {error = 'error', warning = 'warning'}
+    --     },
+
     -- javascript typescript
     xo = {
         command = './node_modules/.bin/xo',
@@ -555,7 +572,20 @@ local linters = {
         },
         securities = {error = 'error', warning = 'warning'},
         sourceName = 'yamllint'
+    },
+
+    -- systemd
+    ['systemd-analyze'] = {
+        command = 'systemd-analyze',
+        debounce = 100,
+        args = {'verify', '%filepath'},
+        isStdout = false,
+        isStderr = true,
+        sourceName = 'systemd-analyze',
+        formatLines = 1,
+        formatPattern = {'^[^:]+:((\\d+):)?\\s*(.*)$', {line = 2, message = 3}}
     }
+
 }
 
 local linters_by_filetype = {
@@ -589,7 +619,8 @@ local linters_by_filetype = {
     sql = {},
     rust = {},
     elixir = 'mix_credo',
-    nix = 'nix-linter'
+    nix = 'nix-linter',
+    systemd = 'systemd-analyze'
 }
 
 local lint = {}

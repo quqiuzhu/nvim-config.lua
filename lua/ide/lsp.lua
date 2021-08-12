@@ -137,21 +137,14 @@ local function setup_lsp()
         local configs = vim.g.lsp_server_configs or {}
         local servers = li.installed_servers()
         for _, server in pairs(servers) do
-            if type(configs[server]) == 'table' then
-                local config = copy(configs[server])
-                config.on_attach = on_attach
-                config.flags = {debounce_text_changes = 150}
-                if config.handlers == nil then
-                    config.handlers = {['textDocument/publishDiagnostics'] = function() end}
-                end
-                lc[server].setup(config)
-            else
-                lc[server].setup {
-                    on_attach = on_attach,
-                    flags = {debounce_text_changes = 150},
-                    handlers = {['textDocument/publishDiagnostics'] = function() end}
-                }
+            local config = {}
+            if type(configs[server]) == 'table' then config = copy(configs[server]) end
+            config.on_attach = on_attach
+            config.flags = {debounce_text_changes = 150}
+            if config.handlers == nil then
+                config.handlers = {['textDocument/publishDiagnostics'] = function() end}
             end
+            lc[server].setup(config)
         end
     end
     setup_servers()
