@@ -575,7 +575,7 @@ local linters_by_filetype = {
     haskell = 'hlint',
     lua = {'luacheck', 'selene'},
     markdown = {'markdownlint'},
-    python = {'flake8', 'mypy', 'pylint'},
+    python = {}, -- {'flake8', 'mypy', 'pylint'},
     scss = 'stylelint',
     sass = 'stylelint',
     less = 'stylelint',
@@ -584,14 +584,14 @@ local linters_by_filetype = {
     fish = 'fish',
     vim = 'vint',
     yaml = 'yamllint',
-    cpp = {},
-    c = {'cpplint'},
-    objc = 'cpplint',
+    cpp = {}, -- cpplint
+    c = {}, -- cpplint
+    objc = {}, -- cpplint
     dockerfile = 'hadolint',
-    javascript = {'xo', 'standard', 'eslint'},
-    typescript = {'xo'},
+    javascript = {}, -- {'xo', 'standard', 'eslint'},
+    typescript = {}, -- {'xo'},
     html = 'tidy',
-    go = {'golangci-lint', 'revive'},
+    go = {},
     ['yaml.ansible'] = 'ansible-lint',
     prose = 'proselint',
     php = {'phpcs', 'phpstan', 'psalm'},
@@ -602,7 +602,8 @@ local linters_by_filetype = {
     rust = {},
     elixir = 'mix_credo',
     nix = 'nix-linter',
-    systemd = 'systemd-analyze'
+    systemd = 'systemd-analyze',
+    vue = {}
 }
 
 local lint = {}
@@ -617,16 +618,18 @@ end
 function lint:plugins() return {} end
 
 function lint:config()
-    local filetypes = {}
-    for t, _ in pairs(linters_by_filetype) do table.insert(filetypes, t) end
     if vim.g.lsp_server_configs == nil then vim.g.lsp_server_configs = {} end
     local c = vim.g.lsp_server_configs
-    c['diagnosticls'] = {
-        filetypes = filetypes,
-        init_options = {linters = linters, filetypes = linters_by_filetype},
-        handlers = {}
-    }
-    c['cpp'] = {handlers = {}}
+    c.diagnosticls = {init_options = {linters = linters, filetypes = linters_by_filetype}, handlers = {}}
+    local filetypes = {}
+    for t, linter in pairs(linters_by_filetype) do
+        if type(linter) ~= 'table' or #linter > 0 then -- use linter
+            table.insert(filetypes, t)
+        else -- use lsp diagnostics
+            c[t] = {handlers = {}}
+        end
+    end
+    c.diagnosticls.filetypes = filetypes
     vim.g.lsp_server_configs = c
 end
 
