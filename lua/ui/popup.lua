@@ -75,6 +75,22 @@ function popup:plugins()
             'nvim-telescope/telescope.nvim',
             config = setup,
             requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+        },
+        {
+            'ygm2/rooter.nvim',
+            setup = function()
+                vim.g.rooter_pattern = {
+                    '.git',
+                    'Makefile',
+                    '_darcs',
+                    '.hg',
+                    '.bzr',
+                    '.svn',
+                    'node_modules',
+                    'CMakeLists.txt'
+                }
+                vim.g.outermost_root = true
+            end
         }
     }
 end

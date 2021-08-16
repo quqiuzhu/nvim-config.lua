@@ -106,3 +106,6 @@
 [submodule "plugins/ethanholz/nvim-lastplace"]
 	path = plugins/ethanholz/nvim-lastplace
 	url = git@github.com:ethanholz/nvim-lastplace.git
+[submodule "plugins/ygm2/rooter.nvim"]
+	path = plugins/ygm2/rooter.nvim
+	url = git@github.com:ygm2/rooter.nvim.git
