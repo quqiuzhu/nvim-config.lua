@@ -123,7 +123,7 @@ function edit:plugins()
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
         {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'quqiuzhu/vim-move', config = setup_move},
+        {'quqiuzhu/vim-move', setup = setup_move},
         {'ethanholz/nvim-lastplace', config = setup_lastplace}
     }
 end
