@@ -83,8 +83,8 @@ local function setup()
     local mapping = require('common.mapping')
     mapping:set_keymaps({
         -- nnoremap <leader>d <cmd>BufferLinePickClose<cr>
-        mapping:item():mode('n'):lhs('<Leader>mn'):noremap():rhs_cmdcr('BufferLineMoveNext'):silent():nowait(),
-        mapping:item():mode('n'):lhs('<Leader>mp'):noremap():rhs_cmdcr('BufferLineMovePrev'):silent():nowait(),
+        mapping:item():mode('n'):lhs('<Leader>mr'):noremap():rhs_cmdcr('BufferLineMoveNext'):silent():nowait(),
+        mapping:item():mode('n'):lhs('<Leader>ml'):noremap():rhs_cmdcr('BufferLineMovePrev'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dp'):noremap():rhs_cmdcr('BufferLinePickClose'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dl'):noremap():rhs_cmdcr('BufferLineCloseLeft'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dr'):noremap():rhs_cmdcr('BufferLineCloseRight'):silent():nowait()

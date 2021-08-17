@@ -43,8 +43,8 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | ------------- | ------ | -------------- | -------------------------------------------- |
 | Window        | Normal | `<Tab>`        | Switch window                                |
 | Buffer        | Normal | `<Leader>N`    | Switch to buffer N, N in range [1, 9]        |
-| Buffer        | Normal | `<Leader>mn`   | Move current buffer next                     |
-| Buffer        | Normal | `<Leader>mp`   | Move current buffer previous                 |
+| Buffer        | Normal | `<Leader>mr`   | Move current buffer right                    |
+| Buffer        | Normal | `<Leader>ml`   | Move current buffer left                     |
 | Buffer        | Normal | `<Leader>dp`   | Pick and delete selected buffer              |
 | Buffer        | Normal | `<Leader>dl`   | Delete left buffer                           |
 | Buffer        | Normal | `<Leader>dr`   | Delete right buffers                         |
