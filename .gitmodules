@@ -70,9 +70,6 @@
 [submodule "plugins/windwp/nvim-autopairs"]
 	path = plugins/windwp/nvim-autopairs
 	url = git@github.com:windwp/nvim-autopairs.git
-[submodule "plugins/matze/vim-move"]
-	path = plugins/matze/vim-move
-	url = git@github.com:matze/vim-move.git
 [submodule "plugins/voldikss/vim-translator"]
 	path = plugins/voldikss/vim-translator
 	url = git@github.com:voldikss/vim-translator.git
@@ -109,3 +106,6 @@
 [submodule "plugins/ygm2/rooter.nvim"]
 	path = plugins/ygm2/rooter.nvim
 	url = git@github.com:ygm2/rooter.nvim.git
+[submodule "plugins/quqiuzhu/vim-move"]
+	path = plugins/quqiuzhu/vim-move
+	url = git@github.com:quqiuzhu/vim-move.git

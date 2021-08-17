@@ -93,7 +93,12 @@ local function setup_autopairs()
     })
 end
 
-local function setup_move() vim.api.nvim_set_var('move_key_modifier', 'C') end
+local function setup_move()
+    vim.g.move_map_keys = 1
+    vim.g.move_key_modifier = 'C'
+    vim.g.move_vmap = 1
+    vim.g.move_nmap = 0
+end
 
 local function setup_lastplace()
     require'nvim-lastplace'.setup {
@@ -118,7 +123,7 @@ function edit:plugins()
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
         {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'matze/vim-move', config = setup_move},
+        {'quqiuzhu/vim-move', config = setup_move},
         {'ethanholz/nvim-lastplace', config = setup_lastplace}
     }
 end
