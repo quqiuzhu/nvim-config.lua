@@ -39,7 +39,7 @@ local function setup_colorzier()
     }
 end
 
-local function cursorline()
+local function setup_cursorline()
     -- You can override cursor highlighting by defining CursorWord group and disabling built-in highlighting
     -- by specifying vim.g.cursorword_highlight (lua) or g:cursorword_highlight (vimscript).
 end

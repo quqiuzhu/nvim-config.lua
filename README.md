@@ -43,11 +43,11 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | ------------- | ------ | -------------- | -------------------------------------------- |
 | Window        | Normal | `<Tab>`        | Switch window                                |
 | Buffer        | Normal | `<Leader>N`    | Switch to buffer N, N in range [1, 9]        |
-| Buffer        | Normal | `<Leader>mr`   | Move current buffer right                    |
-| Buffer        | Normal | `<Leader>ml`   | Move current buffer left                     |
+| Buffer        | Normal | `<Leader>ml`   | Move current buffer right                    |
+| Buffer        | Normal | `<Leader>mh`   | Move current buffer left                     |
 | Buffer        | Normal | `<Leader>dp`   | Pick and delete selected buffer              |
-| Buffer        | Normal | `<Leader>dl`   | Delete left buffer                           |
-| Buffer        | Normal | `<Leader>dr`   | Delete right buffers                         |
+| Buffer        | Normal | `<Leader>dh`   | Delete left buffer                           |
+| Buffer        | Normal | `<Leader>dl`   | Delete right buffers                         |
 | File Explorer | Normal | `<C-n>`        | Toggle file tree (valid in buffer & tree)    |
 | File Explorer | Normal | `<C-r>`        | Refresh file tree (valid in buffer)          |
 | File Explorer | Normal | `<Cr>`         | Edit file (valid in tree)                    |
