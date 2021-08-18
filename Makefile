@@ -7,7 +7,7 @@ endif
 dir ?= ${default_dir}
 
 build:
-	docker build -f Dockerfile -t ${target}:latest .
+	docker build -f ./docker/Dockerfile -t ${target}:latest ./docker
 
 dev:
 	@docker run -it --rm --name=nvim \
