@@ -42,6 +42,10 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | Module        | Mode   | Key Bindings   | Descriptions                                 |
 | ------------- | ------ | -------------- | -------------------------------------------- |
 | Window        | Normal | `<Tab>`        | Switch window                                |
+| Window        | Normal | `<C-h>`        | Switch focus to left side window             |
+| Window        | Normal | `<C-j>`        | Switch focus to up side window               |
+| Window        | Normal | `<C-k>`        | Switch focus to down side window             |
+| Window        | Normal | `<C-l>`        | Switch focus to right side window            |
 | Buffer        | Normal | `<Leader>N`    | Switch to buffer N, N in range [1, 9]        |
 | Buffer        | Normal | `<Leader>ml`   | Move current buffer right                    |
 | Buffer        | Normal | `<Leader>mh`   | Move current buffer left                     |
