@@ -22,6 +22,7 @@ local module_names = {
     'editor.note'
 }
 
+require('common.option')
 local m = manager:new(module_names)
 m:init()
 m:set_configs()

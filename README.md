@@ -127,7 +127,7 @@ The docker image support languages.
 - rust
 
 Note: LspInstall don't means all, some language server should be configured further, such as [clangd][clangd]
-for cpp. clangd need you put a `compile_commands.json` or `compile_flags.txt` in project root, so that the
+for cpp. You should put a `compile_commands.json` or `compile_flags.txt` in project root, so that the
 language server know where to find and reference.
 
 ### Formatter
