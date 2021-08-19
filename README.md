@@ -43,8 +43,8 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | ------------- | ------ | -------------- | -------------------------------------------- |
 | Window        | Normal | `<Tab>`        | Switch window                                |
 | Window        | Normal | `<C-h>`        | Switch focus to left side window             |
-| Window        | Normal | `<C-j>`        | Switch focus to up side window               |
-| Window        | Normal | `<C-k>`        | Switch focus to down side window             |
+| Window        | Normal | `<C-j>`        | Switch focus to down side window             |
+| Window        | Normal | `<C-k>`        | Switch focus to up side window               |
 | Window        | Normal | `<C-l>`        | Switch focus to right side window            |
 | Buffer        | Normal | `<Leader>N`    | Switch to buffer N, N in range [1, 9]        |
 | Buffer        | Normal | `<Leader>ml`   | Move current buffer right                    |
@@ -96,9 +96,9 @@ Keymaps should be short, and you don't need too many of them, the core keymaps m
 | Text Object   | Visual | `.`            | Smart select text object                     |
 | Text Object   | Visual | `;`            | Smart select outer text object               |
 | Text Object   | Visual | `<C-h>`        | Move block left                              |
-| Text Object   | Visual | `<C-l>`        | Move block right                             |
-| Text Object   | Visual | `<C-k>`        | Move block up                                |
 | Text Object   | Visual | `<C-j>`        | Move block down                              |
+| Text Object   | Visual | `<C-k>`        | Move block up                                |
+| Text Object   | Visual | `<C-l>`        | Move block right                             |
 | Translate     | Normal | `<Leader>t`    | Translate selected word in command line      |
 | Translate     | Visual | `<Leader>t`    | Translate selected word in command line      |
 | Translate     | Normal | `<Leader>w`    | Translate selected word in window            |

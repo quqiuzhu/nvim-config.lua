@@ -11,7 +11,6 @@ local function config()
     map('n', '<C-k>', '<CMD>lua require(\'Navigator\').up()<CR>', opts)
     map('n', '<C-l>', '<CMD>lua require(\'Navigator\').right()<CR>', opts)
     map('n', '<C-j>', '<CMD>lua require(\'Navigator\').down()<CR>', opts)
-    map('n', '<C-p>', '<CMD>lua require(\'Navigator\').previous()<CR>', opts)
 end
 
 local tmux = {}
