@@ -84,7 +84,14 @@ function bufferline:new()
 end
 
 function bufferline:plugins()
-    return {{'akinsho/nvim-bufferline.lua', config = setup, requires = {'kyazdani42/nvim-web-devicons'}}}
+    return {
+        {
+            'akinsho/nvim-bufferline.lua',
+            config = setup,
+            requires = {'kyazdani42/nvim-web-devicons'},
+            after = 'nvim-colorizer.lua'
+        }
+    }
 end
 
 function bufferline:config() end
