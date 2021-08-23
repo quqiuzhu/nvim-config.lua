@@ -9,7 +9,7 @@ local function setup()
     bl.setup({
         options = {
             numbers = 'ordinal', -- "none" | "ordinal" | "buffer_id" | "both",
-            number_style = 'superscript', -- "superscript" | "" | {"none", "subscript"}, -- buffer_id at index 1, ordinal at index 2
+            number_style = '', -- "superscript" | "" | {"none", "subscript"}, -- buffer_id at index 1, ordinal at index 2
             mappings = true, -- true | false,
             close_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
             right_mouse_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
@@ -40,17 +40,7 @@ local function setup()
                 return '(' .. count .. ')'
             end,
             -- NOTE: this will be called a lot so don't do any heavy processing here
-            custom_filter = function(buf_number)
-                -- filter out filetypes you don't want to see
-                if vim.bo[buf_number].filetype ~= '<i-dont-want-to-see-this>' then return true end
-                -- filter out by buffer name
-                if vim.fn.bufname(buf_number) ~= '<buffer-name-I-dont-want>' then return true end
-                -- filter out based on arbitrary rules
-                -- e.g. filter out vim wiki buffer from bufferline in your work repo
-                if vim.fn.getcwd() == '<work-repo>' and vim.bo[buf_number].filetype ~= 'wiki' then
-                    return true
-                end
-            end,
+            custom_filter = nil,
             offsets = {
                 {
                     filetype = 'NvimTree',
@@ -73,11 +63,7 @@ local function setup()
             separator_style = 'thin', -- "slant" | "thick" | "thin" | {'any', 'any'},
             enforce_regular_tabs = false, -- false | true,
             always_show_bufferline = true, -- true | false,
-            sort_by = 'id', -- 'id' | 'extension' | 'relative_directory' | 'directory' |
-            function(buffer_a, buffer_b)
-                -- add custom logic
-                return buffer_a.modified > buffer_b.modified
-            end
+            sort_by = 'id' -- 'id' | 'extension' | 'relative_directory' | 'directory' |
         }
     })
     local mapping = require('common.mapping')
