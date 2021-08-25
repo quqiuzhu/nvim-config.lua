@@ -108,11 +108,7 @@ local function setup()
                 for _, client in ipairs(clients) do
                     local filetypes = client.config.filetypes
                     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                        if client.name ~= 'diagnosticls' then
-                            return client.name
-                        else
-                            msg = client.name
-                        end
+                        if client.name ~= 'diagnosticls' then return client.name end
                     end
                 end
                 return msg
