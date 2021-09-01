@@ -15,7 +15,7 @@ local function setup()
         nvim_tree_hide_dotfiles = 0, -- 0 by default, this option hides files and folders starting with a dot `.`
         nvim_tree_git_hl = 0, -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
         nvim_tree_highlight_opened_files = 1, -- 0 by default, will enable folder and file icon highlight for opened files/directories.
-        nvim_tree_root_folder_modifier = ':~', -- This is the default. See :help filename-modifiers for more options
+        nvim_tree_root_folder_modifier = ':t', -- This is the default. See :help filename-modifiers for more options
         nvim_tree_tab_open = 0, -- 0 by default, will open the tree when entering a new tab and the tree was previously open
         nvim_tree_auto_resize = 0, -- 1 by default, will resize the tree to its saved width when opening a file
         nvim_tree_disable_netrw = 1, -- 1 by default, disables netrw
