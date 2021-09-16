@@ -425,8 +425,7 @@ local linters = {
             '^[^:]+:(\\d+):(\\d+)-(\\d+):\\s+\\((\\w)\\d+\\)\\s+(.*)$',
             {line = 1, column = 2, endLine = 1, endColumn = 3, security = 4, message = 5}
         },
-        rootPatterns = {'.luacheckrc'},
-        requiredFiles = {'.luacheckrc'},
+        rootPatterns = {'.luacheckrc', '.git'},
         debounce = 100,
         securities = {W = 'warning', E = 'error'}
     },
