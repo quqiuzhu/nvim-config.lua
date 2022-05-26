@@ -4,7 +4,7 @@
 | ---------------- | ----------------------------------------- | --------------------------------------------- |
 | ide.lsp          | [neovim/nvim-lspconfig][1]                | configurations for LSP client                 |
 | ide.lsp          | [williamboman/nvim-lsp-installer][2]      | install & manage LSP servers                  |
-| ide.lint         | [williamboman/nvim-lsp-installer][2]      | linter base on diagnosticls LSP server        |
+| ide.lint         | [diagnosticls-configs-nvim][36]           | linter base on diagnosticls LSP server        |
 | ide.git          | [f-person/git-blame.nvim][3]              | show git blame information in line            |
 | ide.format       | [mhartington/formatter.nvim][4]           | format runner                                 |
 | ide.debug        | [mfussenegger/nvim-dap][5]                | Debug Adapter Protocol client                 |
@@ -33,9 +33,11 @@
 | ui.outline       | [simrat39/symbols-outline.nvim][28]       | A tree like view for symbols                  |
 | ui.popup         | [nvim-telescope/telescope.nvim][29]       | highly extendable fuzzy finder over lists     |
 | ui.popup         | [nvim-lua/popup.nvim][30]                 | Popup API                                     |
+| ui.popup         | [ygm2/rooter.nvim][34]                    | change cwd to project's root directory        |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | quickfix and location list                    |
 | ui.statusline    | [glepnir/galaxyline.nvim][32]             | statusline                                    |
 | ui.bufferline    | [akinsho/nvim-bufferline.lua][33]         | tabs                                          |
+| lang.markdown    | [npxbr/glow.nvim][35]                     | preview directly in neovim buffer             |
 
 [1]: https://github.com/neovim/nvim-lspconfig
 [2]: https://github.com/williamboman/nvim-lsp-installer
@@ -70,3 +72,6 @@
 [31]: https://github.com/folke/trouble.nvim
 [32]: https://github.com/glepnir/galaxyline.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
+[34]: https://github.com/ygm2/rooter.nvim
+[35]: https://github.com/npxbr/glow.nvim
+[36]: https://github.com/creativenull/diagnosticls-configs-nvim
