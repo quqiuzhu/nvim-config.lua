@@ -1,11 +1,12 @@
 local function setup()
-    require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+    local tree = require('nvim-tree')
+    tree.setup { -- BEGIN_DEFAULT_OPTS
         auto_reload_on_write = true,
         disable_netrw = false,
         hijack_cursor = false,
         hijack_netrw = true,
         hijack_unnamed_buffer_when_opening = false,
-        ignore_buffer_on_setup = false,
+        ignore_buffer_on_setup = true,
         open_on_setup = true,
         open_on_setup_file = false,
         open_on_tab = false,
