@@ -60,7 +60,7 @@ function outline:new()
     return o
 end
 
-function outline:plugins() return {{'simrat39/symbols-outline.nvim', setup = setup, after = 'nvim-lspinstall'}} end
+function outline:plugins() return {{'simrat39/symbols-outline.nvim', setup = setup}} end
 
 function outline:config() end
 

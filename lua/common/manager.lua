@@ -48,7 +48,6 @@ function manager:_set_packer_config()
             },
             depth = 1, -- Git clone depth
             clone_timeout = 120, -- Timeout, in seconds, for git clones
-            default_url_format = 'file://' .. plugin_path .. '/%s' -- Lua format string used for "aaa/bbb" style plugins
         },
         display = {
             non_interactive = false, -- If true, disable display windows for all operations

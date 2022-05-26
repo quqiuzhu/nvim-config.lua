@@ -5,6 +5,7 @@
 -- https://github.com/neoclide/coc.nvim/wiki/Language-servers
 -- https://langserver.org/
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
+-- https://github.com/williamboman/nvim-lsp-installer
 local function setup_complete()
     local ok, compe = pcall(require, 'compe')
     if not ok then return end
@@ -88,11 +89,12 @@ end
 
 local function setup_lsp()
     local function setup_servers()
-        local li = require('lspinstall')
+        local li = require('nvim-lsp-installer')
         local lc = require('lspconfig')
 
         -- Setup server install config
-        li.setup()
+        li.setup({})
+        -- print("nvim-lsp-installer", vim.inspect(li.get_installed_servers()))
 
         -- Use an on_attach function to only map the following keys
         -- after the language server attaches to the current buffer
@@ -135,8 +137,9 @@ local function setup_lsp()
             return res
         end
         local configs = vim.g.lsp_server_configs or {}
-        local servers = li.installed_servers()
-        for _, server in pairs(servers) do
+        local servers = li.get_installed_servers()
+        for _, server_tab in pairs(servers) do
+            local server = server_tab.name
             local config = {}
             if type(configs[server]) == 'table' then config = copy(configs[server]) end
             config.on_attach = on_attach
@@ -148,12 +151,6 @@ local function setup_lsp()
         end
     end
     setup_servers()
-    local ok, li = pcall(require, 'lspinstall')
-    if not ok then return end
-    li.post_install_hook = function()
-        setup_servers() -- reload installed servers
-        vim.cmd('bufdo e') -- this triggers the FileType autocmd that starts the server
-    end
 end
 
 local lsp = {}
@@ -167,7 +164,7 @@ end
 
 function lsp:plugins()
     return {
-        {'kabouzeid/nvim-lspinstall', config = setup_lsp, requires = {'neovim/nvim-lspconfig'}},
+        {'williamboman/nvim-lsp-installer', config = setup_lsp, requires = {'neovim/nvim-lspconfig'}},
         {'hrsh7th/nvim-compe', config = setup_complete}
     }
 end
