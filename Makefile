@@ -6,6 +6,9 @@ ifeq ($(shell uname), Linux)
 endif
 dir ?= ${default_dir}
 
+commit:
+	cp -rf .commit-msg .git/hooks/commit-msg
+
 build:
 	docker build -f ./docker/Dockerfile -t ${target}:latest ./docker
 
@@ -17,4 +20,4 @@ dev:
 	-w /data/ \
 	${target}:latest bash
 
-.PHONY: build dev
+.PHONY: build dev commit
