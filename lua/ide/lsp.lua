@@ -125,7 +125,7 @@ local function setup_lsp()
         if type(configs[server]) == 'table' then config = copy(configs[server]) end
         config.capabilities = capabilities
         config.flags = {debounce_text_changes = 150}
-        -- if config.handlers == nil then config.handlers = {['textDocument/publishDiagnostics'] = function() end} end
+        if config.handlers == nil then config.handlers = {['textDocument/publishDiagnostics'] = function() end} end
         lc[server].setup(config)
     end
 end
