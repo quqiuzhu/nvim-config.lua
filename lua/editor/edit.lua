@@ -4,9 +4,7 @@
 -- auto pairs: https://github.com/windwp/nvim-autopairs
 -- move: https://github.com/matze/vim-move
 local function setup_search()
-    local ok, h = pcall(require, 'hlslens')
-    if not ok then return end
-    h.setup({
+    require('hlslens').setup({
         auto_enable = true,
         enable_incsearch = true,
         calm_down = false,
@@ -31,9 +29,7 @@ local function setup_search()
 end
 
 local function setup_motion()
-    local ok, l = pcall(require, 'lightspeed')
-    if not ok then return end
-    l.setup({
+    require('lightspeed').setup({
         -- This can get _really_ slow if the window has a lot of content,
         -- turn it on only if your machine can always cope with it.
         match_only_the_start_of_same_char_seqs = true,
@@ -47,9 +43,7 @@ local function setup_motion()
 end
 
 local function setup_scroll()
-    local ok, s = pcall(require, 'neoscroll')
-    if not ok then return end
-    s.setup({
+    require('neoscroll').setup({
         -- All these keys will be mapped to their corresponding default scrolling animation
         -- mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
         -- '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
@@ -77,9 +71,7 @@ local function setup_scroll()
 end
 
 local function setup_autopairs()
-    local ok, a = pcall(require, 'nvim-autopairs')
-    if not ok then return end
-    a.setup({
+    require('nvim-autopairs').setup({
         disable_filetype = {'TelescopePrompt'},
         ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]], '%s+', ''),
         enable_moveright = true,

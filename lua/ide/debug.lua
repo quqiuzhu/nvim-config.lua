@@ -5,9 +5,7 @@
 -- https://github.com/sakhnik/nvim-gdb
 -- https://github.com/puremourning/vimspector
 local function setup_ui()
-    local ok, ui = pcall(require, 'dapui')
-    if not ok then return end
-    ui.setup({
+    require('dapui').setup({
         icons = {expanded = '▾', collapsed = '▸'},
         mappings = {
             -- Use a table to apply multiple mappings

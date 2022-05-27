@@ -4,9 +4,7 @@ bufferline.__index = bufferline
 local function setup()
     vim.opt.termguicolors = true
     vim.opt.number = true
-    local ok, bl = pcall(require, 'bufferline')
-    if not ok then return end
-    bl.setup({
+    require('bufferline').setup({
         options = {
             mode = 'buffers', -- set to "tabs" to only show tabpages instead
             numbers = 'ordinal', -- "none" | "ordinal" | "buffer_id" | "both",

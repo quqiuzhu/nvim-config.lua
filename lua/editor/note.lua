@@ -1,8 +1,6 @@
 -- https://github.com/vhyrro/neorg
 local function setup()
-    local ok, o = pcall(require, 'neorg')
-    if not ok then return end
-    o.setup({
+    require('neorg').setup({
         -- Tell Neorg what modules to load
         load = {
             ['core.defaults'] = {}, -- Load all the default modules

@@ -3,9 +3,7 @@
 -- https://github.com/tpope/vim-commentary
 -- https://github.com/preservim/nerdcommenter
 local function setup()
-    local ok, c = pcall(require, 'nvim_comment')
-    if not ok then return end
-    c.setup({
+    require('nvim_comment').setup({
         -- Linters prefer comment and line to have a space in between markers
         marker_padding = true,
         -- should comment out empty or whitespace only lines

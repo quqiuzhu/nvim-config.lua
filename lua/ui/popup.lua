@@ -2,9 +2,7 @@ local popup = {}
 popup.__index = popup
 
 local function setup()
-    local ok, ts = pcall(require, 'telescope')
-    if not ok then return end
-    ts.setup {
+    require('telescope').setup {
         defaults = {
             vimgrep_arguments = {
                 'rg',

@@ -4,17 +4,14 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 -- https://github.com/RRethy/nvim-treesitter-textsubjects
 local function setup_treesitter()
-    local ok, c = pcall(require, 'nvim-treesitter.configs')
-    if not ok then return end
-
     local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
     local maintained_parsers = {}
     for parser_name, parser_config in pairs(parser_configs) do
         if parser_config.maintainers ~= nil then table.insert(maintained_parsers, parser_name) end
     end
-    c.setup {
+    require('nvim-treesitter.configs').setup {
         ensure_installed = maintained_parsers, -- one of "all", or a list of languages
-        ignore_install = {'phpdoc'}, -- List of parsers to ignore installing
+        ignore_install = {'phpdoc', 'ocamllex', 'devicetree', 'godot_resource', 'd', 'teal'}, -- List of parsers to ignore installing
         highlight = {
             enable = true, -- false will disable the whole extension
             disable = {}, -- list of language that will be disabled
@@ -29,9 +26,7 @@ local function setup_treesitter()
 end
 
 local function setup_colorzier()
-    local ok, c = pcall(require, 'colorizer')
-    if not ok then return end
-    c.setup {
+    require('colorizer').setup {
         '*', -- Highlight all files, but customize some others.
         css = {rgb_fn = true}, -- Enable parsing rgb(...) functions in css.
         html = {names = false} -- Disable parsing "names" like Blue or Gray
