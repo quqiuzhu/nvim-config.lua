@@ -4,6 +4,10 @@
 | ---------------- | ----------------------------------------- | --------------------------------------------- |
 | ide.lsp          | [neovim/nvim-lspconfig][1]                | configurations for LSP client                 |
 | ide.lsp          | [williamboman/nvim-lsp-installer][2]      | install & manage LSP servers                  |
+| ide.lsp          | [hrsh7th/nvim-cmp][37]                    | official recommended completion plugin        |
+| ide.lsp          | [hrsh7th/cmp-nvim-lsp][38]                | nvim-cmp source for neovim builtin LSP client |
+| ide.lsp          | [hrsh7th/cmp-buffer][39]                  | nvim-cmp source for buffer words              |
+| ide.lsp          | [hrsh7th/cmp-path][40]                    | nvim-cmp source for path                      |
 | ide.lint         | [diagnosticls-configs-nvim][36]           | linter base on diagnosticls LSP server        |
 | ide.git          | [f-person/git-blame.nvim][3]              | show git blame information in line            |
 | ide.format       | [mhartington/formatter.nvim][4]           | format runner                                 |
@@ -75,3 +79,7 @@
 [34]: https://github.com/ygm2/rooter.nvim
 [35]: https://github.com/npxbr/glow.nvim
 [36]: https://github.com/creativenull/diagnosticls-configs-nvim
+[37]: https://github.com/hrsh7th/nvim-cmp
+[38]: https://github.com/hrsh7th/cmp-nvim-lsp
+[39]: https://github.com/hrsh7th/cmp-buffer
+[40]: https://github.com/hrsh7th/cmp-path
