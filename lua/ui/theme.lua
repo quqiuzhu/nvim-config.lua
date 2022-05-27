@@ -8,14 +8,13 @@ local function setup_treesitter()
     if not ok then return end
 
     local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-    parser_configs.norg = {
-        install_info = {url = 'https://github.com/vhyrro/tree-sitter-norg', files = {'src/parser.c'}, branch = 'main'},
-        maintainers = {'@quqiuzhu'}
-    }
-
+    local maintained_parsers = {}
+    for parser_name, parser_config in pairs(parser_configs) do
+        if parser_config.maintainers ~= nil then table.insert(maintained_parsers, parser_name) end
+    end
     c.setup {
-        ensure_installed = 'all', -- one of "all", or a list of languages
-        ignore_install = {}, -- List of parsers to ignore installing
+        ensure_installed = maintained_parsers, -- one of "all", or a list of languages
+        ignore_install = {'phpdoc'}, -- List of parsers to ignore installing
         highlight = {
             enable = true, -- false will disable the whole extension
             disable = {}, -- list of language that will be disabled
