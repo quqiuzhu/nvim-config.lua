@@ -8,7 +8,7 @@ local function setup()
     if not ok then return end
     bl.setup({
         options = {
-            mode = "buffers", -- set to "tabs" to only show tabpages instead
+            mode = 'buffers', -- set to "tabs" to only show tabpages instead
             numbers = 'ordinal', -- "none" | "ordinal" | "buffer_id" | "both",
             close_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
             right_mouse_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
@@ -52,6 +52,7 @@ local function setup()
                     text_align = 'left' -- "left" | "center" | "right"
                 }
             },
+            color_icons = true,
             show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
             show_buffer_close_icons = true, -- true | false,
             show_close_icon = true, -- true | false,
@@ -66,14 +67,20 @@ local function setup()
         }
     })
     local mapping = require('common.mapping')
-    mapping:set_keymaps({
+    local items = {
         -- nnoremap <leader>d <cmd>BufferLinePickClose<cr>
         mapping:item():mode('n'):lhs('<Leader>ml'):noremap():rhs_cmdcr('BufferLineMoveNext'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>mh'):noremap():rhs_cmdcr('BufferLineMovePrev'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dp'):noremap():rhs_cmdcr('BufferLinePickClose'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dh'):noremap():rhs_cmdcr('BufferLineCloseLeft'):silent():nowait(),
         mapping:item():mode('n'):lhs('<Leader>dl'):noremap():rhs_cmdcr('BufferLineCloseRight'):silent():nowait()
-    })
+    }
+    for i = 0, 9, 1 do
+        local key = string.format('<Leader>%d', i)
+        local cmd = string.format('BufferLineGoToBuffer %d', i)
+        table.insert(items, mapping:item():mode('n'):lhs(key):noremap():rhs_cmdcr(cmd):silent():nowait())
+    end
+    mapping:set_keymaps(items)
 end
 
 function bufferline:new()
@@ -86,6 +93,7 @@ function bufferline:plugins()
     return {
         {
             'akinsho/nvim-bufferline.lua',
+            tag = 'v2.*',
             config = setup,
             requires = {'kyazdani42/nvim-web-devicons'},
             after = 'nvim-colorizer.lua'
