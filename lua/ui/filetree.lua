@@ -127,6 +127,19 @@ local function setup()
         mapping:item():mode('n'):lhs('<C-r>'):noremap():rhs_cmdcr('NvimTreeRefresh'):silent():nowait(), -- use tab switch window
         mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
+
+    -- closes neovim automatically when the tree is the last **WINDOW** in the view
+    -- from nvim-tree readme: autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+    -- https://neovim.io/doc/dev/api_2autocmd_8c.html#a4bf35800481959bb8583e9593a277eb7
+    vim.api.nvim_create_autocmd({'BufEnter'}, {
+        pattern = {'*'},
+        nested = true,
+        callback = function()
+            if vim.fn.winnr '$' == 1 and vim.fn.bufname() == 'NvimTree_' .. vim.fn.tabpagenr() then
+                vim.api.nvim_command ':silent qa!'
+            end
+        end
+    })
 end
 
 local filetree = {}
