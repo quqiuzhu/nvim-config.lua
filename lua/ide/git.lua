@@ -7,7 +7,11 @@ function git:new()
     return o
 end
 
-function git:plugins() return {'f-person/git-blame.nvim'} end
+function git:plugins()
+    return {
+        {'f-person/git-blame.nvim', setup = function() vim.g.gitblame_ignored_filetypes = {'NvimTree', 'Startify', 'Outline'} end}
+    }
+end
 
 function git:config() end
 
