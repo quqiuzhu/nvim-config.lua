@@ -1,22 +1,22 @@
 local manager = require('common.manager')
 
 local module_names = {
-    'ide.lsp',
+    'ide.autocomplete',
     'ide.format',
     'ide.lint',
     'ide.comment',
     'ide.git',
     'ide.debug',
     'ui.terminal',
-    'ui.filetree',
-    'ui.popup',
-    'ui.statusline',
-    'ui.bufferline',
+    'ui.explore',
+    'ui.finder',
+    'ui.statusbar',
+    'ui.tab',
     'ui.theme',
     'ui.outline',
     'ui.quickfix',
     'lang.markdown',
-    'editor.edit',
+    'editor.enhance',
     'editor.tmux',
     'editor.translate',
     'editor.note'

@@ -1,13 +1,13 @@
-# Plugins list
+# Plugins
 
 | Module           | Plugin                                    | Description                                   |
 | ---------------- | ----------------------------------------- | --------------------------------------------- |
-| ide.lsp          | [neovim/nvim-lspconfig][1]                | configurations for LSP client                 |
-| ide.lsp          | [williamboman/nvim-lsp-installer][2]      | install & manage LSP servers                  |
-| ide.lsp          | [hrsh7th/nvim-cmp][37]                    | official recommended completion plugin        |
-| ide.lsp          | [hrsh7th/cmp-nvim-lsp][38]                | nvim-cmp source for neovim builtin LSP client |
-| ide.lsp          | [hrsh7th/cmp-buffer][39]                  | nvim-cmp source for buffer words              |
-| ide.lsp          | [hrsh7th/cmp-path][40]                    | nvim-cmp source for path                      |
+| ide.autocomplete | [neovim/nvim-lspconfig][1]                | configurations for LSP client                 |
+| ide.autocomplete | [williamboman/nvim-lsp-installer][2]      | install & manage LSP servers                  |
+| ide.autocomplete | [hrsh7th/nvim-cmp][37]                    | official recommended completion plugin        |
+| ide.autocomplete | [hrsh7th/cmp-nvim-lsp][38]                | nvim-cmp source for neovim builtin LSP client |
+| ide.autocomplete | [hrsh7th/cmp-buffer][39]                  | nvim-cmp source for buffer words              |
+| ide.autocomplete | [hrsh7th/cmp-path][40]                    | nvim-cmp source for path                      |
 | ide.lint         | [diagnosticls-configs-nvim][36]           | linter base on diagnosticls LSP server        |
 | ide.git          | [f-person/git-blame.nvim][3]              | show git blame information in line            |
 | ide.format       | [mhartington/formatter.nvim][4]           | format runner                                 |
@@ -16,12 +16,12 @@
 | ide.debug        | [rcarriga/nvim-dap-ui][7]                 | A UI for nvim-dap                             |
 | ide.debug        | [jbyuki/one-small-step-for-vimkind][8]    | Debug adapter for Neovim plugins              |
 | ide.comment      | [terrortylor/nvim-comment][9]             | A comment toggler                             |
-| editor.edit      | [kevinhwang91/nvim-hlslens][10]           | better serarch highlighting                   |
-| editor.edit      | [ggandor/lightspeed.nvim][11]             | motion                                        |
-| editor.edit      | [karb94/neoscroll.nvim][12]               | smooth scrolling                              |
-| editor.edit      | [windwp/nvim-autopairs][13]               | autopairs                                     |
-| editor.edit      | [quqiuzhu/vim-move][14]                   | move lines and selections up and down         |
-| editor.edit      | [ethanholz/nvim-lastplace][15]            | reopen files at last edit position            |
+| editor.enhance   | [kevinhwang91/nvim-hlslens][10]           | better serarch highlighting                   |
+| editor.enhance   | [ggandor/lightspeed.nvim][11]             | motion                                        |
+| editor.enhance   | [karb94/neoscroll.nvim][12]               | smooth scrolling                              |
+| editor.enhance   | [windwp/nvim-autopairs][13]               | autopairs                                     |
+| editor.enhance   | [quqiuzhu/vim-move][14]                   | move lines and selections up and down         |
+| editor.enhance   | [ethanholz/nvim-lastplace][15]            | reopen files at last edit position            |
 | editor.note      | [nvim-lua/plenary.nvim][16]               | module with common lua functions              |
 | editor.note      | [vhyrro/neorg][17]                        | redesigned to clone org-mode from emacs       |
 | editor.tmux      | [numToStr/Navigator.nvim][18]             | navigate between neovim splits and tmux panes |
@@ -31,16 +31,16 @@
 | ui.theme         | [glepnir/zephyr-nvim][22]                 | A dark neovim colorscheme                     |
 | ui.theme         | [norcalli/nvim-colorizer.lua][23]         | colorizer show color in vim                   |
 | ui.theme         | [yamatsum/nvim-cursorline][24]            | highlight words and lines on the cursor       |
-| ui.filetree      | [kyazdani42/nvim-tree.lua][25]            | file explorer                                 |
-| ui.filetree      | [kyazdani42/nvim-web-devicons][26]        | common icons                                  |
-| ui.filetree      | [mhinz/vim-startify][27]                  | A fancy start screen                          |
+| ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | file explorer                                 |
+| ui.explorer      | [kyazdani42/nvim-web-devicons][26]        | common icons                                  |
+| ui.explorer      | [mhinz/vim-startify][27]                  | A fancy start screen                          |
 | ui.outline       | [simrat39/symbols-outline.nvim][28]       | A tree like view for symbols                  |
-| ui.popup         | [nvim-telescope/telescope.nvim][29]       | highly extendable fuzzy finder over lists     |
-| ui.popup         | [nvim-lua/popup.nvim][30]                 | Popup API                                     |
-| ui.popup         | [ygm2/rooter.nvim][34]                    | change cwd to project's root directory        |
+| ui.finder        | [nvim-telescope/telescope.nvim][29]       | highly extendable fuzzy finder over lists     |
+| ui.finder        | [nvim-lua/popup.nvim][30]                 | Popup API                                     |
+| ui.finder        | [ygm2/rooter.nvim][34]                    | change cwd to project's root directory        |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | quickfix and location list                    |
-| ui.statusline    | [glepnir/galaxyline.nvim][32]             | statusline                                    |
-| ui.bufferline    | [akinsho/nvim-bufferline.lua][33]         | tabs                                          |
+| ui.statusbar     | [glepnir/galaxyline.nvim][32]             | statusline                                    |
+| ui.tab           | [akinsho/nvim-bufferline.lua][33]         | tabs                                          |
 | lang.markdown    | [npxbr/glow.nvim][35]                     | preview directly in neovim buffer             |
 
 [1]: https://github.com/neovim/nvim-lspconfig
