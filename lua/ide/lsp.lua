@@ -79,8 +79,22 @@ local function setup_lsp()
     })
     -- print("nvim-lsp-installer", vim.inspect(li.get_installed_servers()))
 
+    -- luasnip setup
+    local luasnip = require 'luasnip'
     local cmp = require 'cmp'
     cmp.setup {
+        snippet = {
+            -- REQUIRED - you must specify a snippet engine
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+                -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+                -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            end
+        },
+        window = {
+            -- completion = cmp.config.window.bordered(),
+            -- documentation = cmp.config.window.bordered(),
+        },
         mapping = cmp.mapping.preset.insert({
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -89,6 +103,8 @@ local function setup_lsp()
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
                 else
                     fallback()
                 end
@@ -96,12 +112,14 @@ local function setup_lsp()
             ['<S-Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
                 else
                     fallback()
                 end
             end, {'i', 's'})
         }),
-        sources = {{name = 'nvim_lsp'}, {name = 'path'}, {name = 'buffer'}}
+        sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'path'}, {name = 'buffer'}}
     }
 
     -- Add additional capabilities supported by nvim-cmp
@@ -143,6 +161,8 @@ function lsp:plugins()
     return {
         'williamboman/nvim-lsp-installer',
         {'hrsh7th/nvim-cmp'},
+        {'saadparwaiz1/cmp_luasnip'},
+        {'L3MON4D3/LuaSnip'},
         {'neovim/nvim-lspconfig', config = setup_lsp},
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-path'},
