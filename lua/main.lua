@@ -8,7 +8,7 @@ local module_names = {
     'ide.git',
     'ide.debug',
     'ui.terminal',
-    'ui.explore',
+    'ui.explorer',
     'ui.finder',
     'ui.statusbar',
     'ui.tab',
