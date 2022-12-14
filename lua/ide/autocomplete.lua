@@ -122,9 +122,8 @@ local function setup_lsp()
         sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'path'}, {name = 'buffer'}}
     }
 
-    -- Add additional capabilities supported by nvim-cmp
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+    -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local lc = require('lspconfig')
     local configs = vim.g.lsp_server_configs or {}
     local servers = li.get_installed_servers()

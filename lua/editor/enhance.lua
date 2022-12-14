@@ -4,28 +4,19 @@
 -- auto pairs: https://github.com/windwp/nvim-autopairs
 -- move: https://github.com/matze/vim-move
 local function setup_search()
-    require('hlslens').setup({
-        auto_enable = true,
-        enable_incsearch = true,
-        calm_down = false,
-        nearest_only = false,
-        nearest_float_when = 'auto',
-        float_shadow_blend = 50,
-        virt_priority = 100
-    })
-    vim.cmd [[
-      noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>
-      noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>
-      noremap * *<Cmd>lua require('hlslens').start()<CR>
-      noremap # #<Cmd>lua require('hlslens').start()<CR>
-      noremap g* g*<Cmd>lua require('hlslens').start()<CR>
-      noremap g# g#<Cmd>lua require('hlslens').start()<CR>
-      nnoremap <silent> <leader>l :noh<CR>
-      hi default link HlSearchNear IncSearch
-      hi default link HlSearchLens Visual
-      hi default link HlSearchLensNear IncSearch
-      hi default link HlSearchFloat IncSearch
-    ]]
+    require('hlslens').setup()
+    local kopts = {noremap = true, silent = true}
+    vim.api.nvim_set_keymap('n', 'n',
+                            [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+                            kopts)
+    vim.api.nvim_set_keymap('n', 'N',
+                            [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+                            kopts)
+    vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
 end
 
 local function setup_motion()

@@ -1,6 +1,6 @@
 -- https://github.com/simrat39/symbols-outline.nvim
-local function setup()
-    vim.g.symbols_outline = {
+local function config()
+    require('symbols-outline').setup({
         highlight_hovered_item = true,
         show_guides = true,
         auto_preview = false,
@@ -47,8 +47,7 @@ local function setup()
             Operator = {icon = '+', hl = 'TSOperator'},
             TypeParameter = {icon = '𝙏', hl = 'TSParameter'}
         }
-    }
-    vim.cmd[[au WinClosed * lua require'symbols-outline'.close_outline()]]
+    })
 end
 
 local outline = {}
@@ -60,7 +59,7 @@ function outline:new()
     return o
 end
 
-function outline:plugins() return {{'simrat39/symbols-outline.nvim', setup = setup}} end
+function outline:plugins() return {{'simrat39/symbols-outline.nvim', config = config}} end
 
 function outline:config() end
 
