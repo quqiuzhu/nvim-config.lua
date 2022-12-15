@@ -1,7 +1,5 @@
 --- config
--- https://github.com/glepnir/galaxyline.nvim/blob/main/example/eviline.lua
--- https://github.com/glepnir/galaxyline.nvim/blob/main/example/spaceline.lua
--- https://github.com/glepnir/galaxyline.nvim/issues/12
+-- https://github.com/nvim-lualine/lualine.nvim
 local function setup()
     -- Eviline config for lualine
     -- Author: shadmansaleh
