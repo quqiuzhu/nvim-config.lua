@@ -218,7 +218,7 @@ function statusline:new()
 end
 
 function statusline:plugins()
-    return {{'glepnir/galaxyline.nvim', config = setup, requires = {'kyazdani42/nvim-web-devicons', opt = true}}}
+    return {{'glepnir/galaxyline.nvim', config = setup, requires = {'kyazdani42/nvim-web-devicons'}}}
 end
 
 function statusline:config() end
