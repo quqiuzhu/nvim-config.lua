@@ -28,7 +28,7 @@
 | editor.translate | [voldikss/vim-translator][19]             | translating                                   |
 | ui.theme         | [nvim-treesitter/nvim-treesitter][20]     | config for highlighting of languages          |
 | ui.theme         | [RRethy/nvim-treesitter-textsubjects][21] | smart selection highlighting                  |
-| ui.theme         | [glepnir/zephyr-nvim][22]                 | A dark neovim colorscheme                     |
+| ui.theme         | [navarasu/onedark.nvim][22]               | A dark neovim colorscheme                     |
 | ui.theme         | [norcalli/nvim-colorizer.lua][23]         | colorizer show color in vim                   |
 | ui.theme         | [yamatsum/nvim-cursorline][24]            | highlight words and lines on the cursor       |
 | ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | file explorer                                 |
@@ -39,7 +39,7 @@
 | ui.finder        | [nvim-lua/popup.nvim][30]                 | Popup API                                     |
 | ui.finder        | [ygm2/rooter.nvim][34]                    | change cwd to project's root directory        |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | quickfix and location list                    |
-| ui.statusbar     | [glepnir/galaxyline.nvim][32]             | statusline                                    |
+| ui.statusbar     | [nvim-lualine/lualine.nvim][32]           | statusline                                    |
 | ui.tab           | [akinsho/nvim-bufferline.lua][33]         | tabs                                          |
 | lang.markdown    | [npxbr/glow.nvim][35]                     | preview directly in neovim buffer             |
 
@@ -64,7 +64,7 @@
 [19]: https://github.com/voldikss/vim-translator
 [20]: https://github.com/nvim-treesitter/nvim-treesitter
 [21]: https://github.com/RRethy/nvim-treesitter-textsubjects
-[22]: https://github.com/glepnir/zephyr-nvim
+[22]: https://github.com/navarasu/onedark.nvim
 [23]: https://github.com/norcalli/nvim-colorizer.lua
 [24]: https://github.com/yamatsum/nvim-cursorline
 [25]: https://github.com/kyazdani42/nvim-tree.lua
@@ -74,7 +74,7 @@
 [29]: https://github.com/nvim-telescope/telescope.nvim
 [30]: https://github.com/nvim-lua/popup.nvim
 [31]: https://github.com/folke/trouble.nvim
-[32]: https://github.com/glepnir/galaxyline.nvim
+[32]: https://github.com/nvim-lualine/lualine.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
 [34]: https://github.com/ygm2/rooter.nvim
 [35]: https://github.com/npxbr/glow.nvim
