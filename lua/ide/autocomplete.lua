@@ -139,7 +139,8 @@ function lsp:plugins()
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-path'},
         {'hrsh7th/cmp-nvim-lsp'},
-        {'j-hui/fidget.nvim', config = function() require'fidget'.setup {} end}
+        {'j-hui/fidget.nvim', config = function() require'fidget'.setup {} end},
+        {'ray-x/lsp_signature.nvim', config = function() require'lsp_signature'.setup({}) end}
     }
 end
 
