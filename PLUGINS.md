@@ -20,7 +20,7 @@
 | editor.enhance   | [ggandor/lightspeed.nvim][11]             | ![][1011] | motion                                        |
 | editor.enhance   | [karb94/neoscroll.nvim][12]               | ![][1012] | smooth scrolling                              |
 | editor.enhance   | [windwp/nvim-autopairs][13]               | ![][1013] | autopairs                                     |
-| editor.enhance   | [quqiuzhu/vim-move][14]                   | ![][1014] | move lines and selections up and down         |
+| editor.enhance   | [fedepujol/move.nvim][14]                 | ![][1014] | move lines and selections up and down         |
 | editor.enhance   | [ethanholz/nvim-lastplace][15]            | ![][1015] | reopen files at last edit position            |
 | editor.note      | [nvim-lua/plenary.nvim][16]               | ![][1016] | module with common lua functions              |
 | editor.note      | [vhyrro/neorg][17]                        | ![][1017] | redesigned to clone org-mode from emacs       |
@@ -56,7 +56,7 @@
 [11]: https://github.com/ggandor/lightspeed.nvim
 [12]: https://github.com/karb94/neoscroll.nvim
 [13]: https://github.com/windwp/nvim-autopairs
-[14]: https://github.com/quqiuzhu/vim-move
+[14]: https://github.com/fedepujol/move.nvim
 [15]: https://github.com/ethanholz/nvim-lastplace
 [16]: https://github.com/nvim-lua/plenary.nvim
 [17]: https://github.com/vhyrro/neorg
@@ -96,7 +96,7 @@
 [1011]: https://img.shields.io/github/stars/ggandor/lightspeed.nvim
 [1012]: https://img.shields.io/github/stars/karb94/neoscroll.nvim
 [1013]: https://img.shields.io/github/stars/windwp/nvim-autopairs
-[1014]: https://img.shields.io/github/stars/quqiuzhu/vim-move
+[1014]: https://img.shields.io/github/stars/fedepujol/move.nvim
 [1015]: https://img.shields.io/github/stars/ethanholz/nvim-lastplace
 [1016]: https://img.shields.io/github/stars/nvim-lua/plenary.nvim
 [1017]: https://img.shields.io/github/stars/vhyrro/neorg

@@ -72,10 +72,12 @@ local function setup_autopairs()
 end
 
 local function setup_move()
-    vim.g.move_map_keys = 1
-    vim.g.move_key_modifier = 'C'
-    vim.g.move_vmap = 1
-    vim.g.move_nmap = 0
+    local opts = {noremap = true, silent = true}
+    -- Visual-mode commands
+    vim.keymap.set('v', '<C-j>', ':MoveBlock(1)<CR>', opts)
+    vim.keymap.set('v', '<C-k>', ':MoveBlock(-1)<CR>', opts)
+    vim.keymap.set('v', '<C-h>', ':MoveHBlock(-1)<CR>', opts)
+    vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
 end
 
 local function setup_lastplace()
@@ -101,7 +103,7 @@ function edit:plugins()
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
         {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'quqiuzhu/vim-move', setup = setup_move},
+        {'fedepujol/move.nvim', setup = setup_move},
         {'ethanholz/nvim-lastplace', config = setup_lastplace}
     }
 end
