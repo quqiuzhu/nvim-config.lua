@@ -84,6 +84,7 @@
 [38]: https://github.com/hrsh7th/cmp-nvim-lsp
 [39]: https://github.com/hrsh7th/cmp-buffer
 [40]: https://github.com/hrsh7th/cmp-path
+[41]: https://github.com/williamboman/mason-lspconfig.nvim
 [1001]: https://img.shields.io/github/stars/neovim/nvim-lspconfig
 [1002]: https://img.shields.io/github/stars/williamboman/mason.nvim
 [1003]: https://img.shields.io/github/stars/f-person/git-blame.nvim
