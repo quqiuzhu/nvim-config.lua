@@ -10,7 +10,19 @@
 local function setup_lsp()
     require('mason').setup {ui = {icons = {package_installed = '✓'}}}
     local mlspc = require('mason-lspconfig') -- luasnip setup
-    mlspc.setup {ensure_installed = {'sumneko_lua'}}
+    mlspc.setup {
+        ensure_installed = {
+            'diagnosticls',
+            'sumneko_lua',
+            'clangd',
+            'gopls',
+            'texlab',
+            'pyright',
+            'rust_analyzer',
+            'denols',
+            'jdtls'
+        }
+    }
     local luasnip = require 'luasnip'
     local cmp = require 'cmp'
     cmp.setup {
