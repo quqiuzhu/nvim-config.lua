@@ -3,7 +3,8 @@
 | Module           | Plugin                                    | Stars     | Description                                   |
 | ---------------- | ----------------------------------------- | --------- | --------------------------------------------- |
 | ide.autocomplete | [neovim/nvim-lspconfig][1]                | ![][1001] | configurations for LSP client                 |
-| ide.autocomplete | [williamboman/nvim-lsp-installer][2]      | ![][1002] | install & manage LSP servers                  |
+| ide.autocomplete | [williamboman/mason.nvim][2]              | ![][1002] | manager for LSP, DAP, linters, formatters     |
+| ide.autocomplete | [williamboman/mason-lspconfig.nvim][41]   | ![][1041] | use lspconfig with mason.nvim                 |
 | ide.autocomplete | [hrsh7th/nvim-cmp][37]                    | ![][1037] | official recommended completion plugin        |
 | ide.autocomplete | [hrsh7th/cmp-nvim-lsp][38]                | ![][1038] | nvim-cmp source for neovim builtin LSP client |
 | ide.autocomplete | [hrsh7th/cmp-buffer][39]                  | ![][1039] | nvim-cmp source for buffer words              |
@@ -44,7 +45,7 @@
 | lang.markdown    | [npxbr/glow.nvim][35]                     | ![][1035] | preview directly in neovim buffer             |
 
 [1]: https://github.com/neovim/nvim-lspconfig
-[2]: https://github.com/williamboman/nvim-lsp-installer
+[2]: https://github.com/williamboman/mason.nvim
 [3]: https://github.com/f-person/git-blame.nvim
 [4]: https://github.com/mhartington/formatter.nvim
 [5]: https://github.com/mfussenegger/nvim-dap
@@ -84,7 +85,7 @@
 [39]: https://github.com/hrsh7th/cmp-buffer
 [40]: https://github.com/hrsh7th/cmp-path
 [1001]: https://img.shields.io/github/stars/neovim/nvim-lspconfig
-[1002]: https://img.shields.io/github/stars/williamboman/nvim-lsp-installer
+[1002]: https://img.shields.io/github/stars/williamboman/mason.nvim
 [1003]: https://img.shields.io/github/stars/f-person/git-blame.nvim
 [1004]: https://img.shields.io/github/stars/mhartington/formatter.nvim
 [1005]: https://img.shields.io/github/stars/mfussenegger/nvim-dap
@@ -123,3 +124,4 @@
 [1038]: https://img.shields.io/github/stars/hrsh7th/cmp-nvim-lsp
 [1039]: https://img.shields.io/github/stars/hrsh7th/cmp-buffer
 [1040]: https://img.shields.io/github/stars/hrsh7th/cmp-path
+[1041]: https://img.shields.io/github/stars/williamboman/mason-lspconfig.nvim
