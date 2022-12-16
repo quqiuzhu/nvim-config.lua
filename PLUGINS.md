@@ -38,7 +38,7 @@
 | ui.outline       | [simrat39/symbols-outline.nvim][28]       | ![][1028] | A tree like view for symbols                  |
 | ui.finder        | [nvim-telescope/telescope.nvim][29]       | ![][1029] | highly extendable fuzzy finder over lists     |
 | ui.finder        | [nvim-lua/popup.nvim][30]                 | ![][1030] | Popup API                                     |
-| ui.finder        | [ygm2/rooter.nvim][34]                    | ![][1034] | change cwd to project's root directory        |
+| ui.finder        | [ahmedkhalf/project.nvim][34]             | ![][1034] | change cwd to project's root                  |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | ![][1031] | quickfix and location list                    |
 | ui.statusbar     | [nvim-lualine/lualine.nvim][32]           | ![][1032] | statusline                                    |
 | ui.tab           | [akinsho/nvim-bufferline.lua][33]         | ![][1033] | tabs                                          |
@@ -77,7 +77,7 @@
 [31]: https://github.com/folke/trouble.nvim
 [32]: https://github.com/nvim-lualine/lualine.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
-[34]: https://github.com/ygm2/rooter.nvim
+[34]: https://github.com/ahmedkhalf/project.nvim
 [35]: https://github.com/npxbr/glow.nvim
 [36]: https://github.com/creativenull/diagnosticls-configs-nvim
 [37]: https://github.com/hrsh7th/nvim-cmp
@@ -118,7 +118,7 @@
 [1031]: https://img.shields.io/github/stars/folke/trouble.nvim
 [1032]: https://img.shields.io/github/stars/nvim-lualine/lualine.nvim
 [1033]: https://img.shields.io/github/stars/akinsho/nvim-bufferline.lua
-[1034]: https://img.shields.io/github/stars/ygm2/rooter.nvim
+[1034]: https://img.shields.io/github/stars/ahmedkhalf/project.nvim
 [1035]: https://img.shields.io/github/stars/npxbr/glow.nvim
 [1036]: https://img.shields.io/github/stars/creativenull/diagnosticls-configs-nvim
 [1037]: https://img.shields.io/github/stars/hrsh7th/nvim-cmp
