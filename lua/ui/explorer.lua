@@ -72,7 +72,7 @@ local function setup()
             icons = {webdev_colors = true, git_placement = 'before'}
         },
         hijack_directories = {enable = true, auto_open = true},
-        update_focused_file = {enable = false, update_cwd = false, ignore_list = {}},
+        update_focused_file = {enable = true, update_cwd = false, ignore_list = {}},
         ignore_ft_on_setup = {},
         system_open = {cmd = '', args = {}},
         diagnostics = {
