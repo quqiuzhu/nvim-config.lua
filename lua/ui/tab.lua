@@ -75,7 +75,7 @@ local function setup()
     }
     for i = 0, 9, 1 do
         local key = string.format('<Leader>%d', i)
-        local cmd = string.format('BufferLineGoToBuffer %d', i)
+        local cmd = string.format('lua require("bufferline").go_to_buffer(%d, true)', i)
         table.insert(items, mapping:item():mode('n'):lhs(key):noremap():rhs_cmdcr(cmd):silent():nowait())
     end
     mapping:set_keymaps(items)
@@ -91,7 +91,7 @@ function bufferline:plugins()
     return {
         {
             'akinsho/nvim-bufferline.lua',
-            tag = 'v2.*',
+            tag = 'v3.*',
             config = setup,
             requires = {'kyazdani42/nvim-web-devicons'},
             after = 'nvim-colorizer.lua'
