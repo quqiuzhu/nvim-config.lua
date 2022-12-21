@@ -38,6 +38,10 @@ local function setup()
             -- Disable sections and component separators
             component_separators = '',
             section_separators = '',
+            disabled_filetypes = {
+                statusline = {'NvimTree', 'vista', 'dbui', 'packer', 'Outline', 'startify', 'Trouble'},
+                winbar = {}
+            },
             theme = {
                 -- We are going to use lualine_c an lualine_x as left and
                 -- right section. Both are highlighted by c theme .  So we

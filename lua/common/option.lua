@@ -7,6 +7,7 @@ vim.o.pumheight = 10
 vim.o.fileencoding = 'utf-8'
 vim.o.splitbelow = true
 vim.o.termguicolors = true
+vim.o.number = true
 vim.o.splitright = true
 vim.o.conceallevel = 0
 vim.o.showtabline = 2
