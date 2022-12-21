@@ -80,7 +80,7 @@ local function setup()
             show_on_dirs = false,
             icons = {hint = '', info = '', warning = '', error = ''}
         },
-        filters = {dotfiles = false, custom = {'.git', 'node_modules', '.cache'}, exclude = {}},
+        filters = {dotfiles = false, custom = {'.git/', 'node_modules/', '.cache/'}, exclude = {}},
         git = {enable = true, ignore = true, timeout = 400},
         actions = {
             use_system_clipboard = true,
