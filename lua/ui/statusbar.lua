@@ -164,7 +164,7 @@ local function setup()
             end
             return msg
         end,
-        icon = '',
+        icon = ' ',
         color = {fg = colors.violet, gui = 'bold'}
     }
 

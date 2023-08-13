@@ -9,8 +9,38 @@ local function setup_treesitter()
     for parser_name, parser_config in pairs(parser_configs) do
         if parser_config.maintainers ~= nil then table.insert(maintained_parsers, parser_name) end
     end
+    local selected = {
+        'c',
+        'cpp',
+        'python',
+        'java',
+        'go',
+        'rust',
+        'ruby',
+        'javascript',
+        'swift',
+        'tsx',
+        'typescript',
+        'lua',
+        'gitignore',
+        'make',
+        'scss',
+        'sql',
+        'solidity',
+        'svelte',
+        'verilog',
+        'yaml',
+        'toml',
+        'vim',
+        'vimdoc',
+        'query',
+        'json',
+        'cmake',
+        'scala',
+        'proto'
+    }
     require('nvim-treesitter.configs').setup {
-        ensure_installed = maintained_parsers, -- one of "all", or a list of languages
+        ensure_installed = selected, -- one of "all", or a list of languages
         ignore_install = {'phpdoc', 'ocamllex', 'devicetree', 'godot_resource', 'd', 'teal'}, -- List of parsers to ignore installing
         highlight = {
             enable = true, -- false will disable the whole extension
@@ -39,11 +69,12 @@ local function setup_cursorline()
 end
 
 local function setup_onedark()
+    -- Lua
     require('onedark').setup {
         -- Main options --
-        style = 'darker', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+        style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
         transparent = false, -- Show/hide background
-        term_colors = true, -- Change terminal color as per the selected theme style
+        term_colors = false, -- Change terminal color as per the selected theme style
         ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
         cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
@@ -53,7 +84,7 @@ local function setup_onedark()
 
         -- Change code style ---
         -- Options are italic, bold, underline, none
-        -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+        -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
         code_style = {comments = 'italic', keywords = 'none', functions = 'none', strings = 'none', variables = 'none'},
 
         -- Lualine options --
@@ -62,8 +93,18 @@ local function setup_onedark()
         },
 
         -- Custom Highlights --
-        colors = {}, -- Override default colors
-        highlights = {}, -- Override highlight groups
+        colors = {
+            -- grey = "#404247"
+        }, -- Override default colors
+        highlights = {
+            -- Fix gitblame & comment color
+            Comment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            SpecialComment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            ["@comment"] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            ["@lsp.type.comment"] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            -- Fix bufferline selected state color
+            Normal = {fg = '$grey', bg = '$bg0'}
+        }, -- Override highlight groups
 
         -- Plugins Config --
         diagnostics = {
@@ -86,7 +127,7 @@ end
 
 function theme:plugins()
     return {
-        {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = setup_treesitter},
+        {'nvim-treesitter/nvim-treesitter', config = setup_treesitter},
         {'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter'},
         {'navarasu/onedark.nvim', config = setup_onedark},
         {'norcalli/nvim-colorizer.lua', config = setup_colorzier, after = 'onedark.nvim'},

@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM registry.sensetime.com/library/ubuntu:20.04-r1
 
 # Using mirrors
 RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
@@ -8,6 +8,11 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/source
 # Neovim: https://github.com/neovim/neovim/wiki/Installing-Neovim
 RUN apt-get update \
       && apt install -y curl wget \
+      # Compress: unzip zip tar
+      && apt install -y unzip zip tar \
+      # Build essentials
+      && DEBIAN_FRONTEND=noninteractive apt install -y build-essential autoconf libtool cmake pkg-config git \
+      && apt install -y clang-format lua5.3 liblua5.3-dev ripgrep \
       && curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
       && chmod u+x nvim.appimage \
       && ./nvim.appimage --appimage-extract \
@@ -21,40 +26,19 @@ RUN apt-get update \
       && update-alternatives --config editor \
       && rm -f nvim.appimage
 
-# Python3
-RUN apt-get install -y python3.8 python3.8-dev python3.8-distutils python3.8-venv python3-pip \
-    && mkdir -p $HOME/.config/pip \
-    && printf '[global]\nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple' > $HOME/.config/pip/pip.conf \
-    && pip3 install --upgrade pip \
-    && pip3 install virtualenv \
-    && pip3 install pynvim
-
-# Build essentials
-RUN apt-get install -y build-essential autoconf libtool cmake pkg-config git
-
-ADD cargo_config /cargo_config
-
 # RipGrep
+ADD cargo_config /cargo_config
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh \
     && chmod +x rustup.sh \
     && ./rustup.sh -y \
     && cp /cargo_config /root/.cargo/config \
-    && /root/.cargo/bin/cargo install ripgrep
-
+    && /root/.cargo/bin/cargo install tree-sitter-cli \
+    && /root/.cargo/bin/cargo install ripgrep 
 ENV PATH="/root/.cargo/bin:$PATH"
-
-# Compress: unzip zip tar
-RUN apt-get install -y unzip zip tar
-
-# Golang
-RUN wget https://mirrors.ustc.edu.cn/golang/go1.12.17.linux-amd64.tar.gz \
-    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.12.17.linux-amd64.tar.gz
-
-ENV PATH="/usr/local/go/bin:$PATH"
 
 # Formatter
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x |  bash - \
-    && apt-get install -y nodejs clang-format lua5.3 liblua5.3-dev \
+    && apt-get install -y nodejs python3-pip\
     && npm install prettier -g \
     && pip3 install yapf \ 
     && wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz \
@@ -63,3 +47,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x |  bash - \
     && ./configure \
     && make . && make install \
     && luarocks install --server=https://luarocks.org/dev luaformatter
+
+# Golang
+RUN wget https://mirrors.ustc.edu.cn/golang/go1.20.7.linux-amd64.tar.gz \
+    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.7.linux-amd64.tar.gz
+ENV PATH="/usr/local/go/bin:$PATH"

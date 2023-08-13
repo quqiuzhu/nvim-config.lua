@@ -13,11 +13,11 @@ local function setup_lsp()
     mlspc.setup {
         ensure_installed = {
             'diagnosticls',
-            'sumneko_lua',
+            'lua_ls',
             'clangd',
             'gopls',
             'texlab',
-            'pyright',
+            'pylyzer',
             'rust_analyzer',
             'denols',
             'jdtls'
@@ -130,16 +130,16 @@ end
 
 function lsp:plugins()
     return {
+        {'neovim/nvim-lspconfig', config = setup_lsp},
         {'williamboman/mason.nvim'},
-        {'williamboman/mason-lspconfig.nvim'},
+        {'williamboman/mason-lspconfig.nvim', requires = {'neovim/nvim-lspconfig'}},
         {'hrsh7th/nvim-cmp'},
         {'saadparwaiz1/cmp_luasnip'},
         {'L3MON4D3/LuaSnip'},
-        {'neovim/nvim-lspconfig', config = setup_lsp},
         {'hrsh7th/cmp-buffer'},
         {'hrsh7th/cmp-path'},
         {'hrsh7th/cmp-nvim-lsp'},
-        {'j-hui/fidget.nvim', config = function() require'fidget'.setup {} end},
+        -- {'j-hui/fidget.nvim', config = function() require'fidget'.setup {} end},
         {'ray-x/lsp_signature.nvim', config = function() require'lsp_signature'.setup({}) end}
     }
 end

@@ -1,20 +1,17 @@
 -- https://github.com/vhyrro/neorg
 local function setup()
     require('neorg').setup({
-        -- Tell Neorg what modules to load
         load = {
-            ['core.defaults'] = {}, -- Load all the default modules
-            ['core.keybinds'] = { -- Configure core.keybinds
+            ["core.defaults"] = {}, -- Loads default behaviour
+            ["core.concealer"] = {}, -- Adds pretty icons to your documents
+            ["core.dirman"] = { -- Manages Neorg workspaces
                 config = {
-                    default_keybinds = true, -- Generate the default keybinds
-                    neorg_leader = '<Leader>o' -- This is the default if unspecified
-                }
+                    workspaces = {
+                        notes = "~/notes",
+                    },
+                },
             },
-            ['core.norg.concealer'] = {}, -- Allows for use of icons
-            ['core.norg.dirman'] = { -- Manage your directories with Neorg
-                config = {workspaces = {my_workspace = '~/neorg'}}
-            }
-        }
+        },
     })
 end
 
@@ -27,7 +24,7 @@ function note:new()
     return o
 end
 
-function note:plugins() return {{'vhyrro/neorg', config = setup, requires = 'nvim-lua/plenary.nvim'}} end
+function note:plugins() return {{'vhyrro/neorg', config = setup, run = ":Neorg sync-parsers", requires = 'nvim-lua/plenary.nvim'}} end
 
 function note:config() end
 

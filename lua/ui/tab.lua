@@ -19,9 +19,9 @@ local function setup()
             close_icon = '',
             left_trunc_marker = '',
             right_trunc_marker = '',
-            max_name_length = 18,
-            max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-            tab_size = 18,
+            max_name_length = 12,
+            max_prefix_length = 12, -- prefix used when a buffer is de-duplicated
+            tab_size = 12,
             diagnostics = false, -- false | "nvim_lsp",
             diagnostics_indicator = function(count, level, diagnostics_dict, context)
                 return '(' .. count .. ')'
@@ -40,11 +40,11 @@ local function setup()
                     text_align = 'left' -- "left" | "center" | "right"
                 }
             },
-            color_icons = true,
-            show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
-            show_buffer_close_icons = true, -- true | false,
-            show_close_icon = true, -- true | false,
-            show_tab_indicators = true, -- true | false,
+            color_icons = false,
+            show_buffer_icons = false, -- true | false, -- disable filetype icons for buffers
+            show_buffer_close_icons = false, -- true | false,
+            show_close_icon = false, -- true | false,
+            show_tab_indicators = false, -- true | false,
             persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
             -- can also be a table containing 2 custom separators
             -- [focused and unfocused]. eg: { '|', '|' }
@@ -52,7 +52,27 @@ local function setup()
             enforce_regular_tabs = false, -- false | true,
             always_show_bufferline = true, -- true | false,
             sort_by = 'id' -- 'id' | 'extension' | 'relative_directory' | 'directory' |
-        }
+        },
+        -- highlights = {
+        --     fill = {
+        --         fg = "#abb2bf",
+        --         bg = "#282c34",
+        --     },
+        --     background = {
+        --         fg = "#abb2bf",
+        --         bg = "#282c34",
+        --     },
+        --     buffer_selected = {
+        --         fg = "#e16d77",
+        --         bg = '#00ff00',
+        --         bold = true,
+        --         italic = true,
+        --     },
+        --     buffer_visible = {
+        --         fg = "#abb2bf",
+        --         bg = "#282c34",
+        --     },
+        -- }
     })
     local mapping = require('common.mapping')
     local items = {
@@ -81,7 +101,7 @@ function bufferline:plugins()
     return {
         {
             'akinsho/nvim-bufferline.lua',
-            tag = 'v3.*',
+            tag = 'v4.*',
             config = setup,
             requires = {'kyazdani42/nvim-web-devicons'},
             after = 'nvim-colorizer.lua'
