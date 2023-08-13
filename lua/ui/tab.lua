@@ -52,7 +52,7 @@ local function setup()
             enforce_regular_tabs = false, -- false | true,
             always_show_bufferline = true, -- true | false,
             sort_by = 'id' -- 'id' | 'extension' | 'relative_directory' | 'directory' |
-        },
+        }
         -- highlights = {
         --     fill = {
         --         fg = "#abb2bf",

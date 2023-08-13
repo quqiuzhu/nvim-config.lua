@@ -5,6 +5,9 @@ version=v0.9.1
 commit:
 	cp -rf .commit-msg .git/hooks/commit-msg
 
+fmt:
+	lua-format -i lua/*/*.lua
+
 build:
 	docker build --network host --build-arg HTTPS_PROXY=http://proxy.sensetime.com:3128 -f ./.devcontainer/Dockerfile -t ${target}:${version} ./.devcontainer
 

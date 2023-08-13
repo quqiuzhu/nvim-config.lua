@@ -47,7 +47,7 @@ function manager:_set_packer_config()
                 submodules = 'submodule update --init --recursive --progress'
             },
             depth = 1, -- Git clone depth
-            clone_timeout = 120, -- Timeout, in seconds, for git clones
+            clone_timeout = 120 -- Timeout, in seconds, for git clones
         },
         display = {
             non_interactive = false, -- If true, disable display windows for all operations
@@ -105,7 +105,7 @@ function manager:load_plugins()
     packer.reset()
     for _, plugin in pairs(self.plugins) do packer.use(plugin) end
     packer.install()
-    --packer.compile()
+    -- packer.compile()
     vim.cmd [[
       autocmd User PackerComplete PackerCompile
     ]]

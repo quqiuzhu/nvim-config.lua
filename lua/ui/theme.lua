@@ -100,8 +100,8 @@ local function setup_onedark()
             -- Fix gitblame & comment color
             Comment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
             SpecialComment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            ["@comment"] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            ["@lsp.type.comment"] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            ['@comment'] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
+            ['@lsp.type.comment'] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
             -- Fix bufferline selected state color
             Normal = {fg = '$grey', bg = '$bg0'}
         }, -- Override highlight groups

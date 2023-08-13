@@ -2,16 +2,12 @@
 local function setup()
     require('neorg').setup({
         load = {
-            ["core.defaults"] = {}, -- Loads default behaviour
-            ["core.concealer"] = {}, -- Adds pretty icons to your documents
-            ["core.dirman"] = { -- Manages Neorg workspaces
-                config = {
-                    workspaces = {
-                        notes = "~/notes",
-                    },
-                },
-            },
-        },
+            ['core.defaults'] = {}, -- Loads default behaviour
+            ['core.concealer'] = {}, -- Adds pretty icons to your documents
+            ['core.dirman'] = { -- Manages Neorg workspaces
+                config = {workspaces = {notes = '~/notes'}}
+            }
+        }
     })
 end
 
@@ -24,7 +20,9 @@ function note:new()
     return o
 end
 
-function note:plugins() return {{'vhyrro/neorg', config = setup, run = ":Neorg sync-parsers", requires = 'nvim-lua/plenary.nvim'}} end
+function note:plugins()
+    return {{'vhyrro/neorg', config = setup, run = ':Neorg sync-parsers', requires = 'nvim-lua/plenary.nvim'}}
+end
 
 function note:config() end
 

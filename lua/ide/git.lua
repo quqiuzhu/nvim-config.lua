@@ -16,9 +16,7 @@ function git:plugins()
     }
 end
 
-function git:config() 
-
-end
+function git:config() end
 
 function git:mapping() end
 
