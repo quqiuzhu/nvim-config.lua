@@ -30,7 +30,7 @@ function translate:new()
     return o
 end
 
-function translate:plugins() return {{'voldikss/vim-translator', setup = setup}} end
+function translate:plugins() return {{'voldikss/vim-translator', init = setup}} end
 
 function translate:config() end
 

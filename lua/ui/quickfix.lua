@@ -67,7 +67,9 @@ function quickfix:new()
     return o
 end
 
-function quickfix:plugins() return {{'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', config = config}} end
+function quickfix:plugins()
+    return {{'folke/trouble.nvim', dependencies = 'kyazdani42/nvim-web-devicons', config = config}}
+end
 
 function quickfix:config() end
 

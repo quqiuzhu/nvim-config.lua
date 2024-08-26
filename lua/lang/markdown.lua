@@ -13,7 +13,7 @@ function markdown:plugins()
         {
             'npxbr/glow.nvim',
             ft = {'markdown'},
-            setup = function() vim.cmd [[autocmd FileType markdown noremap <leader>p :Glow<CR>]] end
+            init = function() vim.cmd [[autocmd FileType markdown noremap <leader>p :Glow<CR>]] end
         }
     }
 end

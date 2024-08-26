@@ -74,3 +74,8 @@ vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_remote_plugins = 1
 vim.g.loaded_nvim_hlslens = 1
 
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = '\\'
+vim.g.maplocalleader = '\\'

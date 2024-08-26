@@ -154,7 +154,7 @@ local function setup()
         reload_on_bufenter = false,
         view = {
             width = 48,
-            hide_root_folder = false,
+            -- hide_root_folder = false,
             side = 'left',
             preserve_window_proportions = false,
             number = false,
@@ -220,6 +220,8 @@ local function setup()
         mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
 
+    vim.api.nvim_create_autocmd({'VimEnter'},
+                                {pattern = {'*'}, callback = function() require('nvim-tree.api').tree.open() end})
     -- closes neovim automatically when the tree is the last **WINDOW** in the view
     -- from nvim-tree readme: autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
     -- https://neovim.io/doc/dev/api_2autocmd_8c.html#a4bf35800481959bb8583e9593a277eb7
@@ -247,11 +249,9 @@ function filetree:plugins()
     return {
         {
             'kyazdani42/nvim-tree.lua',
-            requires = {'kyazdani42/nvim-web-devicons'},
-            config = setup,
-            after = 'nvim-bufferline.lua'
-        },
-        'mhinz/vim-startify'
+            dependencies = {'kyazdani42/nvim-web-devicons', 'nvim-bufferline.lua', 'mhinz/vim-startify'},
+            config = setup
+        }
     }
 end
 

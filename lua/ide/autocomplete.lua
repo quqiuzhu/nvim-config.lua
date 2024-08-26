@@ -132,7 +132,7 @@ function lsp:plugins()
     return {
         {'neovim/nvim-lspconfig', config = setup_lsp},
         {'williamboman/mason.nvim'},
-        {'williamboman/mason-lspconfig.nvim', requires = {'neovim/nvim-lspconfig'}},
+        {'williamboman/mason-lspconfig.nvim', dependencies = {'neovim/nvim-lspconfig'}},
         {'hrsh7th/nvim-cmp'},
         {'saadparwaiz1/cmp_luasnip'},
         {'L3MON4D3/LuaSnip'},

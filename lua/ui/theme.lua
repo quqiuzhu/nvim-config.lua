@@ -128,10 +128,10 @@ end
 function theme:plugins()
     return {
         {'nvim-treesitter/nvim-treesitter', config = setup_treesitter},
-        {'RRethy/nvim-treesitter-textsubjects', after = 'nvim-treesitter'},
+        {'RRethy/nvim-treesitter-textsubjects', dependencies = {'nvim-treesitter'}},
         {'navarasu/onedark.nvim', config = setup_onedark},
-        {'norcalli/nvim-colorizer.lua', config = setup_colorzier, after = 'onedark.nvim'},
-        {'yamatsum/nvim-cursorline', config = setup_cursorline, after = 'nvim-colorizer.lua'}
+        {'norcalli/nvim-colorizer.lua', config = setup_colorzier, dependencies = {'onedark.nvim'}},
+        {'yamatsum/nvim-cursorline', config = setup_cursorline, dependencies = {'nvim-colorizer.lua'}}
     }
 end
 

@@ -126,9 +126,10 @@ end
 
 function dap:plugins()
     return {
-        {'rcarriga/nvim-dap-ui', config = setup_ui, requires = {'mfussenegger/nvim-dap'}},
-        {'Pocco81/dap-buddy.nvim', config = setup_install, requires = {'mfussenegger/nvim-dap'}},
-        {'jbyuki/one-small-step-for-vimkind', config = setup_lua_debug, requires = {'mfussenegger/nvim-dap'}} -- neovim internal luajit debug
+        {'nvim-neotest/nvim-nio'},
+        {'rcarriga/nvim-dap-ui', config = setup_ui, dependencies = {'mfussenegger/nvim-dap'}},
+        {'Pocco81/dap-buddy.nvim', config = setup_install, dependencies = {'mfussenegger/nvim-dap'}},
+        {'jbyuki/one-small-step-for-vimkind', config = setup_lua_debug, dependencies = {'mfussenegger/nvim-dap'}} -- neovim internal luajit debug
     }
 end
 

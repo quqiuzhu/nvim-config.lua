@@ -11,7 +11,7 @@ function git:plugins()
     return {
         {
             'f-person/git-blame.nvim',
-            setup = function() vim.g.gitblame_ignored_filetypes = {'NvimTree', 'Startify', 'Outline'} end
+            init = function() vim.g.gitblame_ignored_filetypes = {'NvimTree', 'Startify', 'Outline'} end
         }
     }
 end

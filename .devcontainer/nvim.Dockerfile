@@ -37,7 +37,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rustup.sh \
 ENV PATH="/root/.cargo/bin:$PATH"
 
 # Formatter
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x |  bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x |  bash - \
     && apt-get install -y nodejs python3-pip\
     && npm install prettier -g \
     && pip3 install yapf \ 

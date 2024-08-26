@@ -108,7 +108,7 @@ function popup:plugins()
         {
             'nvim-telescope/telescope.nvim',
             config = setup,
-            requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+            dependencies = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
         },
         {'ahmedkhalf/project.nvim', config = setup_project}
     }

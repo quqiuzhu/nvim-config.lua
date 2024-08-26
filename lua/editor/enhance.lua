@@ -103,7 +103,7 @@ function edit:plugins()
         {'ggandor/lightspeed.nvim', config = setup_motion},
         {'karb94/neoscroll.nvim', config = setup_scroll},
         {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'fedepujol/move.nvim', setup = setup_move},
+        {'fedepujol/move.nvim', init = setup_move},
         {'ethanholz/nvim-lastplace', config = setup_lastplace}
     }
 end

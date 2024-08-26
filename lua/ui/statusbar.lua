@@ -208,7 +208,7 @@ function statusline:new()
 end
 
 function statusline:plugins()
-    return {{'nvim-lualine/lualine.nvim', config = setup, requires = {'kyazdani42/nvim-web-devicons'}}}
+    return {{'nvim-lualine/lualine.nvim', config = setup, dependencies = {'kyazdani42/nvim-web-devicons'}}}
 end
 
 function statusline:config() end
