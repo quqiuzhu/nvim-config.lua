@@ -32,6 +32,10 @@
 | ui.theme         | [nvim-treesitter/nvim-treesitter][20]     | ![][1020] | config for highlighting of languages          |
 | ui.theme         | [RRethy/nvim-treesitter-textsubjects][21] | ![][1021] | smart selection highlighting                  |
 | ui.theme         | [navarasu/onedark.nvim][22]               | ![][1022] | A dark neovim colorscheme                     |
+| ui.theme         | [folke/tokyonight.nvim][44]               | ![][1044] | A dark neovim colorscheme                     |
+| ui.theme         | [catppuccin/nvim][45]                     | ![][1045] | A dark neovim colorscheme                     |
+| ui.theme         | [rebelot/kanagawa.nvim][46]               | ![][1046] | A dark neovim colorscheme                     |
+| ui.theme         | [ellisonleao/gruvbox.nvim][47]            | ![][1047] | A dark neovim colorscheme                     |
 | ui.theme         | [norcalli/nvim-colorizer.lua][23]         | ![][1023] | colorizer show color in vim                   |
 | ui.theme         | [yamatsum/nvim-cursorline][24]            | ![][1024] | highlight words and lines on the cursor       |
 | ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | ![][1025] | file explorer                                 |
@@ -89,6 +93,10 @@
 [41]: https://github.com/williamboman/mason-lspconfig.nvim
 [42]: https://github.com/j-hui/fidget.nvim
 [43]: https://github.com/ray-x/lsp_signature.nvim
+[44]: https://github.com/folke/tokyonight.nvim
+[45]: https://github.com/catppuccin/nvim
+[46]: https://github.com/rebelot/kanagawa.nvim
+[47]: https://github.com/ellisonleao/gruvbox.nvim
 [1001]: https://img.shields.io/github/stars/neovim/nvim-lspconfig
 [1002]: https://img.shields.io/github/stars/williamboman/mason.nvim
 [1003]: https://img.shields.io/github/stars/f-person/git-blame.nvim
@@ -132,3 +140,7 @@
 [1041]: https://img.shields.io/github/stars/williamboman/mason-lspconfig.nvim
 [1042]: https://img.shields.io/github/stars/j-hui/fidget.nvim
 [1043]: https://img.shields.io/github/stars/ray-x/lsp_signature.nvim
+[1044]: https://img.shields.io/github/stars/folke/tokyonight.nvim
+[1045]: https://img.shields.io/github/stars/catppuccin/nvim
+[1046]: https://img.shields.io/github/stars/rebelot/kanagawa.nvim
+[1047]: https://img.shields.io/github/stars/ellisonleao/gruvbox.nvim

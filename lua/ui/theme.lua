@@ -69,50 +69,7 @@ local function setup_cursorline()
 end
 
 local function setup_onedark()
-    -- Lua
-    require('onedark').setup {
-        -- Main options --
-        style = 'dark', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-        transparent = false, -- Show/hide background
-        term_colors = false, -- Change terminal color as per the selected theme style
-        ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
-        cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
-
-        -- toggle theme style ---
-        toggle_style_key = nil, -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-        toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'}, -- List of styles to toggle between
-
-        -- Change code style ---
-        -- Options are italic, bold, underline, none
-        -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
-        code_style = {comments = 'italic', keywords = 'none', functions = 'none', strings = 'none', variables = 'none'},
-
-        -- Lualine options --
-        lualine = {
-            transparent = false -- lualine center bar transparency
-        },
-
-        -- Custom Highlights --
-        colors = {
-            -- grey = "#404247"
-        }, -- Override default colors
-        highlights = {
-            -- Fix gitblame & comment color
-            Comment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            SpecialComment = {fg = '$bg1', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            ['@comment'] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            ['@lsp.type.comment'] = {fg = '$bg0', bg = '$grey', sp = '$bg2', fmt = 'italic'},
-            -- Fix bufferline selected state color
-            Normal = {fg = '$grey', bg = '$bg0'}
-        }, -- Override highlight groups
-
-        -- Plugins Config --
-        diagnostics = {
-            darker = true, -- darker colors for diagnostic
-            undercurl = true, -- use undercurl instead of underline for diagnostics
-            background = true -- use background color for virtual text
-        }
-    }
+    require('onedark').setup()
     require('onedark').load()
 end
 
@@ -125,11 +82,21 @@ function theme:new()
     return o
 end
 
+-- supported colorschemes:
+-- colorscheme onedark
+-- colorscheme tokyonight " tokyonight-night, tokyonight-storm, tokyonight-day, tokyonight-moon
+-- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+-- colorscheme kanagawa " kanagawa-wave, kanagawa-dragon, kanagawa-lotus
+-- colorscheme gruvbox
 function theme:plugins()
     return {
-        {'nvim-treesitter/nvim-treesitter', config = setup_treesitter},
+        {'nvim-treesitter/nvim-treesitter', config = setup_treesitter, run = ':TSUpdate'},
         {'RRethy/nvim-treesitter-textsubjects', dependencies = {'nvim-treesitter'}},
         {'navarasu/onedark.nvim', config = setup_onedark},
+        {'folke/tokyonight.nvim', lazy = false, priority = 1000, opts = {}},
+        {'catppuccin/nvim', name = 'catppuccin', priority = 1000},
+        {'rebelot/kanagawa.nvim', priority = 1000},
+        {'ellisonleao/gruvbox.nvim', priority = 1000},
         {'norcalli/nvim-colorizer.lua', config = setup_colorzier, dependencies = {'onedark.nvim'}},
         {'yamatsum/nvim-cursorline', config = setup_cursorline, dependencies = {'nvim-colorizer.lua'}}
     }

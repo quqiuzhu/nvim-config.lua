@@ -52,15 +52,6 @@ local function setup()
             enforce_regular_tabs = false, -- false | true,
             always_show_bufferline = true, -- true | false,
             sort_by = 'id' -- 'id' | 'extension' | 'relative_directory' | 'directory' |
-        },
-        highlights = {
-            fill = {fg = '#abb2bf', bg = '#282c34'},
-            background = {fg = '#abb2bf', bg = '#282c34'},
-            buffer_selected = {bg = '#dddddd', bold = true, italic = true},
-            buffer_visible = {fg = '#abb2bf', bg = '#282c34'},
-            numbers = {fg = '#abb2bf', bg = '#282c34'},
-            numbers_visible = {fg = '#abb2bf', bg = '#282c34'},
-            numbers_selected = {bg = '#dddddd'}
         }
     })
     local mapping = require('common.mapping')
