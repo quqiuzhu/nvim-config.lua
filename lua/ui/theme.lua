@@ -55,17 +55,62 @@ local function setup_treesitter()
     }
 end
 
-local function setup_colorzier()
-    require('colorizer').setup {
-        '*', -- Highlight all files, but customize some others.
-        css = {rgb_fn = true}, -- Enable parsing rgb(...) functions in css.
-        html = {names = false} -- Disable parsing "names" like Blue or Gray
-    }
+local function setup_colorizer()
+    require('colorizer').setup({
+        filetypes = { '*' },
+        user_default_options = {
+            RGB = true, -- #RGB hex codes
+            RRGGBB = true, -- #RRGGBB hex codes
+            names = true, -- "Name" codes like Blue or blue
+            RRGGBBAA = false, -- #RRGGBBAA hex codes
+            AARRGGBB = false, -- 0xAARRGGBB hex codes
+            rgb_fn = true, -- CSS rgb() and rgba() functions
+            hsl_fn = true, -- CSS hsl() and hsla() functions
+            css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+            css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+            mode = 'background', -- Set the display mode.
+            tailwind = false,
+            sass = { enable = false },
+            virtualtext = '■',
+        },
+        buftypes = {},
+    })
 end
 
-local function setup_cursorline()
-    -- You can override cursor highlighting by defining CursorWord group and disabling built-in highlighting
-    -- by specifying vim.g.cursorword_highlight (lua) or g:cursorword_highlight (vimscript).
+local function setup_illuminate()
+    require('illuminate').configure({
+        providers = {
+            'lsp',
+            'treesitter',
+            'regex',
+        },
+        delay = 120,
+        filetype_overrides = {},
+        filetypes_denylist = {
+            'dirvish',
+            'fugitive',
+            'alpha',
+            'NvimTree',
+            'lazy',
+            'neogitstatus',
+            'Trouble',
+            'lir',
+            'Outline',
+            'spectre_panel',
+            'toggleterm',
+            'DressingSelect',
+            'TelescopePrompt',
+        },
+        filetypes_allowlist = {},
+        modes_denylist = {},
+        modes_allowlist = {},
+        providers_regex_syntax_denylist = {},
+        providers_regex_syntax_allowlist = {},
+        under_cursor = true,
+        large_file_cutoff = nil,
+        large_file_overrides = nil,
+        min_count_to_highlight = 1,
+    })
 end
 
 local function setup_onedark()
@@ -90,15 +135,59 @@ end
 -- colorscheme gruvbox
 function theme:plugins()
     return {
-        {'nvim-treesitter/nvim-treesitter', config = setup_treesitter, run = ':TSUpdate'},
-        {'RRethy/nvim-treesitter-textsubjects', dependencies = {'nvim-treesitter'}},
-        {'navarasu/onedark.nvim', config = setup_onedark},
-        {'folke/tokyonight.nvim', lazy = false, priority = 1000, opts = {}},
-        {'catppuccin/nvim', name = 'catppuccin', priority = 1000},
-        {'rebelot/kanagawa.nvim', priority = 1000},
-        {'ellisonleao/gruvbox.nvim', priority = 1000},
-        {'norcalli/nvim-colorizer.lua', config = setup_colorzier, dependencies = {'onedark.nvim'}},
-        {'yamatsum/nvim-cursorline', config = setup_cursorline, dependencies = {'nvim-colorizer.lua'}}
+        {
+            'nvim-treesitter/nvim-treesitter',
+            build = ':TSUpdate',
+            event = { 'BufReadPre', 'BufNewFile' },
+            config = setup_treesitter,
+        },
+        {
+            'RRethy/nvim-treesitter-textsubjects',
+            dependencies = { 'nvim-treesitter/nvim-treesitter' },
+            event = { 'BufReadPre', 'BufNewFile' },
+        },
+        {
+            'navarasu/onedark.nvim',
+            lazy = false,
+            priority = 1000,
+            config = setup_onedark,
+        },
+        {
+            'folke/tokyonight.nvim',
+            lazy = false,
+            priority = 1000,
+            opts = {},
+        },
+        {
+            'catppuccin/nvim',
+            name = 'catppuccin',
+            lazy = false,
+            priority = 1000,
+        },
+        {
+            'rebelot/kanagawa.nvim',
+            lazy = false,
+            priority = 1000,
+        },
+        {
+            'ellisonleao/gruvbox.nvim',
+            lazy = false,
+            priority = 1000,
+        },
+        {
+            'NvChad/nvim-colorizer.lua',
+            event = { 'BufReadPre', 'BufNewFile' },
+            config = setup_colorizer,
+        },
+        {
+            'RRethy/vim-illuminate',
+            event = { 'BufReadPost', 'BufNewFile' },
+            config = setup_illuminate,
+            keys = {
+                { ']]', function() require('illuminate').goto_next_reference(false) end, desc = 'Next Reference' },
+                { '[[', function() require('illuminate').goto_prev_reference(false) end, desc = 'Prev Reference' },
+            },
+        },
     }
 end
 

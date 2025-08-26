@@ -94,12 +94,30 @@ local function setup_move()
     vim.keymap.set('v', '<C-l>', ':MoveHBlock(1)<CR>', opts)
 end
 
-local function setup_lastplace()
-    require'nvim-lastplace'.setup {
-        lastplace_ignore_buftype = {'NvimTree', 'vista', 'dbui', 'packer', 'Outline', 'startify', 'Trouble', 'help'},
-        lastplace_ignore_filetype = {'gitcommit', 'gitrebase', 'svn', 'hgcommit'},
-        lastplace_open_folds = true
-    }
+local function setup_persistence()
+    require('persistence').setup({
+        dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'), -- directory where session files are saved
+        options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' }, -- sessionoptions used for saving
+        pre_save = nil, -- a function to call before saving the session
+        post_save = nil, -- a function to call after saving the session
+        save_empty = false, -- don't save if there are no open file buffers
+    })
+    
+    -- 设置自动命令来自动保存和恢复会话
+    local group = vim.api.nvim_create_augroup('persistence', { clear = true })
+    
+    -- 自动保存会话
+    vim.api.nvim_create_autocmd('VimLeavePre', {
+        group = group,
+        callback = function()
+            require('persistence').save()
+        end,
+    })
+    
+    -- 设置快捷键
+    vim.keymap.set('n', '<leader>qs', function() require('persistence').save() end, { desc = 'Save session' })
+    vim.keymap.set('n', '<leader>ql', function() require('persistence').load() end, { desc = 'Load session' })
+    vim.keymap.set('n', '<leader>qd', function() require('persistence').stop() end, { desc = 'Stop session' })
 end
 
 local edit = {}
@@ -148,7 +166,16 @@ function edit:plugins()
             },
             config = setup_move
         },
-        {'ethanholz/nvim-lastplace', event = 'BufReadPre', config = setup_lastplace}
+        {
+            'folke/persistence.nvim',
+            event = 'BufReadPre',
+            keys = {
+                { '<leader>qs', function() require('persistence').save() end, desc = 'Save session' },
+                { '<leader>ql', function() require('persistence').load() end, desc = 'Load session' },
+                { '<leader>qd', function() require('persistence').stop() end, desc = 'Stop session' },
+            },
+            config = setup_persistence,
+        }
     }
 end
 

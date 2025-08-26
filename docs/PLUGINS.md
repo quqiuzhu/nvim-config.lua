@@ -4,17 +4,25 @@
 
 ### 2025-01-16 - 核心插件升级
 
-#### 升级的插件 - 翻译、笔记、代码检查、格式化、调试、注释、编辑增强
+#### 第一批升级 - 翻译、笔记
 
-| 原插件                       | 新插件                         | 升级原因                                          | 兼容性说明                                |
-| ---------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
-| `voldikss/vim-translator`    | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
-| `vhyrro/neorg`               | `nvim-neorg/neorg`             | 插件迁移到新的官方组织，功能更完善                | 配置语法略有变化，但功能保持一致          |
-| `mhartington/formatter.nvim` | `stevearc/conform.nvim`        | 新插件性能更好，配置更简单，支持 fallback         | 保持相同快捷键 `<Leader>f`                |
-| `diagnosticls-configs-nvim`  | `mfussenegger/nvim-lint`       | 现代异步 linting，更好的性能和配置                | 自动触发，无需手动配置                    |
-| `Pocco81/dap-buddy.nvim`     | `jay-babu/mason-nvim-dap.nvim` | 官方 Mason 生态内的替代方案                       | 自动安装调试器，更好的集成                |
-| `terrortylor/nvim-comment`   | `numToStr/Comment.nvim`        | 更现代、维护活跃、性能更好                        | 保持相同快捷键 `gcc` 和 `gc`              |
-| `ggandor/lightspeed.nvim`    | `ggandor/leap.nvim`            | Leap 是 lightspeed 的继任版本                     | 快捷键从 `f/F/t/T` 改为 `s/S/gs`          |
+#### 第二批升级 - 代码检查、格式化、调试、注释、编辑增强
+
+#### 第三批升级 - 主题&UI、Markdown、会话管理
+
+| 原插件                        | 新插件                         | 升级原因                                          | 兼容性说明                                |
+| ----------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
+| `voldikss/vim-translator`     | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
+| `vhyrro/neorg`                | `nvim-neorg/neorg`             | 插件迁移到新的官方组织，功能更完善                | 配置语法略有变化，但功能保持一致          |
+| `mhartington/formatter.nvim`  | `stevearc/conform.nvim`        | 新插件性能更好，配置更简单，支持 fallback         | 保持相同快捷键 `<Leader>f`                |
+| `diagnosticls-configs-nvim`   | `mfussenegger/nvim-lint`       | 现代异步 linting，更好的性能和配置                | 自动触发，无需手动配置                    |
+| `Pocco81/dap-buddy.nvim`      | `jay-babu/mason-nvim-dap.nvim` | 官方 Mason 生态内的替代方案                       | 自动安装调试器，更好的集成                |
+| `terrortylor/nvim-comment`    | `numToStr/Comment.nvim`        | 更现代、维护活跃、性能更好                        | 保持相同快捷键 `gcc` 和 `gc`              |
+| `ggandor/lightspeed.nvim`     | `ggandor/leap.nvim`            | Leap 是 lightspeed 的继任版本                     | 快捷键从 `f/F/t/T` 改为 `s/S/gs`          |
+| `norcalli/nvim-colorizer.lua` | `NvChad/nvim-colorizer.lua`    | 官方不更新，新 fork 在维护                        | 功能保持一致，配置语法略有变化            |
+| `yamatsum/nvim-cursorline`    | `RRethy/vim-illuminate`        | 维护更活跃，智能高亮同名符号                      | 新增 `]]` 和 `[[` 快捷键跳转引用          |
+| `npxbr/glow.nvim`             | `OXY2DEV/markview.nvim`        | markview 支持直接渲染                             | 保持 `<leader>p` 快捷键，新增实时渲染     |
+| `ethanholz/nvim-lastplace`    | `folke/persistence.nvim`       | Persistence 还能恢复 buffers 会话                 | 新增会话管理快捷键 `<leader>qs/ql/qd`     |
 
 #### 功能变化
 
@@ -68,6 +76,33 @@
 - ✅ 更好的视觉反馈
 - ✅ 支持跨窗口跳转
 
+**颜色显示 (NvChad/nvim-colorizer.lua)**:
+
+- ✅ 功能保持一致
+- ✅ 更活跃的维护和更新
+- ✅ 更好的性能和稳定性
+- ⚠️ 配置语法略有变化
+
+**光标高亮 (vim-illuminate)**:
+
+- ✅ 智能高亮同名符号
+- ✅ 支持 LSP、Treesitter、正则表达式多种提供者
+- ✅ 新增快捷键：`]]`（下一个引用）、`[[`（上一个引用）
+- ✅ 更好的性能和可配置性
+
+**Markdown 渲染**:
+
+- ✅ **markview.nvim**: 直接在 Neovim 内实时渲染 markdown
+- ✅ 双重支持：实时渲染 + 外部预览
+- ✅ 更好的 markdown 编辑体验
+
+**会话管理 (persistence.nvim)**:
+
+- ✅ 自动保存和恢复会话
+- ✅ 恢复缓冲区、窗口布局、工作目录等
+- ✅ 新增快捷键：`<leader>qs`（保存）、`<leader>ql`（加载）、`<leader>qd`（停止）
+- ✅ 比简单的 lastplace 功能更强大
+
 ---
 
 | Module           | Plugin                                    | Stars     | Description                                   |
@@ -94,7 +129,7 @@
 | editor.enhance   | [karb94/neoscroll.nvim][12]               | ![][1012] | smooth scrolling                              |
 | editor.enhance   | [windwp/nvim-autopairs][13]               | ![][1013] | autopairs                                     |
 | editor.enhance   | [fedepujol/move.nvim][14]                 | ![][1014] | move lines and selections up and down         |
-| editor.enhance   | [ethanholz/nvim-lastplace][15]            | ![][1015] | reopen files at last edit position            |
+| editor.enhance   | [folke/persistence.nvim][15]              | ![][1015] | session management with buffer restoration    |
 | editor.note      | [nvim-neorg/neorg][17]                    | ![][1017] | modern note-taking with org-mode features     |
 | editor.tmux      | [numToStr/Navigator.nvim][18]             | ![][1018] | navigate between neovim splits and tmux panes |
 | editor.translate | [uga-rosa/translate.nvim][19]             | ![][1019] | modern Lua-based translation plugin           |
@@ -105,8 +140,8 @@
 | ui.theme         | [catppuccin/nvim][45]                     | ![][1045] | A dark neovim colorscheme                     |
 | ui.theme         | [rebelot/kanagawa.nvim][46]               | ![][1046] | A dark neovim colorscheme                     |
 | ui.theme         | [ellisonleao/gruvbox.nvim][47]            | ![][1047] | A dark neovim colorscheme                     |
-| ui.theme         | [norcalli/nvim-colorizer.lua][23]         | ![][1023] | colorizer show color in vim                   |
-| ui.theme         | [yamatsum/nvim-cursorline][24]            | ![][1024] | highlight words and lines on the cursor       |
+| ui.theme         | [NvChad/nvim-colorizer.lua][23]           | ![][1023] | modern colorizer with active maintenance      |
+| ui.theme         | [RRethy/vim-illuminate][24]               | ![][1024] | intelligent highlighting of word under cursor |
 | ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | ![][1025] | file explorer                                 |
 | ui.explorer      | [kyazdani42/nvim-web-devicons][26]        | ![][1026] | common icons                                  |
 | ui.explorer      | [mhinz/vim-startify][27]                  | ![][1027] | A fancy start screen                          |
@@ -117,7 +152,7 @@
 | ui.quickfix      | [folke/trouble.nvim][31]                  | ![][1031] | quickfix and location list                    |
 | ui.statusbar     | [nvim-lualine/lualine.nvim][32]           | ![][1032] | statusline                                    |
 | ui.tab           | [akinsho/nvim-bufferline.lua][33]         | ![][1033] | tabs                                          |
-| lang.markdown    | [npxbr/glow.nvim][35]                     | ![][1035] | preview directly in neovim buffer             |
+| lang.markdown    | [OXY2DEV/markview.nvim][48]               | ![][1048] | real-time markdown rendering in neovim        |
 
 [1]: https://github.com/neovim/nvim-lspconfig
 [2]: https://github.com/williamboman/mason.nvim
@@ -133,16 +168,15 @@
 [12]: https://github.com/karb94/neoscroll.nvim
 [13]: https://github.com/windwp/nvim-autopairs
 [14]: https://github.com/fedepujol/move.nvim
-[15]: https://github.com/ethanholz/nvim-lastplace
-[16]: https://github.com/nvim-lua/plenary.nvim
+[15]: https://github.com/folke/persistence.nvim
 [17]: https://github.com/nvim-neorg/neorg
 [18]: https://github.com/numToStr/Navigator.nvim
 [19]: https://github.com/uga-rosa/translate.nvim
 [20]: https://github.com/nvim-treesitter/nvim-treesitter
 [21]: https://github.com/RRethy/nvim-treesitter-textsubjects
 [22]: https://github.com/navarasu/onedark.nvim
-[23]: https://github.com/norcalli/nvim-colorizer.lua
-[24]: https://github.com/yamatsum/nvim-cursorline
+[23]: https://github.com/NvChad/nvim-colorizer.lua
+[24]: https://github.com/RRethy/vim-illuminate
 [25]: https://github.com/kyazdani42/nvim-tree.lua
 [26]: https://github.com/kyazdani42/nvim-web-devicons
 [27]: https://github.com/mhinz/vim-startify
@@ -153,7 +187,7 @@
 [32]: https://github.com/nvim-lualine/lualine.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
 [34]: https://github.com/ahmedkhalf/project.nvim
-[35]: https://github.com/npxbr/glow.nvim
+[48]: https://github.com/OXY2DEV/markview.nvim
 [36]: https://github.com/mfussenegger/nvim-lint
 [37]: https://github.com/hrsh7th/nvim-cmp
 [38]: https://github.com/hrsh7th/cmp-nvim-lsp
@@ -180,16 +214,15 @@
 [1012]: https://img.shields.io/github/stars/karb94/neoscroll.nvim
 [1013]: https://img.shields.io/github/stars/windwp/nvim-autopairs
 [1014]: https://img.shields.io/github/stars/fedepujol/move.nvim
-[1015]: https://img.shields.io/github/stars/ethanholz/nvim-lastplace
-[1016]: https://img.shields.io/github/stars/nvim-lua/plenary.nvim
+[1015]: https://img.shields.io/github/stars/folke/persistence.nvim
 [1017]: https://img.shields.io/github/stars/nvim-neorg/neorg
 [1018]: https://img.shields.io/github/stars/numToStr/Navigator.nvim
 [1019]: https://img.shields.io/github/stars/uga-rosa/translate.nvim
 [1020]: https://img.shields.io/github/stars/nvim-treesitter/nvim-treesitter
 [1021]: https://img.shields.io/github/stars/RRethy/nvim-treesitter-textsubjects
 [1022]: https://img.shields.io/github/stars/navarasu/onedark.nvim
-[1023]: https://img.shields.io/github/stars/norcalli/nvim-colorizer.lua
-[1024]: https://img.shields.io/github/stars/yamatsum/nvim-cursorline
+[1023]: https://img.shields.io/github/stars/NvChad/nvim-colorizer.lua
+[1024]: https://img.shields.io/github/stars/RRethy/vim-illuminate
 [1025]: https://img.shields.io/github/stars/kyazdani42/nvim-tree.lua
 [1026]: https://img.shields.io/github/stars/kyazdani42/nvim-web-devicons
 [1027]: https://img.shields.io/github/stars/mhinz/vim-startify
@@ -200,7 +233,7 @@
 [1032]: https://img.shields.io/github/stars/nvim-lualine/lualine.nvim
 [1033]: https://img.shields.io/github/stars/akinsho/nvim-bufferline.lua
 [1034]: https://img.shields.io/github/stars/ahmedkhalf/project.nvim
-[1035]: https://img.shields.io/github/stars/npxbr/glow.nvim
+[1048]: https://img.shields.io/github/stars/OXY2DEV/markview.nvim
 [1036]: https://img.shields.io/github/stars/mfussenegger/nvim-lint
 [1037]: https://img.shields.io/github/stars/hrsh7th/nvim-cmp
 [1038]: https://img.shields.io/github/stars/hrsh7th/cmp-nvim-lsp
