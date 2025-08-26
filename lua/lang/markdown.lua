@@ -2,8 +2,8 @@
 -- https://github.com/OXY2DEV/markview.nvim
 local function setup_markview()
     require('markview').setup({
-        modes = { 'n', 'no', 'c' }, -- Change these modes to what you need
         preview = {
+            modes = { 'n', 'no', 'c' }, -- Change these modes to what you need
             hybrid_modes = { 'n' }, -- Uses this feature on normal mode
             callbacks = {
                 on_enable = function (_, win)

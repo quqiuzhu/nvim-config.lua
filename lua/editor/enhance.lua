@@ -48,19 +48,6 @@ local function setup_motion()
 end
 
 local function setup_scroll()
-    require('neoscroll').setup({
-        -- All these keys will be mapped to their corresponding default scrolling animation
-        -- mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-        -- '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        hide_cursor = true, -- Hide cursor while scrolling
-        stop_eof = true, -- Stop at <EOF> when scrolling downwards
-        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-        easing_function = nil, -- Default easing function
-        pre_hook = nil, -- Function to run before the scrolling animation starts
-        post_hook = nil -- Function to run after the scrolling animation ends
-    })
     local t = {}
     -- Syntax: t[keys] = {function, {function arguments}}
     t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
@@ -72,7 +59,19 @@ local function setup_scroll()
     t['zt'] = {'zt', {'250'}}
     t['zz'] = {'zz', {'250'}}
     t['zb'] = {'zb', {'250'}}
-    require('neoscroll.config').set_mappings(t)
+
+    require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = t,
+        hide_cursor = true, -- Hide cursor while scrolling
+        stop_eof = true, -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil, -- Default easing function
+        pre_hook = nil, -- Function to run before the scrolling animation starts
+        post_hook = nil -- Function to run after the scrolling animation ends
+    })
 end
 
 local function setup_autopairs()
@@ -97,27 +96,33 @@ end
 local function setup_persistence()
     require('persistence').setup({
         dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'), -- directory where session files are saved
-        options = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' }, -- sessionoptions used for saving
+        options = {'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp'}, -- sessionoptions used for saving
         pre_save = nil, -- a function to call before saving the session
         post_save = nil, -- a function to call after saving the session
-        save_empty = false, -- don't save if there are no open file buffers
+        save_empty = false -- don't save if there are no open file buffers
     })
-    
+
     -- 设置自动命令来自动保存和恢复会话
-    local group = vim.api.nvim_create_augroup('persistence', { clear = true })
-    
+    local group = vim.api.nvim_create_augroup('persistence', {clear = true})
+
     -- 自动保存会话
     vim.api.nvim_create_autocmd('VimLeavePre', {
         group = group,
         callback = function()
             require('persistence').save()
-        end,
+        end
     })
-    
+
     -- 设置快捷键
-    vim.keymap.set('n', '<leader>qs', function() require('persistence').save() end, { desc = 'Save session' })
-    vim.keymap.set('n', '<leader>ql', function() require('persistence').load() end, { desc = 'Load session' })
-    vim.keymap.set('n', '<leader>qd', function() require('persistence').stop() end, { desc = 'Stop session' })
+    vim.keymap.set('n', '<leader>qs', function()
+        require('persistence').save()
+    end, {desc = 'Save session'})
+    vim.keymap.set('n', '<leader>ql', function()
+        require('persistence').load()
+    end, {desc = 'Load session'})
+    vim.keymap.set('n', '<leader>qd', function()
+        require('persistence').stop()
+    end, {desc = 'Stop session'})
 end
 
 local edit = {}
@@ -170,11 +175,29 @@ function edit:plugins()
             'folke/persistence.nvim',
             event = 'BufReadPre',
             keys = {
-                { '<leader>qs', function() require('persistence').save() end, desc = 'Save session' },
-                { '<leader>ql', function() require('persistence').load() end, desc = 'Load session' },
-                { '<leader>qd', function() require('persistence').stop() end, desc = 'Stop session' },
+                {
+                    '<leader>qs',
+                    function()
+                        require('persistence').save()
+                    end,
+                    desc = 'Save session'
+                },
+                {
+                    '<leader>ql',
+                    function()
+                        require('persistence').load()
+                    end,
+                    desc = 'Load session'
+                },
+                {
+                    '<leader>qd',
+                    function()
+                        require('persistence').stop()
+                    end,
+                    desc = 'Stop session'
+                }
             },
-            config = setup_persistence,
+            config = setup_persistence
         }
     }
 end

@@ -15,6 +15,7 @@ local module_names = {
     'ui.theme',
     'ui.outline',
     'ui.quickfix',
+    'ui.dashboard',
     'lang.markdown',
     'editor.enhance',
     'editor.tmux',

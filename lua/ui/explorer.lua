@@ -220,8 +220,12 @@ local function setup()
         mapping:item():mode('n'):lhs('<tab>'):noremap():rhs('<C-w>w'):silent():nowait()
     })
 
-    vim.api.nvim_create_autocmd({'VimEnter'},
-                                {pattern = {'*'}, callback = function() require('nvim-tree.api').tree.open() end})
+    vim.api.nvim_create_autocmd({'VimEnter'}, {
+        pattern = {'*'},
+        callback = function()
+            require('nvim-tree.api').tree.open()
+        end
+    })
     -- closes neovim automatically when the tree is the last **WINDOW** in the view
     -- from nvim-tree readme: autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
     -- https://neovim.io/doc/dev/api_2autocmd_8c.html#a4bf35800481959bb8583e9593a277eb7
@@ -249,25 +253,17 @@ function filetree:plugins()
     return {
         {
             'kyazdani42/nvim-tree.lua',
-            dependencies = {'kyazdani42/nvim-web-devicons', 'nvim-bufferline.lua', 'mhinz/vim-startify'},
+            dependencies = {'kyazdani42/nvim-web-devicons', 'nvim-bufferline.lua'},
             config = setup
         }
     }
 end
 
 function filetree:config()
-    vim.g.startify_lists = {
-        {header = {'   MRU in current directory'}, type = 'dir'},
-        {header = {'   MRU '}, type = 'files'},
-        {header = {'   Sessions'}, type = 'sessions'},
-        {header = {'   Bookmarks'}, type = 'bookmarks'},
-        {header = {'   Commands'}, type = 'commands'}
-    }
-    vim.g.startify_session_persistence = 1
-    vim.g.startify_session_autoload = 1
-    vim.g.startify_update_oldfiles = 1
+    -- Configuration moved to dashboard.lua (alpha-nvim)
 end
 
-function filetree:mapping() end
+function filetree:mapping()
+end
 
 return filetree

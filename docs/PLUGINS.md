@@ -10,6 +10,8 @@
 
 #### 第三批升级 - 主题&UI、Markdown、会话管理
 
+#### 第四批升级 - 符号大纲、启动页面、Telescope优化
+
 | 原插件                        | 新插件                         | 升级原因                                          | 兼容性说明                                |
 | ----------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
 | `voldikss/vim-translator`     | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
@@ -22,7 +24,10 @@
 | `norcalli/nvim-colorizer.lua` | `NvChad/nvim-colorizer.lua`    | 官方不更新，新 fork 在维护                        | 功能保持一致，配置语法略有变化            |
 | `yamatsum/nvim-cursorline`    | `RRethy/vim-illuminate`        | 维护更活跃，智能高亮同名符号                      | 新增 `]]` 和 `[[` 快捷键跳转引用          |
 | `npxbr/glow.nvim`             | `OXY2DEV/markview.nvim`        | markview 支持直接渲染                             | 保持 `<leader>p` 快捷键，新增实时渲染     |
-| `ethanholz/nvim-lastplace`    | `folke/persistence.nvim`       | Persistence 还能恢复 buffers 会话                 | 新增会话管理快捷键 `<leader>qs/ql/qd`     |
+| `ethanholz/nvim-lastplace` | `folke/persistence.nvim` | Persistence 还能恢复 buffers 会话 | 新增会话管理快捷键 `<leader>qs/ql/qd` |
+| `simrat39/symbols-outline.nvim` | `stevearc/aerial.nvim` | 功能更强，支持 LSP + Treesitter | 新增快捷键 `<leader>a`，更丰富的导航功能 |
+| `mhinz/vim-startify` | `goolord/alpha-nvim` | 新一代 dashboard，更现代化 | 保持启动页面功能，界面更美观 |
+| Telescope 依赖 `popup.nvim` | 移除 `popup.nvim` 依赖 | Telescope 已内置替代功能 | 功能保持一致，减少依赖 |
 
 #### 功能变化
 
@@ -97,11 +102,30 @@
 - ✅ 更好的 markdown 编辑体验
 
 **会话管理 (persistence.nvim)**:
-
 - ✅ 自动保存和恢复会话
 - ✅ 恢复缓冲区、窗口布局、工作目录等
 - ✅ 新增快捷键：`<leader>qs`（保存）、`<leader>ql`（加载）、`<leader>qd`（停止）
 - ✅ 比简单的 lastplace 功能更强大
+
+**符号大纲 (aerial.nvim)**:
+- ✅ 支持 LSP + Treesitter 双重后端
+- ✅ 新增快捷键：`<leader>a` 切换符号大纲
+- ✅ 更丰富的导航功能和快捷键
+- ✅ 支持浮动窗口和导航模式
+- ✅ 更好的性能和可配置性
+
+**启动页面 (alpha-nvim)**:
+- ✅ 现代化的启动页面设计
+- ✅ 显示插件数量和 Neovim 版本信息
+- ✅ 快速访问常用功能：新建文件、查找文件、最近文件等
+- ✅ 美观的 ASCII 艺术字标题
+- ✅ 更好的可定制性
+
+**Telescope 优化**:
+- ✅ 移除不必要的 popup.nvim 依赖
+- ✅ 减少插件依赖，提高启动速度
+- ✅ 功能保持完全一致
+- ✅ 更简洁的配置
 
 ---
 
@@ -144,10 +168,9 @@
 | ui.theme         | [RRethy/vim-illuminate][24]               | ![][1024] | intelligent highlighting of word under cursor |
 | ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | ![][1025] | file explorer                                 |
 | ui.explorer      | [kyazdani42/nvim-web-devicons][26]        | ![][1026] | common icons                                  |
-| ui.explorer      | [mhinz/vim-startify][27]                  | ![][1027] | A fancy start screen                          |
-| ui.outline       | [simrat39/symbols-outline.nvim][28]       | ![][1028] | A tree like view for symbols                  |
+| ui.dashboard     | [goolord/alpha-nvim][27]                  | ![][1027] | modern and customizable start screen         |
+| ui.outline       | [stevearc/aerial.nvim][28]                | ![][1028] | modern symbol outline with LSP + Treesitter  |
 | ui.finder        | [nvim-telescope/telescope.nvim][29]       | ![][1029] | highly extendable fuzzy finder over lists     |
-| ui.finder        | [nvim-lua/popup.nvim][30]                 | ![][1030] | Popup API                                     |
 | ui.finder        | [ahmedkhalf/project.nvim][34]             | ![][1034] | change cwd to project's root                  |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | ![][1031] | quickfix and location list                    |
 | ui.statusbar     | [nvim-lualine/lualine.nvim][32]           | ![][1032] | statusline                                    |
@@ -179,10 +202,9 @@
 [24]: https://github.com/RRethy/vim-illuminate
 [25]: https://github.com/kyazdani42/nvim-tree.lua
 [26]: https://github.com/kyazdani42/nvim-web-devicons
-[27]: https://github.com/mhinz/vim-startify
-[28]: https://github.com/simrat39/symbols-outline.nvim
+[27]: https://github.com/goolord/alpha-nvim
+[28]: https://github.com/stevearc/aerial.nvim
 [29]: https://github.com/nvim-telescope/telescope.nvim
-[30]: https://github.com/nvim-lua/popup.nvim
 [31]: https://github.com/folke/trouble.nvim
 [32]: https://github.com/nvim-lualine/lualine.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
@@ -225,10 +247,9 @@
 [1024]: https://img.shields.io/github/stars/RRethy/vim-illuminate
 [1025]: https://img.shields.io/github/stars/kyazdani42/nvim-tree.lua
 [1026]: https://img.shields.io/github/stars/kyazdani42/nvim-web-devicons
-[1027]: https://img.shields.io/github/stars/mhinz/vim-startify
-[1028]: https://img.shields.io/github/stars/simrat39/symbols-outline.nvim
+[1027]: https://img.shields.io/github/stars/goolord/alpha-nvim
+[1028]: https://img.shields.io/github/stars/stevearc/aerial.nvim
 [1029]: https://img.shields.io/github/stars/nvim-telescope/telescope.nvim
-[1030]: https://img.shields.io/github/stars/nvim-lua/popup.nvim
 [1031]: https://img.shields.io/github/stars/folke/trouble.nvim
 [1032]: https://img.shields.io/github/stars/nvim-lualine/lualine.nvim
 [1033]: https://img.shields.io/github/stars/akinsho/nvim-bufferline.lua

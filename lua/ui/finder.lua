@@ -105,17 +105,15 @@ end
 
 function popup:plugins()
     return {
-        {
-            'nvim-telescope/telescope.nvim',
-            config = setup,
-            dependencies = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-        },
-        {'ahmedkhalf/project.nvim', config = setup_project}
+        {'nvim-telescope/telescope.nvim', config = setup, dependencies = {'nvim-lua/plenary.nvim'}}
+        -- {'ahmedkhalf/project.nvim', config = setup_project}
     }
 end
 
-function popup:config() end
+function popup:config()
+end
 
-function popup:mapping() end
+function popup:mapping()
+end
 
 return popup
