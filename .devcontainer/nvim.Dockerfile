@@ -1,4 +1,4 @@
-FROM registry.sensetime.com/library/ubuntu:20.04-r1
+FROM docker.m.daocloud.io/library/ubuntu:22.04
 
 # Using mirrors
 RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list \
@@ -13,7 +13,7 @@ RUN apt-get update \
       # Build essentials
       && DEBIAN_FRONTEND=noninteractive apt install -y build-essential autoconf libtool cmake pkg-config git \
       && apt install -y clang-format lua5.3 liblua5.3-dev ripgrep \
-      && curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
+      && curl -L -o nvim.appimage https://github.com/neovim/neovim/releases/download/v0.11.3/nvim-linux-x86_64.appimage \
       && chmod u+x nvim.appimage \
       && ./nvim.appimage --appimage-extract \
       && ./squashfs-root/AppRun --version \
@@ -49,6 +49,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x |  bash - \
     && luarocks install --server=https://luarocks.org/dev luaformatter
 
 # Golang
-RUN wget https://mirrors.ustc.edu.cn/golang/go1.20.7.linux-amd64.tar.gz \
-    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.7.linux-amd64.tar.gz
+RUN wget https://mirrors.aliyun.com/golang/go1.20.7.linux-amd64.tar.gz \
+    && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.7.linux-amd64.tar.gz \
+    && rm -f go1.20.7.linux-amd64.tar.gz
 ENV PATH="/usr/local/go/bin:$PATH"

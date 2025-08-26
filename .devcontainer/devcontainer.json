@@ -1,34 +1,30 @@
 {
-    "image": "quqiuzhu/nvim:latest",
-    // 运行参数
-    "runArgs": [
-      "--rm",
-      "--hostname=devcontainer",
-      "--name=nvim_config",
-      "--gpus=all",
-      "--network=host",
-      "--entrypoint=/bin/bash -c"
-    ],
-    "workspaceMount": "source=${localWorkspaceFolder},target=/root/.config/nvim,type=bind,consistency=cached",
-    "workspaceFolder": "/root/.config/nvim",
-    "name": "nvim-config",
-    "remoteEnv": {
-      // 更新容器的时区
-      "TZ": "Asia/Shanghai",
-      // 设置代理
-      "HTTP_PROXY": "http://proxy.sensetime.com:3128/",
-      "http_proxy": "http://proxy.sensetime.com:3128/",
-      "HTTPS_PROXY": "http://proxy.sensetime.com:3128/",
-      "https_proxy": "http://proxy.sensetime.com:3128/"
-    },
-    // 请在容器中设置代理为 http://proxy.sensetime.com:3128/，而后再添加所需的插件
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "ms-python.python"
-        ]
-      }
+  "image": "quqiuzhu/nvim:v0.11.3",
+  // 运行参数
+  "runArgs": [
+    "--rm",
+    "--hostname=devcontainer",
+    "--name=nvim_config",
+    "--gpus=all",
+    "--network=host",
+    "--entrypoint=/bin/bash -c"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/root/.config/nvim,type=bind,consistency=cached",
+  "workspaceFolder": "/root/.config/nvim",
+  "name": "nvim-config",
+  "remoteEnv": {
+    // 更新容器的时区
+    "TZ": "Asia/Shanghai",
+    // 设置代理
+    "HTTP_PROXY": "http://proxy.sensetime.com:3128/",
+    "http_proxy": "http://proxy.sensetime.com:3128/",
+    "HTTPS_PROXY": "http://proxy.sensetime.com:3128/",
+    "https_proxy": "http://proxy.sensetime.com:3128/"
+  },
+  // 请在容器中设置代理为 http://proxy.sensetime.com:3128/，而后再添加所需的插件
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python"]
     }
   }
-  
-  
+}
