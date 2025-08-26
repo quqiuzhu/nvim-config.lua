@@ -2,7 +2,7 @@
 
 ## 升级记录
 
-### 2025-01-16 - 核心插件升级
+### 2025-08-26 - 核心插件升级
 
 #### 第一批升级 - 翻译、笔记
 
@@ -10,24 +10,24 @@
 
 #### 第三批升级 - 主题&UI、Markdown、会话管理
 
-#### 第四批升级 - 符号大纲、启动页面、Telescope优化
+#### 第四批升级 - 符号大纲、启动页面、Telescope 优化
 
-| 原插件                        | 新插件                         | 升级原因                                          | 兼容性说明                                |
-| ----------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
-| `voldikss/vim-translator`     | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
-| `vhyrro/neorg`                | `nvim-neorg/neorg`             | 插件迁移到新的官方组织，功能更完善                | 配置语法略有变化，但功能保持一致          |
-| `mhartington/formatter.nvim`  | `stevearc/conform.nvim`        | 新插件性能更好，配置更简单，支持 fallback         | 保持相同快捷键 `<Leader>f`                |
-| `diagnosticls-configs-nvim`   | `mfussenegger/nvim-lint`       | 现代异步 linting，更好的性能和配置                | 自动触发，无需手动配置                    |
-| `Pocco81/dap-buddy.nvim`      | `jay-babu/mason-nvim-dap.nvim` | 官方 Mason 生态内的替代方案                       | 自动安装调试器，更好的集成                |
-| `terrortylor/nvim-comment`    | `numToStr/Comment.nvim`        | 更现代、维护活跃、性能更好                        | 保持相同快捷键 `gcc` 和 `gc`              |
-| `ggandor/lightspeed.nvim`     | `ggandor/leap.nvim`            | Leap 是 lightspeed 的继任版本                     | 快捷键从 `f/F/t/T` 改为 `s/S/gs`          |
-| `norcalli/nvim-colorizer.lua` | `NvChad/nvim-colorizer.lua`    | 官方不更新，新 fork 在维护                        | 功能保持一致，配置语法略有变化            |
-| `yamatsum/nvim-cursorline`    | `RRethy/vim-illuminate`        | 维护更活跃，智能高亮同名符号                      | 新增 `]]` 和 `[[` 快捷键跳转引用          |
-| `npxbr/glow.nvim`             | `OXY2DEV/markview.nvim`        | markview 支持直接渲染                             | 保持 `<leader>p` 快捷键，新增实时渲染     |
-| `ethanholz/nvim-lastplace` | `folke/persistence.nvim` | Persistence 还能恢复 buffers 会话 | 新增会话管理快捷键 `<leader>qs/ql/qd` |
-| `simrat39/symbols-outline.nvim` | `stevearc/aerial.nvim` | 功能更强，支持 LSP + Treesitter | 新增快捷键 `<leader>a`，更丰富的导航功能 |
-| `mhinz/vim-startify` | `goolord/alpha-nvim` | 新一代 dashboard，更现代化 | 保持启动页面功能，界面更美观 |
-| Telescope 依赖 `popup.nvim` | 移除 `popup.nvim` 依赖 | Telescope 已内置替代功能 | 功能保持一致，减少依赖 |
+| 原插件                          | 新插件                         | 升级原因                                          | 兼容性说明                                |
+| ------------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
+| `voldikss/vim-translator`       | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
+| `vhyrro/neorg`                  | `nvim-neorg/neorg`             | 插件迁移到新的官方组织，功能更完善                | 配置语法略有变化，但功能保持一致          |
+| `mhartington/formatter.nvim`    | `stevearc/conform.nvim`        | 新插件性能更好，配置更简单，支持 fallback         | 保持相同快捷键 `<Leader>f`                |
+| `diagnosticls-configs-nvim`     | `mfussenegger/nvim-lint`       | 现代异步 linting，更好的性能和配置                | 自动触发，无需手动配置                    |
+| `Pocco81/dap-buddy.nvim`        | `jay-babu/mason-nvim-dap.nvim` | 官方 Mason 生态内的替代方案                       | 自动安装调试器，更好的集成                |
+| `terrortylor/nvim-comment`      | `numToStr/Comment.nvim`        | 更现代、维护活跃、性能更好                        | 保持相同快捷键 `gcc` 和 `gc`              |
+| `ggandor/lightspeed.nvim`       | `ggandor/leap.nvim`            | Leap 是 lightspeed 的继任版本                     | 快捷键从 `f/F/t/T` 改为 `s/S/gs`          |
+| `norcalli/nvim-colorizer.lua`   | `NvChad/nvim-colorizer.lua`    | 官方不更新，新 fork 在维护                        | 功能保持一致，配置语法略有变化            |
+| `yamatsum/nvim-cursorline`      | `RRethy/vim-illuminate`        | 维护更活跃，智能高亮同名符号                      | 新增 `]]` 和 `[[` 快捷键跳转引用          |
+| `npxbr/glow.nvim`               | `OXY2DEV/markview.nvim`        | markview 支持直接渲染                             | 保持 `<leader>p` 快捷键，新增实时渲染     |
+| `ethanholz/nvim-lastplace`      | `folke/persistence.nvim`       | Persistence 还能恢复 buffers 会话                 | 新增会话管理快捷键 `<leader>qs/ql/qd`     |
+| `simrat39/symbols-outline.nvim` | `stevearc/aerial.nvim`         | 功能更强，支持 LSP + Treesitter                   | 新增快捷键 `<leader>a`，更丰富的导航功能  |
+| `mhinz/vim-startify`            | `goolord/alpha-nvim`           | 新一代 dashboard，更现代化                        | 保持启动页面功能，界面更美观              |
+| Telescope 依赖 `popup.nvim`     | 移除 `popup.nvim` 依赖         | Telescope 已内置替代功能                          | 功能保持一致，减少依赖                    |
 
 #### 功能变化
 
@@ -102,12 +102,14 @@
 - ✅ 更好的 markdown 编辑体验
 
 **会话管理 (persistence.nvim)**:
+
 - ✅ 自动保存和恢复会话
 - ✅ 恢复缓冲区、窗口布局、工作目录等
 - ✅ 新增快捷键：`<leader>qs`（保存）、`<leader>ql`（加载）、`<leader>qd`（停止）
 - ✅ 比简单的 lastplace 功能更强大
 
 **符号大纲 (aerial.nvim)**:
+
 - ✅ 支持 LSP + Treesitter 双重后端
 - ✅ 新增快捷键：`<leader>a` 切换符号大纲
 - ✅ 更丰富的导航功能和快捷键
@@ -115,6 +117,7 @@
 - ✅ 更好的性能和可配置性
 
 **启动页面 (alpha-nvim)**:
+
 - ✅ 现代化的启动页面设计
 - ✅ 显示插件数量和 Neovim 版本信息
 - ✅ 快速访问常用功能：新建文件、查找文件、最近文件等
@@ -122,6 +125,7 @@
 - ✅ 更好的可定制性
 
 **Telescope 优化**:
+
 - ✅ 移除不必要的 popup.nvim 依赖
 - ✅ 减少插件依赖，提高启动速度
 - ✅ 功能保持完全一致
@@ -168,8 +172,8 @@
 | ui.theme         | [RRethy/vim-illuminate][24]               | ![][1024] | intelligent highlighting of word under cursor |
 | ui.explorer      | [kyazdani42/nvim-tree.lua][25]            | ![][1025] | file explorer                                 |
 | ui.explorer      | [kyazdani42/nvim-web-devicons][26]        | ![][1026] | common icons                                  |
-| ui.dashboard     | [goolord/alpha-nvim][27]                  | ![][1027] | modern and customizable start screen         |
-| ui.outline       | [stevearc/aerial.nvim][28]                | ![][1028] | modern symbol outline with LSP + Treesitter  |
+| ui.dashboard     | [goolord/alpha-nvim][27]                  | ![][1027] | modern and customizable start screen          |
+| ui.outline       | [stevearc/aerial.nvim][28]                | ![][1028] | modern symbol outline with LSP + Treesitter   |
 | ui.finder        | [nvim-telescope/telescope.nvim][29]       | ![][1029] | highly extendable fuzzy finder over lists     |
 | ui.finder        | [ahmedkhalf/project.nvim][34]             | ![][1034] | change cwd to project's root                  |
 | ui.quickfix      | [folke/trouble.nvim][31]                  | ![][1031] | quickfix and location list                    |

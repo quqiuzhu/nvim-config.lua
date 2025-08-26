@@ -4,39 +4,43 @@ local function setup()
     require('conform').setup({
         formatters_by_ft = {
             -- Lua
-            lua = { 'lua-format' },
+            lua = {'lua-format'},
             -- Web development
-            javascript = { 'prettier' },
-            typescript = { 'prettier' },
-            html = { 'prettier' },
-            css = { 'prettier' },
-            scss = { 'prettier' },
-            less = { 'prettier' },
-            json = { 'prettier' },
-            yaml = { 'prettier' },
-            markdown = { 'prettier' },
-            vue = { 'prettier' },
+            javascript = {'prettier'},
+            typescript = {'prettier'},
+            html = {'prettier'},
+            css = {'prettier'},
+            scss = {'prettier'},
+            less = {'prettier'},
+            json = {'prettier'},
+            yaml = {'prettier'},
+            markdown = {'prettier'},
+            vue = {'prettier'},
             -- Systems programming
-            c = { 'clang-format' },
-            cpp = { 'clang-format' },
-            objc = { 'clang-format' },
-            proto = { 'clang-format' },
-            glsl = { 'clang-format' },
-            java = { 'clang-format' },
+            c = {'clang-format'},
+            cpp = {'clang-format'},
+            objc = {'clang-format'},
+            proto = {'clang-format'},
+            glsl = {'clang-format'},
+            java = {'clang-format'},
             -- Other languages
-            rust = { 'rustfmt' },
-            go = { 'gofmt' },
-            python = { 'black', 'isort' },
+            rust = {'rustfmt'},
+            go = {'goimports'}, -- 或者 'gofmt', "goimports", "gofumpt"
+            python = {'black', 'isort'},
+            typst = {'typstfmt'}
         },
         -- 自定义格式化器配置
         formatters = {
             ['lua-format'] = {
                 command = 'lua-format',
-                args = { '--indent-width=4', '--tab-width=4', '--no-keep-simple-control-block-one-line', '--no-keep-simple-function-one-line' },
+                args = {
+                    '--indent-width=4',
+                    '--tab-width=4',
+                    '--no-keep-simple-control-block-one-line',
+                    '--no-keep-simple-function-one-line'
+                }
             },
-            prettier = {
-                args = { '--stdin-filepath', '$FILENAME', '--single-quote' },
-            },
+            prettier = {args = {'--stdin-filepath', '$FILENAME', '--single-quote'}}
         },
         -- 格式化选项
         format_on_save = {
@@ -45,14 +49,15 @@ local function setup()
             -- lsp_fallback = true,
         },
         -- 格式化后的通知
-        notify_on_error = true,
+        notify_on_error = true
     })
-    
+
     -- 保持原有的快捷键映射
     local mapping = require('common.mapping')
     mapping:set_keymaps({
         -- nnoremap <silent> <leader>f <cmd>lua require('conform').format({ lsp_fallback = true })<cr>
-        mapping:item():mode('n'):lhs('<leader>f'):noremap():rhs_cmdcr([[lua require('conform').format({ lsp_fallback = true })]]):silent():nowait()
+        mapping:item():mode('n'):lhs('<leader>f'):noremap():rhs_cmdcr(
+            [[lua require('conform').format({ lsp_fallback = true })]]):silent():nowait()
     })
 end
 
@@ -65,29 +70,32 @@ function format:new()
     return o
 end
 
-function format:plugins() 
+-- Formatters are installed in lint.lua
+function format:plugins()
     return {
         {
             'stevearc/conform.nvim',
-            event = { 'BufWritePre' },
-            cmd = { 'ConformInfo' },
+            event = {'BufWritePre'},
+            cmd = {'ConformInfo'},
             keys = {
                 {
                     '<leader>f',
                     function()
-                        require('conform').format({ lsp_fallback = true })
+                        require('conform').format({lsp_fallback = true})
                     end,
                     mode = '',
-                    desc = 'Format buffer',
-                },
+                    desc = 'Format buffer'
+                }
             },
-            config = setup,
+            config = setup
         }
     }
 end
 
-function format:config() end
+function format:config()
+end
 
-function format:mapping() end
+function format:mapping()
+end
 
 return format

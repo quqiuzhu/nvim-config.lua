@@ -12,14 +12,33 @@ local function setup_lsp()
     local mlspc = require('mason-lspconfig') -- luasnip setup
     mlspc.setup {
         ensure_installed = {
-            'diagnosticls',
+            -- Lua
             'lua_ls',
+            -- Python
+            'pyright', -- 推荐替换 pylyzer
+            -- C / C++
             'clangd',
+            -- Go
             'gopls',
-            'texlab',
-            'pylyzer',
+            -- Rust
             'rust_analyzer',
-            'denols',
+            -- JavaScript / TypeScript / JSON
+            'ts_ls',
+            'jsonls',
+            -- Vue
+            -- 'volar',
+            -- Web (HTML, CSS, etc.)
+            'html',
+            'cssls',
+            -- YAML
+            'yamlls',
+            -- Docker
+            'dockerls',
+            -- Markdown
+            'marksman',
+            -- LaTeX
+            'texlab',
+            -- Java
             'jdtls'
         }
     }
@@ -85,13 +104,16 @@ local function setup_lsp()
         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
         vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-        vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-                       bufopts)
+        vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, bufopts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format {async = true} end, bufopts)
+        vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format {async = true}
+        end, bufopts)
     end
 
     -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
@@ -100,21 +122,34 @@ local function setup_lsp()
     local servers = mlspc.get_installed_servers()
     -- print(vim.inspect(servers))
     local function copy(obj, seen)
-        if type(obj) ~= 'table' then return obj end
-        if seen and seen[obj] then return seen[obj] end
+        if type(obj) ~= 'table' then
+            return obj
+        end
+        if seen and seen[obj] then
+            return seen[obj]
+        end
         local s = seen or {}
         local res = setmetatable({}, getmetatable(obj))
         s[obj] = res
-        for k, v in pairs(obj) do res[copy(k, s)] = copy(v, s) end
+        for k, v in pairs(obj) do
+            res[copy(k, s)] = copy(v, s)
+        end
         return res
     end
     local configs = vim.g.lsp_server_configs or {}
     for _, server in pairs(servers) do
         local config = {on_attach = on_attach}
-        if type(configs[server]) == 'table' then config = copy(configs[server]) end
+        if type(configs[server]) == 'table' then
+            config = copy(configs[server])
+        end
         config.capabilities = capabilities
         config.flags = {debounce_text_changes = 150}
-        if config.handlers == nil then config.handlers = {['textDocument/publishDiagnostics'] = function() end} end
+        if config.handlers == nil then
+            config.handlers = {
+                ['textDocument/publishDiagnostics'] = function()
+                end
+            }
+        end
         lc[server].setup(config)
     end
 end
@@ -146,12 +181,19 @@ function lsp:plugins()
                 lsp_status.register_progress()
             end
         },
-        {'ray-x/lsp_signature.nvim', config = function() require'lsp_signature'.setup({}) end}
+        {
+            'ray-x/lsp_signature.nvim',
+            config = function()
+                require'lsp_signature'.setup({})
+            end
+        }
     }
 end
 
-function lsp:config() end
+function lsp:config()
+end
 
-function lsp:mapping() end
+function lsp:mapping()
+end
 
 return lsp
