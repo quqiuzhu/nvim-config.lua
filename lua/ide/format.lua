@@ -1,88 +1,58 @@
--- Formatter
--- https://github.com/mhartington/formatter.nvim
--- https://github.com/sbdchd/neoformat
--- https://github.com/sbdchd/neoformat/tree/master/autoload/neoformat/formatters
--- Each format tool config is a function that returns a table. Since each entry is a function,
--- the tables for each file type act as an ordered list (or array). This mean things will run
--- in the order you list them, keep this in mind.
--- Each formatter should return a table that consist of:
--- exe: the program you wish to run
--- args: a table of args to pass
--- stdin: If it should use stdin or not.
--- cwd : The path to run the program from.
--- tempfile_dir: directory for temp file when not using stdin (optional)
--- tempfile_prefix: prefix for temp file when not using stdin (optional)
--- tempfile_postfix: postfix for temp file when not using stdin (optional)
+-- Formatter - https://github.com/stevearc/conform.nvim
+-- Modern formatter with better performance and configuration
 local function setup()
-    local function new_formater_function(name)
-        if name == 'prettier' then
-            return function()
-                local get_prettier_extend_parser = function()
-                    local ft = vim.bo.filetype
-                    if ft == 'css' or ft == 'less' or ft == 'scss' then
-                        return 'css'
-                    elseif ft == 'typescript' or ft == 'json' or ft == 'yaml' or ft == 'vue' then
-                        return ft
-                    end
-                end
-                local args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'}
-                local parser = get_prettier_extend_parser()
-                if parser ~= nil then
-                    args = {'--stdin-filepath', vim.api.nvim_buf_get_name(0), '--parser', parser, '--single-quote'}
-                end
-                return {exe = 'prettier', args = args, stdin = true}
-            end
-        elseif name == 'clang-format' then
-            return function()
-                return {
-                    exe = 'clang-format',
-                    args = {},
-                    stdin = true,
-                    cwd = vim.fn.expand('%:p:h') -- Run clang-format in cwd of the file.
-                }
-            end
-        end
-    end
-
-    local ok, f = pcall(require, 'formatter')
-    if not ok then return end
-    f.setup({
-        logging = false,
-        filetype = {
-            rust = {function() return {exe = 'rustfmt', args = {'--emit=stdout'}, stdin = true} end},
-            lua = {function()
-                return {exe = 'lua-format', args = {}, stdin = true, cwd = vim.fn.expand('%:p:h')}
-            end},
-            go = {function() return {exe = 'gofmt', args = {}, stdin = true} end},
-            python = {function() return {exe = 'yapf', args = {}, stdin = true} end},
-            javascript = {new_formater_function('prettier')},
-            html = {new_formater_function('prettier')},
-            markdown = {new_formater_function('prettier')},
-            css = {new_formater_function('prettier')},
-            less = {new_formater_function('prettier')},
-            scss = {new_formater_function('prettier')},
-            typescript = {new_formater_function('prettier')},
-            json = {new_formater_function('prettier')},
-            vue = {new_formater_function('prettier')},
-            yaml = {new_formater_function('prettier')},
-            cpp = {new_formater_function('clang-format')},
-            c = {new_formater_function('clang-format')},
-            objc = {new_formater_function('clang-format')},
-            proto = {new_formater_function('clang-format')},
-            glsl = {new_formater_function('clang-format')},
-            java = {new_formater_function('clang-format')}
-        }
+    require('conform').setup({
+        formatters_by_ft = {
+            -- Lua
+            lua = { 'lua-format' },
+            -- Web development
+            javascript = { 'prettier' },
+            typescript = { 'prettier' },
+            html = { 'prettier' },
+            css = { 'prettier' },
+            scss = { 'prettier' },
+            less = { 'prettier' },
+            json = { 'prettier' },
+            yaml = { 'prettier' },
+            markdown = { 'prettier' },
+            vue = { 'prettier' },
+            -- Systems programming
+            c = { 'clang-format' },
+            cpp = { 'clang-format' },
+            objc = { 'clang-format' },
+            proto = { 'clang-format' },
+            glsl = { 'clang-format' },
+            java = { 'clang-format' },
+            -- Other languages
+            rust = { 'rustfmt' },
+            go = { 'gofmt' },
+            python = { 'black', 'isort' },
+        },
+        -- 自定义格式化器配置
+        formatters = {
+            ['lua-format'] = {
+                command = 'lua-format',
+                args = { '--indent-width=4', '--tab-width=4', '--no-keep-simple-control-block-one-line', '--no-keep-simple-function-one-line' },
+            },
+            prettier = {
+                args = { '--stdin-filepath', '$FILENAME', '--single-quote' },
+            },
+        },
+        -- 格式化选项
+        format_on_save = {
+            -- 可以设置为 true 来启用保存时自动格式化
+            -- timeout_ms = 500,
+            -- lsp_fallback = true,
+        },
+        -- 格式化后的通知
+        notify_on_error = true,
     })
-    -- vim.api.nvim_exec([[
-    -- augroup FormatAutogroup
-    -- autocmd!
-    -- autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
-    -- augroup END
-    -- ]], true)
+    
+    -- 保持原有的快捷键映射
     local mapping = require('common.mapping')
     mapping:set_keymaps({
-        -- nnoremap <slient> <leader>f <cmd>Format<cr>
-        mapping:item():mode('n'):lhs('<leader>f'):noremap():rhs_cmdcr('Format'):silent():nowait()
+        -- nnoremap <silent> <leader>f <cmd>lua require('conform').format({ lsp_fallback = true })<cr>
+        mapping:item():mode('n'):lhs('<leader>f'):noremap():rhs_cmdcr([[lua require('conform').format({ lsp_fallback = true })]]):silent():nowait()
     })
 end
 
@@ -95,7 +65,26 @@ function format:new()
     return o
 end
 
-function format:plugins() return {{'mhartington/formatter.nvim', config = setup}} end
+function format:plugins() 
+    return {
+        {
+            'stevearc/conform.nvim',
+            event = { 'BufWritePre' },
+            cmd = { 'ConformInfo' },
+            keys = {
+                {
+                    '<leader>f',
+                    function()
+                        require('conform').format({ lsp_fallback = true })
+                    end,
+                    mode = '',
+                    desc = 'Format buffer',
+                },
+            },
+            config = setup,
+        }
+    }
+end
 
 function format:config() end
 

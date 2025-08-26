@@ -82,12 +82,18 @@ local function setup_ui()
     })
 end
 
-local function setup_install()
-    local ok, install = pcall(require, 'dap-install')
-    if not ok then return end
-    install.setup({installation_path = vim.fn.stdpath('data') .. '/dapinstall/', verbosely_call_debuggers = false})
-    local dbg_list = require('dap-install.debuggers_list').debuggers
-    for debugger, _ in pairs(dbg_list) do install.config(debugger, {}) end
+local function setup_mason_dap()
+    require('mason-nvim-dap').setup({
+        ensure_installed = {
+            'python',
+            'delve', -- Go debugger
+            'node2', -- Node.js debugger
+            'chrome', -- Chrome debugger
+            'codelldb' -- C/C++/Rust debugger
+        },
+        automatic_installation = true,
+        handlers = {}
+    })
 end
 
 local function setup_lua_debug()
@@ -99,7 +105,9 @@ local function setup_lua_debug()
             name = 'Attach to running Neovim instance',
             host = function()
                 local value = vim.fn.input('Host [127.0.0.1]: ')
-                if value ~= '' then return value end
+                if value ~= '' then
+                    return value
+                end
                 return '127.0.0.1'
             end,
             port = function()
@@ -126,15 +134,91 @@ end
 
 function dap:plugins()
     return {
-        {'nvim-neotest/nvim-nio'},
-        {'rcarriga/nvim-dap-ui', config = setup_ui, dependencies = {'mfussenegger/nvim-dap'}},
-        {'Pocco81/dap-buddy.nvim', config = setup_install, dependencies = {'mfussenegger/nvim-dap'}},
-        {'jbyuki/one-small-step-for-vimkind', config = setup_lua_debug, dependencies = {'mfussenegger/nvim-dap'}} -- neovim internal luajit debug
+        {
+            'mfussenegger/nvim-dap',
+            dependencies = {
+                'nvim-neotest/nvim-nio',
+                'rcarriga/nvim-dap-ui',
+                'jay-babu/mason-nvim-dap.nvim',
+                'jbyuki/one-small-step-for-vimkind'
+            },
+            keys = {
+                {
+                    '<F5>',
+                    function()
+                        require('dap').continue()
+                    end,
+                    desc = 'Debug: Start/Continue'
+                },
+                {
+                    '<F1>',
+                    function()
+                        require('dap').step_into()
+                    end,
+                    desc = 'Debug: Step Into'
+                },
+                {
+                    '<F2>',
+                    function()
+                        require('dap').step_over()
+                    end,
+                    desc = 'Debug: Step Over'
+                },
+                {
+                    '<F3>',
+                    function()
+                        require('dap').step_out()
+                    end,
+                    desc = 'Debug: Step Out'
+                },
+                {
+                    '<leader>b',
+                    function()
+                        require('dap').toggle_breakpoint()
+                    end,
+                    desc = 'Debug: Toggle Breakpoint'
+                },
+                {
+                    '<leader>B',
+                    function()
+                        require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+                    end,
+                    desc = 'Debug: Set Breakpoint'
+                }
+            }
+        },
+        {
+            'rcarriga/nvim-dap-ui',
+            dependencies = {'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio'},
+            config = setup_ui,
+            keys = {
+                {
+                    '<leader>du',
+                    function()
+                        require('dapui').toggle()
+                    end,
+                    desc = 'Debug: See last session result.'
+                }
+            }
+        },
+        {
+            'jay-babu/mason-nvim-dap.nvim',
+            dependencies = {'williamboman/mason.nvim', 'mfussenegger/nvim-dap'},
+            config = setup_mason_dap
+        },
+        {
+            'jbyuki/one-small-step-for-vimkind',
+            dependencies = {'mfussenegger/nvim-dap'},
+            config = setup_lua_debug,
+            ft = 'lua'
+        }
     }
 end
 
-function dap:config() end
+function dap:config()
+end
 
-function dap:mapping() end
+function dap:mapping()
+end
 
 return dap

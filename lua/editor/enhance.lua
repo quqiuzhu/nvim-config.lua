@@ -20,17 +20,31 @@ local function setup_search()
 end
 
 local function setup_motion()
-    require('lightspeed').setup({
-        -- This can get _really_ slow if the window has a lot of content,
-        -- turn it on only if your machine can always cope with it.
-        match_only_the_start_of_same_char_seqs = true,
-        limit_ft_matches = 5,
-        -- By default, the values of these will be decided at runtime,
-        -- based on `jump_to_first_match`.
-        labels = nil,
-        cycle_group_fwd_key = nil,
-        cycle_group_bwd_key = nil
+    require('leap').setup({
+        max_phase_one_targets = nil,
+        highlight_unlabeled_phase_one_targets = false,
+        max_highlighted_traversal_targets = 10,
+        case_sensitive = false,
+        equivalence_classes = {' \t\r\n'},
+        substitute_chars = {},
+        safe_labels = 'sfnut/SFNLHMUGTZ?',
+        labels = 'sfnjklhodweimbuyvrgtaqpcxz/SFNJKLHODWEIMBUYVRGTAQPCXZ?',
+        special_keys = {
+            repeat_search = '<enter>',
+            next_phase_one_target = '<enter>',
+            next_target = {'<enter>', ';'},
+            prev_target = {'<tab>', ','},
+            next_group = '<space>',
+            prev_group = '<tab>',
+            multi_accept = '<enter>',
+            multi_revert = '<backspace>'
+        }
     })
+
+    -- 设置快捷键
+    vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
+    vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward)')
+    vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
 end
 
 local function setup_scroll()
@@ -99,17 +113,49 @@ end
 
 function edit:plugins()
     return {
-        {'kevinhwang91/nvim-hlslens', config = setup_search},
-        {'ggandor/lightspeed.nvim', config = setup_motion},
-        {'karb94/neoscroll.nvim', config = setup_scroll},
-        {'windwp/nvim-autopairs', config = setup_autopairs},
-        {'fedepujol/move.nvim', init = setup_move},
-        {'ethanholz/nvim-lastplace', config = setup_lastplace}
+        {
+            'kevinhwang91/nvim-hlslens',
+            event = 'SearchWrapped',
+            config = setup_search,
+            keys = {
+                {'n', mode = 'n'},
+                {'N', mode = 'n'},
+                {'*', mode = 'n'},
+                {'#', mode = 'n'},
+                {'g*', mode = 'n'},
+                {'g#', mode = 'n'}
+            }
+        },
+        {
+            'ggandor/leap.nvim',
+            event = 'VeryLazy',
+            config = setup_motion,
+            keys = {
+                {'s', mode = {'n', 'x', 'o'}, desc = 'Leap forward'},
+                {'S', mode = {'n', 'x', 'o'}, desc = 'Leap backward'},
+                {'gs', mode = {'n', 'x', 'o'}, desc = 'Leap from windows'}
+            }
+        },
+        {'karb94/neoscroll.nvim', event = 'VeryLazy', config = setup_scroll},
+        {'windwp/nvim-autopairs', event = 'InsertEnter', config = setup_autopairs},
+        {
+            'fedepujol/move.nvim',
+            keys = {
+                {'<C-j>', mode = 'v', desc = 'Move block down'},
+                {'<C-k>', mode = 'v', desc = 'Move block up'},
+                {'<C-h>', mode = 'v', desc = 'Move block left'},
+                {'<C-l>', mode = 'v', desc = 'Move block right'}
+            },
+            config = setup_move
+        },
+        {'ethanholz/nvim-lastplace', event = 'BufReadPre', config = setup_lastplace}
     }
 end
 
-function edit:config() end
+function edit:config()
+end
 
-function edit:mapping() end
+function edit:mapping()
+end
 
 return edit

@@ -2,28 +2,71 @@
 
 ## 升级记录
 
-### 2025-01-16 - 笔记和翻译插件升级
+### 2025-01-16 - 核心插件升级
 
-#### 升级的插件
+#### 升级的插件 - 翻译、笔记、代码检查、格式化、调试、注释、编辑增强
 
-| 原插件 | 新插件 | 升级原因 | 兼容性说明 |
-|--------|--------|----------|------------|
-| `voldikss/vim-translator` | `uga-rosa/translate.nvim` | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
-| `vhyrro/neorg` | `nvim-neorg/neorg` | 插件迁移到新的官方组织，功能更完善 | 配置语法略有变化，但功能保持一致 |
+| 原插件                       | 新插件                         | 升级原因                                          | 兼容性说明                                |
+| ---------------------------- | ------------------------------ | ------------------------------------------------- | ----------------------------------------- |
+| `voldikss/vim-translator`    | `uga-rosa/translate.nvim`      | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
+| `vhyrro/neorg`               | `nvim-neorg/neorg`             | 插件迁移到新的官方组织，功能更完善                | 配置语法略有变化，但功能保持一致          |
+| `mhartington/formatter.nvim` | `stevearc/conform.nvim`        | 新插件性能更好，配置更简单，支持 fallback         | 保持相同快捷键 `<Leader>f`                |
+| `diagnosticls-configs-nvim`  | `mfussenegger/nvim-lint`       | 现代异步 linting，更好的性能和配置                | 自动触发，无需手动配置                    |
+| `Pocco81/dap-buddy.nvim`     | `jay-babu/mason-nvim-dap.nvim` | 官方 Mason 生态内的替代方案                       | 自动安装调试器，更好的集成                |
+| `terrortylor/nvim-comment`   | `numToStr/Comment.nvim`        | 更现代、维护活跃、性能更好                        | 保持相同快捷键 `gcc` 和 `gc`              |
+| `ggandor/lightspeed.nvim`    | `ggandor/leap.nvim`            | Leap 是 lightspeed 的继任版本                     | 快捷键从 `f/F/t/T` 改为 `s/S/gs`          |
 
 #### 功能变化
 
 **翻译功能 (translate.nvim)**:
+
 - ✅ 保持原有快捷键不变
 - ✅ 支持多种翻译引擎
 - ✅ 更好的 Lua 集成
 - ⚠️ 需要安装 `translate-shell` 命令行工具
 
 **笔记功能 (neorg)**:
+
 - ✅ 更完善的工作区管理
 - ✅ 更好的 nvim-cmp 集成
 - ✅ 支持导出功能
 - ✅ 新增 `<Leader>n` 作为 neorg 专用前缀键
+
+**代码格式化 (conform.nvim)**:
+
+- ✅ 保持原有快捷键 `<Leader>f`
+- ✅ 更好的性能和启动速度
+- ✅ 支持 LSP fallback 格式化
+- ✅ 支持多个格式化器链式调用
+- ✅ 更简单的配置语法
+
+**代码检查 (nvim-lint)**:
+
+- ✅ 异步 linting，不阻塞编辑
+- ✅ 自动触发检查（保存、进入、离开插入模式）
+- ✅ 更好的错误显示和集成
+- ⚠️ 需要手动安装对应的 linter 工具
+
+**调试功能 (mason-nvim-dap)**:
+
+- ✅ 自动安装和配置调试器
+- ✅ 更好的 Mason 生态集成
+- ✅ 新增调试快捷键：`<F1-F5>`, `<Leader>b`, `<Leader>du`
+- ✅ 支持多种语言调试器
+
+**注释功能 (Comment.nvim)**:
+
+- ✅ 保持原有快捷键 `gcc` 和 `gc`
+- ✅ 更好的性能和响应速度
+- ✅ 支持块注释 `gbc` 和 `gb`
+- ✅ 新增额外快捷键：`gcO`, `gco`, `gcA`
+
+**快速跳转 (leap.nvim)**:
+
+- ⚠️ 快捷键变化：`s`（向前）、`S`（向后）、`gs`（跨窗口）
+- ✅ 更精确的跳转算法
+- ✅ 更好的视觉反馈
+- ✅ 支持跨窗口跳转
 
 ---
 
@@ -38,16 +81,16 @@
 | ide.autocomplete | [hrsh7th/cmp-path][40]                    | ![][1040] | nvim-cmp source for path                      |
 | ide.autocomplete | [nvim-lua/lsp-status.nvim][42]            | ![][1042] | show nvim-lsp progress                        |
 | ide.autocomplete | [ray-x/lsp_signature.nvim][43]            | ![][1043] | complete function parameters                  |
-| ide.lint         | [diagnosticls-configs-nvim][36]           | ![][1036] | linter base on diagnosticls LSP server        |
+| ide.lint         | [mfussenegger/nvim-lint][36]              | ![][1036] | modern async linting with better performance  |
 | ide.git          | [f-person/git-blame.nvim][3]              | ![][1003] | show git blame information in line            |
-| ide.format       | [mhartington/formatter.nvim][4]           | ![][1004] | format runner                                 |
+| ide.format       | [stevearc/conform.nvim][4]                | ![][1004] | modern formatter with better performance      |
 | ide.debug        | [mfussenegger/nvim-dap][5]                | ![][1005] | Debug Adapter Protocol client                 |
-| ide.debug        | [Pocco81/dap-buddy.nvim][6]               | ![][1006] | install & manage debugers                     |
+| ide.debug        | [jay-babu/mason-nvim-dap.nvim][6]         | ![][1006] | install & manage debuggers with Mason         |
 | ide.debug        | [rcarriga/nvim-dap-ui][7]                 | ![][1007] | A UI for nvim-dap                             |
 | ide.debug        | [jbyuki/one-small-step-for-vimkind][8]    | ![][1008] | Debug adapter for Neovim plugins              |
-| ide.comment      | [terrortylor/nvim-comment][9]             | ![][1009] | A comment toggler                             |
+| ide.comment      | [numToStr/Comment.nvim][9]                | ![][1009] | modern and performant comment plugin          |
 | editor.enhance   | [kevinhwang91/nvim-hlslens][10]           | ![][1010] | better serarch highlighting                   |
-| editor.enhance   | [ggandor/lightspeed.nvim][11]             | ![][1011] | motion                                        |
+| editor.enhance   | [ggandor/leap.nvim][11]                   | ![][1011] | modern motion plugin, successor to lightspeed |
 | editor.enhance   | [karb94/neoscroll.nvim][12]               | ![][1012] | smooth scrolling                              |
 | editor.enhance   | [windwp/nvim-autopairs][13]               | ![][1013] | autopairs                                     |
 | editor.enhance   | [fedepujol/move.nvim][14]                 | ![][1014] | move lines and selections up and down         |
@@ -79,14 +122,14 @@
 [1]: https://github.com/neovim/nvim-lspconfig
 [2]: https://github.com/williamboman/mason.nvim
 [3]: https://github.com/f-person/git-blame.nvim
-[4]: https://github.com/mhartington/formatter.nvim
+[4]: https://github.com/stevearc/conform.nvim
 [5]: https://github.com/mfussenegger/nvim-dap
-[6]: https://github.com/Pocco81/dap-buddy.nvim
+[6]: https://github.com/jay-babu/mason-nvim-dap.nvim
 [7]: https://github.com/rcarriga/nvim-dap-ui
 [8]: https://github.com/jbyuki/one-small-step-for-vimkind
-[9]: https://github.com/terrortylor/nvim-comment
+[9]: https://github.com/numToStr/Comment.nvim
 [10]: https://github.com/kevinhwang91/nvim-hlslens
-[11]: https://github.com/ggandor/lightspeed.nvim
+[11]: https://github.com/ggandor/leap.nvim
 [12]: https://github.com/karb94/neoscroll.nvim
 [13]: https://github.com/windwp/nvim-autopairs
 [14]: https://github.com/fedepujol/move.nvim
@@ -111,7 +154,7 @@
 [33]: https://github.com/akinsho/nvim-bufferline.lua
 [34]: https://github.com/ahmedkhalf/project.nvim
 [35]: https://github.com/npxbr/glow.nvim
-[36]: https://github.com/creativenull/diagnosticls-configs-nvim
+[36]: https://github.com/mfussenegger/nvim-lint
 [37]: https://github.com/hrsh7th/nvim-cmp
 [38]: https://github.com/hrsh7th/cmp-nvim-lsp
 [39]: https://github.com/hrsh7th/cmp-buffer
@@ -126,14 +169,14 @@
 [1001]: https://img.shields.io/github/stars/neovim/nvim-lspconfig
 [1002]: https://img.shields.io/github/stars/williamboman/mason.nvim
 [1003]: https://img.shields.io/github/stars/f-person/git-blame.nvim
-[1004]: https://img.shields.io/github/stars/mhartington/formatter.nvim
+[1004]: https://img.shields.io/github/stars/stevearc/conform.nvim
 [1005]: https://img.shields.io/github/stars/mfussenegger/nvim-dap
-[1006]: https://img.shields.io/github/stars/Pocco81/dap-buddy.nvim
+[1006]: https://img.shields.io/github/stars/jay-babu/mason-nvim-dap.nvim
 [1007]: https://img.shields.io/github/stars/rcarriga/nvim-dap-ui
 [1008]: https://img.shields.io/github/stars/jbyuki/one-small-step-for-vimkind
-[1009]: https://img.shields.io/github/stars/terrortylor/nvim-comment
+[1009]: https://img.shields.io/github/stars/numToStr/Comment.nvim
 [1010]: https://img.shields.io/github/stars/kevinhwang91/nvim-hlslens
-[1011]: https://img.shields.io/github/stars/ggandor/lightspeed.nvim
+[1011]: https://img.shields.io/github/stars/ggandor/leap.nvim
 [1012]: https://img.shields.io/github/stars/karb94/neoscroll.nvim
 [1013]: https://img.shields.io/github/stars/windwp/nvim-autopairs
 [1014]: https://img.shields.io/github/stars/fedepujol/move.nvim
@@ -158,7 +201,7 @@
 [1033]: https://img.shields.io/github/stars/akinsho/nvim-bufferline.lua
 [1034]: https://img.shields.io/github/stars/ahmedkhalf/project.nvim
 [1035]: https://img.shields.io/github/stars/npxbr/glow.nvim
-[1036]: https://img.shields.io/github/stars/creativenull/diagnosticls-configs-nvim
+[1036]: https://img.shields.io/github/stars/mfussenegger/nvim-lint
 [1037]: https://img.shields.io/github/stars/hrsh7th/nvim-cmp
 [1038]: https://img.shields.io/github/stars/hrsh7th/cmp-nvim-lsp
 [1039]: https://img.shields.io/github/stars/hrsh7th/cmp-buffer
