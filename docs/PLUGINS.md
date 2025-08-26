@@ -1,5 +1,32 @@
 # Plugins
 
+## 升级记录
+
+### 2025-01-16 - 笔记和翻译插件升级
+
+#### 升级的插件
+
+| 原插件 | 新插件 | 升级原因 | 兼容性说明 |
+|--------|--------|----------|------------|
+| `voldikss/vim-translator` | `uga-rosa/translate.nvim` | 原插件停止维护，新插件是现代 Lua 实现，支持多引擎 | 保持相同快捷键 `<Leader>t` 和 `<Leader>w` |
+| `vhyrro/neorg` | `nvim-neorg/neorg` | 插件迁移到新的官方组织，功能更完善 | 配置语法略有变化，但功能保持一致 |
+
+#### 功能变化
+
+**翻译功能 (translate.nvim)**:
+- ✅ 保持原有快捷键不变
+- ✅ 支持多种翻译引擎
+- ✅ 更好的 Lua 集成
+- ⚠️ 需要安装 `translate-shell` 命令行工具
+
+**笔记功能 (neorg)**:
+- ✅ 更完善的工作区管理
+- ✅ 更好的 nvim-cmp 集成
+- ✅ 支持导出功能
+- ✅ 新增 `<Leader>n` 作为 neorg 专用前缀键
+
+---
+
 | Module           | Plugin                                    | Stars     | Description                                   |
 | ---------------- | ----------------------------------------- | --------- | --------------------------------------------- |
 | ide.autocomplete | [neovim/nvim-lspconfig][1]                | ![][1001] | configurations for LSP client                 |
@@ -25,10 +52,9 @@
 | editor.enhance   | [windwp/nvim-autopairs][13]               | ![][1013] | autopairs                                     |
 | editor.enhance   | [fedepujol/move.nvim][14]                 | ![][1014] | move lines and selections up and down         |
 | editor.enhance   | [ethanholz/nvim-lastplace][15]            | ![][1015] | reopen files at last edit position            |
-| editor.note      | [nvim-lua/plenary.nvim][16]               | ![][1016] | module with common lua functions              |
-| editor.note      | [vhyrro/neorg][17]                        | ![][1017] | redesigned to clone org-mode from emacs       |
+| editor.note      | [nvim-neorg/neorg][17]                    | ![][1017] | modern note-taking with org-mode features     |
 | editor.tmux      | [numToStr/Navigator.nvim][18]             | ![][1018] | navigate between neovim splits and tmux panes |
-| editor.translate | [voldikss/vim-translator][19]             | ![][1019] | translating                                   |
+| editor.translate | [uga-rosa/translate.nvim][19]             | ![][1019] | modern Lua-based translation plugin           |
 | ui.theme         | [nvim-treesitter/nvim-treesitter][20]     | ![][1020] | config for highlighting of languages          |
 | ui.theme         | [RRethy/nvim-treesitter-textsubjects][21] | ![][1021] | smart selection highlighting                  |
 | ui.theme         | [navarasu/onedark.nvim][22]               | ![][1022] | A dark neovim colorscheme                     |
@@ -66,9 +92,9 @@
 [14]: https://github.com/fedepujol/move.nvim
 [15]: https://github.com/ethanholz/nvim-lastplace
 [16]: https://github.com/nvim-lua/plenary.nvim
-[17]: https://github.com/vhyrro/neorg
+[17]: https://github.com/nvim-neorg/neorg
 [18]: https://github.com/numToStr/Navigator.nvim
-[19]: https://github.com/voldikss/vim-translator
+[19]: https://github.com/uga-rosa/translate.nvim
 [20]: https://github.com/nvim-treesitter/nvim-treesitter
 [21]: https://github.com/RRethy/nvim-treesitter-textsubjects
 [22]: https://github.com/navarasu/onedark.nvim
@@ -113,9 +139,9 @@
 [1014]: https://img.shields.io/github/stars/fedepujol/move.nvim
 [1015]: https://img.shields.io/github/stars/ethanholz/nvim-lastplace
 [1016]: https://img.shields.io/github/stars/nvim-lua/plenary.nvim
-[1017]: https://img.shields.io/github/stars/vhyrro/neorg
+[1017]: https://img.shields.io/github/stars/nvim-neorg/neorg
 [1018]: https://img.shields.io/github/stars/numToStr/Navigator.nvim
-[1019]: https://img.shields.io/github/stars/voldikss/vim-translator
+[1019]: https://img.shields.io/github/stars/uga-rosa/translate.nvim
 [1020]: https://img.shields.io/github/stars/nvim-treesitter/nvim-treesitter
 [1021]: https://img.shields.io/github/stars/RRethy/nvim-treesitter-textsubjects
 [1022]: https://img.shields.io/github/stars/navarasu/onedark.nvim

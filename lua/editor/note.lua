@@ -1,5 +1,34 @@
--- https://github.com/vhyrro/neorg
-local function setup() end
+-- https://github.com/nvim-neorg/neorg
+local function setup()
+    require('neorg').setup({
+        load = {
+            ['core.defaults'] = {}, -- Loads default behaviour
+            ['core.concealer'] = {}, -- Adds pretty icons to your documents
+            ['core.dirman'] = { -- Manages Neorg workspaces
+                config = {
+                    workspaces = {
+                        notes = '~/notes',
+                        work = '~/work-notes',
+                    },
+                    default_workspace = 'notes',
+                },
+            },
+            ['core.completion'] = {
+                config = {
+                    engine = 'nvim-cmp'
+                }
+            },
+            ['core.integrations.nvim-cmp'] = {},
+            ['core.export'] = {},
+            ['core.keybinds'] = {
+                config = {
+                    default_keybinds = true,
+                    neorg_leader = '<Leader>n'
+                }
+            }
+        },
+    })
+end
 
 local note = {}
 note.__index = note
@@ -14,9 +43,14 @@ function note:plugins()
     return {
         {
             'nvim-neorg/neorg',
-            lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-            version = '*', -- Pin Neorg to the latest stable release
-            config = true
+            dependencies = { 'nvim-lua/plenary.nvim' },
+            build = ':Neorg sync-parsers',
+            ft = 'norg',
+            cmd = 'Neorg',
+            keys = {
+                {'<Leader>n', desc = 'Neorg commands'}
+            },
+            config = setup
         }
     }
 end
