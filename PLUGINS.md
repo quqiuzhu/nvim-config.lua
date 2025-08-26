@@ -9,7 +9,7 @@
 | ide.autocomplete | [hrsh7th/cmp-nvim-lsp][38]                | ![][1038] | nvim-cmp source for neovim builtin LSP client |
 | ide.autocomplete | [hrsh7th/cmp-buffer][39]                  | ![][1039] | nvim-cmp source for buffer words              |
 | ide.autocomplete | [hrsh7th/cmp-path][40]                    | ![][1040] | nvim-cmp source for path                      |
-| ide.autocomplete | [j-hui/fidget.nvim][42]                   | ![][1042] | show nvim-lsp progress                        |
+| ide.autocomplete | [nvim-lua/lsp-status.nvim][42]            | ![][1042] | show nvim-lsp progress                        |
 | ide.autocomplete | [ray-x/lsp_signature.nvim][43]            | ![][1043] | complete function parameters                  |
 | ide.lint         | [diagnosticls-configs-nvim][36]           | ![][1036] | linter base on diagnosticls LSP server        |
 | ide.git          | [f-person/git-blame.nvim][3]              | ![][1003] | show git blame information in line            |
@@ -91,7 +91,7 @@
 [39]: https://github.com/hrsh7th/cmp-buffer
 [40]: https://github.com/hrsh7th/cmp-path
 [41]: https://github.com/williamboman/mason-lspconfig.nvim
-[42]: https://github.com/j-hui/fidget.nvim
+[42]: https://github.com/nvim-lua/lsp-status.nvim
 [43]: https://github.com/ray-x/lsp_signature.nvim
 [44]: https://github.com/folke/tokyonight.nvim
 [45]: https://github.com/catppuccin/nvim
@@ -138,7 +138,7 @@
 [1039]: https://img.shields.io/github/stars/hrsh7th/cmp-buffer
 [1040]: https://img.shields.io/github/stars/hrsh7th/cmp-path
 [1041]: https://img.shields.io/github/stars/williamboman/mason-lspconfig.nvim
-[1042]: https://img.shields.io/github/stars/j-hui/fidget.nvim
+[1042]: https://img.shields.io/github/stars/nvim-lua/lsp-status.nvim
 [1043]: https://img.shields.io/github/stars/ray-x/lsp_signature.nvim
 [1044]: https://img.shields.io/github/stars/folke/tokyonight.nvim
 [1045]: https://img.shields.io/github/stars/catppuccin/nvim
