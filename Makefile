@@ -2,9 +2,6 @@ project=nvim
 target=quqiuzhu/nvim
 version=v0.11.3
 
-commit:
-	cp -rf .commit-msg .git/hooks/commit-msg
-
 fmt:
 	lua-format -i lua/*/*.lua
 
