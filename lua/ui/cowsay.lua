@@ -750,7 +750,7 @@ function cowsay.generate()
     local quote = cowsay.quotes[math.random(#cowsay.quotes)]
 
     -- 生成对话框
-    local bubble = cowsay.cowsay_bubble(quote, 70)
+    local bubble = cowsay.cowsay_bubble(quote, 60)
 
     -- 拼接对话框 + 动物
     local result = {
