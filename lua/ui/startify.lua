@@ -123,7 +123,7 @@ local mru_opts = {
 --- @param items_number number? optional number of items to generate, default = 5
 local function mru(start, cwd, items_number, opts)
     opts = opts or mru_opts
-    items_number = if_nil(items_number, 5)
+    items_number = if_nil(items_number, 10)
     local oldfiles = {}
     for _, v in pairs(vim.v.oldfiles) do
         if #oldfiles == items_number then
@@ -187,7 +187,7 @@ local section = {
             {
                 type = "group",
                 val = function()
-                    return { mru(5) }
+                    return { mru(10) }
                 end,
             },
         },
@@ -226,7 +226,7 @@ local config = {
         { type = "padding", val = 2 },
         section.top_buttons,
         section.mru_cwd,
-        section.mru,
+        -- section.mru,
         { type = "padding", val = 1 },
         section.bottom_buttons,
         section.footer,
