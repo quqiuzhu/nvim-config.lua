@@ -1,4 +1,5 @@
 -- https://github.com/goolord/alpha-nvim
+local cowsay = require('ui.cowsay')
 
 local dashboard = {}
 dashboard.__index = dashboard
@@ -17,7 +18,10 @@ function dashboard:plugins()
             dependencies = {'nvim-tree/nvim-web-devicons'},
             -- config = setup,
             config = function()
-                require'alpha'.setup(require'alpha.themes.startify'.config)
+                local startify = require 'ui.startify'
+                -- 替换 header 为 cowsay 生成的内容
+                startify.section.header.val = cowsay.generate()
+                require'alpha'.setup(startify.config)
             end
         }
     }
