@@ -140,6 +140,14 @@ local function setup()
         vim.keymap.set('n', '<C-k>', api.node.show_info_popup, opts('Info'))
         vim.keymap.set('n', '.', api.node.run.cmd, opts('Run Command'))
     end
+    local ui_width = vim.api.nvim_list_uis()[1].width
+    -- 定义屏幕尺寸的“分界点”和你期望的宽度
+    local breakpoint = 200
+    local width_for_large_screen = 48
+    local width_for_small_screen = 40
+
+    -- 根据当前屏幕宽度决定使用哪个值
+    local desired_exploreer_width = ui_width >= breakpoint and width_for_large_screen or width_for_small_screen
     local tree = require('nvim-tree')
     tree.setup { -- BEGIN_DEFAULT_OPTS
         on_attach = on_attach,
@@ -153,7 +161,7 @@ local function setup()
         update_cwd = false,
         reload_on_bufenter = false,
         view = {
-            width = 48,
+            width = desired_exploreer_width,
             -- hide_root_folder = false,
             side = 'left',
             preserve_window_proportions = false,
