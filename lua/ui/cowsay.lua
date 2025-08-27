@@ -741,6 +741,36 @@ function cowsay.cowsay_bubble(text, width)
     return out
 end
 
+--- Wrap text into lines of at most `width` characters
+-- No bubbles, just plain wrapped lines.
+-- @param text string
+-- @param width number
+-- @return table of strings (each line)
+function cowsay.wrap_text(text, width)
+    width = width or 80
+    local lines = {''}
+
+    for word in text:gmatch('%S+') do
+        local current = lines[#lines]
+        if #current + #word + 1 <= width then
+            if current == '' then
+                lines[#lines] = word
+            else
+                lines[#lines] = current .. ' ' .. word
+            end
+        else
+            table.insert(lines, word)
+        end
+    end
+
+    -- sanitize (remove \n, \r if input had them)
+    for i, l in ipairs(lines) do
+        lines[i] = l:gsub('[\r\n]', '')
+    end
+
+    return lines
+end
+
 -- 生成 cowsay 风格文本
 function cowsay.generate()
     math.randomseed(os.time())
@@ -750,20 +780,14 @@ function cowsay.generate()
     local quote = cowsay.quotes[math.random(#cowsay.quotes)]
 
     -- 生成对话框
-    local bubble = cowsay.cowsay_bubble(quote, 60)
+    -- local bubble = cowsay.cowsay_bubble(quote, 60)
+    local bubble = cowsay.wrap_text(quote, 70)
 
     -- 拼接对话框 + 动物
-    local result = {
-        [[                                  __]],
-        [[     ___     ___    ___   __  __ /\_\    ___ ___]],
-        [[    / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\]],
-        [[   /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \]],
-        [[   \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        [[    \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-        [[]],
-    }
-    vim.list_extend(result, bubble)
+    local result = {}
     vim.list_extend(result, animal)
+    vim.list_extend(result, {''})
+    vim.list_extend(result, bubble)
 
     return result
 end
