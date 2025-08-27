@@ -26,7 +26,7 @@ local function setup_lsp()
             'ts_ls',
             'jsonls',
             -- Vue
-            -- 'volar',
+            'vue_ls',
             -- Web (HTML, CSS, etc.)
             'html',
             'cssls',

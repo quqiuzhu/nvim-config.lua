@@ -85,11 +85,14 @@ end
 local function setup_mason_dap()
     require('mason-nvim-dap').setup({
         ensure_installed = {
-            'python',
+            'python', -- Python debugger
             'delve', -- Go debugger
-            'node2', -- Node.js debugger
-            'chrome', -- Chrome debugger
-            'codelldb' -- C/C++/Rust debugger
+            'js', -- JavaScript debugger
+            'codelldb', -- C/C++/Rust debugger,
+            'javadbg', -- Java debugger
+            'cppdbg', -- C++ debugger
+            'kotlin', -- Kotlin debugger
+            'php' -- PHP debugger
         },
         automatic_installation = true,
         handlers = {}
