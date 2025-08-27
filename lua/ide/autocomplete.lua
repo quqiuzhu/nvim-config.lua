@@ -11,20 +11,6 @@ local function setup_lsp()
     require('mason').setup({
         -- UI 配置（可选）
         ui = {icons = {package_installed = '✓', package_pending = '➜', package_uninstalled = '✗'}},
-
-        -- 镜像配置
-        registries = {
-            'github:mason-org/mason-registry' -- 默认官方源
-        },
-
-        -- 设置下载镜像
-        providers = {
-            npm = {install = {'npm', '--registry=https://registry.npmmirror.com'}},
-            pip = {install = {'pip', '--index-url', 'https://pypi.tuna.tsinghua.edu.cn/simple'}},
-            go = {install = {'go', 'env', '-w', 'GOPROXY=https://goproxy.cn,direct'}},
-            -- 如果需要 cargo (rust)
-            cargo = {install = {'cargo', '--registry', 'https://rsproxy.cn'}}
-        }
     })
     local mlspc = require('mason-lspconfig') -- luasnip setup
     mlspc.setup {
