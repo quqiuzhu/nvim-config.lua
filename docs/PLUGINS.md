@@ -145,6 +145,7 @@
 | ide.autocomplete | [nvim-lua/lsp-status.nvim][42]            | ![][1042] | show nvim-lsp progress                        |
 | ide.autocomplete | [ray-x/lsp_signature.nvim][43]            | ![][1043] | complete function parameters                  |
 | ide.lint         | [mfussenegger/nvim-lint][36]              | ![][1036] | modern async linting with better performance  |
+| ide.lint         | [mason-tool-installer.nvim][35]           | ![][1035] | Install and upgrade linters & formatters      |
 | ide.git          | [f-person/git-blame.nvim][3]              | ![][1003] | show git blame information in line            |
 | ide.format       | [stevearc/conform.nvim][4]                | ![][1004] | modern formatter with better performance      |
 | ide.debug        | [mfussenegger/nvim-dap][5]                | ![][1005] | Debug Adapter Protocol client                 |
@@ -213,7 +214,7 @@
 [32]: https://github.com/nvim-lualine/lualine.nvim
 [33]: https://github.com/akinsho/nvim-bufferline.lua
 [34]: https://github.com/ahmedkhalf/project.nvim
-[48]: https://github.com/OXY2DEV/markview.nvim
+[35]: https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 [36]: https://github.com/mfussenegger/nvim-lint
 [37]: https://github.com/hrsh7th/nvim-cmp
 [38]: https://github.com/hrsh7th/cmp-nvim-lsp
@@ -226,6 +227,7 @@
 [45]: https://github.com/catppuccin/nvim
 [46]: https://github.com/rebelot/kanagawa.nvim
 [47]: https://github.com/ellisonleao/gruvbox.nvim
+[48]: https://github.com/OXY2DEV/markview.nvim
 [1001]: https://img.shields.io/github/stars/neovim/nvim-lspconfig
 [1002]: https://img.shields.io/github/stars/williamboman/mason.nvim
 [1003]: https://img.shields.io/github/stars/f-person/git-blame.nvim
@@ -258,7 +260,7 @@
 [1032]: https://img.shields.io/github/stars/nvim-lualine/lualine.nvim
 [1033]: https://img.shields.io/github/stars/akinsho/nvim-bufferline.lua
 [1034]: https://img.shields.io/github/stars/ahmedkhalf/project.nvim
-[1048]: https://img.shields.io/github/stars/OXY2DEV/markview.nvim
+[1035]: https://img.shields.io/github/stars/WhoIsSethDaniel/mason-tool-installer.nvim
 [1036]: https://img.shields.io/github/stars/mfussenegger/nvim-lint
 [1037]: https://img.shields.io/github/stars/hrsh7th/nvim-cmp
 [1038]: https://img.shields.io/github/stars/hrsh7th/cmp-nvim-lsp
@@ -271,3 +273,4 @@
 [1045]: https://img.shields.io/github/stars/catppuccin/nvim
 [1046]: https://img.shields.io/github/stars/rebelot/kanagawa.nvim
 [1047]: https://img.shields.io/github/stars/ellisonleao/gruvbox.nvim
+[1048]: https://img.shields.io/github/stars/OXY2DEV/markview.nvim
