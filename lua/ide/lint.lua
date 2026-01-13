@@ -3,39 +3,58 @@
 local function setup()
     local lint = require('lint')
 
-    -- 配置各种文件类型的 linter
-    lint.linters_by_ft = {
-        -- Lua
+    -- 按安装状态检测 linter 可用性（避免未安装时报错）
+    local function linter_available(name)
+        if type(name) ~= 'string' or name == '' then return false end
+        local def = lint.linters[name]
+        if not def then return false end
+        local cmd = def.cmd
+        if type(cmd) == 'function' then
+            local ok, resolved = pcall(cmd)
+            if ok and type(resolved) == 'string' and resolved ~= '' then
+                return vim.fn.executable(resolved) == 1
+            end
+        elseif type(cmd) == 'string' and cmd ~= '' then
+            return vim.fn.executable(cmd) == 1
+        end
+        return vim.fn.executable(name) == 1
+    end
+
+    local base = {
         lua = {'luacheck'},
-        -- Python
         python = {'flake8', 'mypy'},
-        -- JavaScript/TypeScript
         javascript = {'eslint_d'},
         typescript = {'eslint_d'},
-        -- Go
         go = {'golangci-lint'},
-        -- Shell
         sh = {'shellcheck'},
         bash = {'shellcheck'},
-        -- Markdown
         markdown = {'markdownlint'},
-        -- YAML
         yaml = {'yamllint'},
-        -- Docker
         dockerfile = {'hadolint'},
-        -- CSS/SCSS
         css = {'stylelint'},
         scss = {'stylelint'},
-        -- HTML
         html = {'tidy'},
-        -- C/C++
         c = {'cpplint'},
         cpp = {'cpplint'},
-        -- Rust (通常使用 LSP，这里可以留空)
         rust = {},
-        -- Java (通常使用 LSP)
         java = {}
     }
+
+    local function filter(list)
+        local out = {}
+        for _, name in ipairs(list) do
+            if linter_available(name) then
+                out[#out + 1] = name
+            end
+        end
+        return out
+    end
+
+    local linters_by_ft = {}
+    for ft, list in pairs(base) do
+        linters_by_ft[ft] = filter(list)
+    end
+    lint.linters_by_ft = linters_by_ft
 
     -- 自定义 linter 配置
     lint.linters.luacheck.args = {
@@ -60,9 +79,10 @@ local function setup()
     vim.api.nvim_create_autocmd({'BufEnter', 'BufWritePost', 'InsertLeave'}, {
         group = lint_augroup,
         callback = function()
-            -- 只对支持的文件类型进行 lint
             local ft = vim.bo.filetype
-            if lint.linters_by_ft[ft] then
+            local configured = filter(base[ft] or {})
+            if next(configured) ~= nil then
+                lint.linters_by_ft[ft] = configured
                 lint.try_lint()
             end
         end

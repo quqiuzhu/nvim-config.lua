@@ -119,7 +119,6 @@ local function setup_lsp()
 
     -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lc = require('lspconfig')
     local servers = mlspc.get_installed_servers()
     -- print(vim.inspect(servers))
     local function copy(obj, seen)
@@ -151,7 +150,8 @@ local function setup_lsp()
                 end
             }
         end
-        lc[server].setup(config)
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
     end
 end
 

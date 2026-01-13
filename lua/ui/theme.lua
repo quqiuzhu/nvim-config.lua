@@ -4,11 +4,7 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 -- https://github.com/RRethy/nvim-treesitter-textsubjects
 local function setup_treesitter()
-    local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-    local maintained_parsers = {}
-    for parser_name, parser_config in pairs(parser_configs) do
-        if parser_config.maintainers ~= nil then table.insert(maintained_parsers, parser_name) end
-    end
+    -- 1. 定义要安装的语言
     local selected = {
         'c',
         'cpp',
@@ -39,20 +35,25 @@ local function setup_treesitter()
         'scala',
         'proto'
     }
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = selected, -- one of "all", or a list of languages
-        ignore_install = {'phpdoc', 'ocamllex', 'devicetree', 'godot_resource', 'd', 'teal'}, -- List of parsers to ignore installing
-        highlight = {
-            enable = true, -- false will disable the whole extension
-            disable = {}, -- list of language that will be disabled
-            -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-            -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-            -- Using this option may slow down your editor, and you may see some duplicate highlights.
-            -- Instead of true it can also be a list of languages
-            additional_vim_regex_highlighting = false
-        },
-        textsubjects = {enable = true, keymaps = {['.'] = 'textsubjects-smart', [';'] = 'textsubjects-container-outer'}}
-    }
+    -- 2. 修复 ensure_installed 报错
+    -- 在新版 main 分支中，这个函数移动到了 .install 模块，且由于异步加载，建议增加判断
+    local ok_install, ts_install = pcall(require, 'nvim-treesitter.install')
+    if ok_install and ts_install.ensure_installed then
+        ts_install.ensure_installed(selected)
+    end
+
+    -- 3. 修复 nvim-treesitter.configs 报错
+    -- 注意：如果你在 main 分支，这个 require 必失败。
+    -- 我们改用新版的配置方式：直接设置 vim.g 变量或使用新的模块（如果存在）
+    local ok_configs, configs = pcall(require, 'nvim-treesitter.configs')
+    if ok_configs then
+        configs.setup({highlight = {enable = true, additional_vim_regex_highlighting = false}})
+    else
+        -- 如果在 main 分支，configs 模块不存在
+        -- 新版 Treesitter 默认对所有缓冲区开启高亮，
+        -- 你通常不再需要手动调用 setup({ highlight = { enable = true } })
+        -- 如果要手动禁用某些 buffer 的高亮，需使用 vim.treesitter.stop()
+    end
 end
 
 local function setup_colorizer()
@@ -138,13 +139,9 @@ function theme:plugins()
         {
             'nvim-treesitter/nvim-treesitter',
             build = ':TSUpdate',
-            event = { 'BufReadPre', 'BufNewFile' },
+            lazy = false,
+            priority = 900,
             config = setup_treesitter,
-        },
-        {
-            'RRethy/nvim-treesitter-textsubjects',
-            dependencies = { 'nvim-treesitter/nvim-treesitter' },
-            event = { 'BufReadPre', 'BufNewFile' },
         },
         {
             'navarasu/onedark.nvim',
