@@ -16,10 +16,14 @@ local function setup()
             end
         elseif type(cmd) == 'string' and cmd ~= '' then
             return vim.fn.executable(cmd) == 1
+        elseif type(cmd) == 'table' and #cmd >= 1 and type(cmd[1]) == 'string' and cmd[1] ~= '' then
+            return vim.fn.executable(cmd[1]) == 1
         end
         return vim.fn.executable(name) == 1
     end
 
+    -- 配置各种文件类型的 linter
+    -- 基于可执行存在性进行过滤，避免未安装的 linter 触发断言
     local base = {
         lua = {'luacheck'},
         python = {'flake8', 'mypy'},
@@ -40,6 +44,7 @@ local function setup()
         java = {}
     }
 
+    -- 过滤不可用的 linter 列表
     local function filter(list)
         local out = {}
         for _, name in ipairs(list) do
@@ -50,6 +55,7 @@ local function setup()
         return out
     end
 
+    -- 按当前环境生成最终 linters_by_ft
     local linters_by_ft = {}
     for ft, list in pairs(base) do
         linters_by_ft[ft] = filter(list)
@@ -79,6 +85,7 @@ local function setup()
     vim.api.nvim_create_autocmd({'BufEnter', 'BufWritePost', 'InsertLeave'}, {
         group = lint_augroup,
         callback = function()
+            -- 只对支持且已安装的 linter 执行
             local ft = vim.bo.filetype
             local configured = filter(base[ft] or {})
             if next(configured) ~= nil then

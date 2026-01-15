@@ -178,8 +178,10 @@ function lsp:plugins()
         {
             'nvim-lua/lsp-status.nvim',
             config = function()
-                local lsp_status = require('lsp-status')
-                lsp_status.register_progress()
+                local ok, lsp_status = pcall(require, 'lsp-status')
+                if ok then
+                    lsp_status.config({})
+                end
             end
         },
         {
